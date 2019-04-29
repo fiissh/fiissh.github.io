@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文主要介绍 Flutter 异步编程相关的内容。关键字 async、async、sync、sync、await、yield 以及 Future、Stream 和 Timer 对象构成了 Flutter 异步编程的全部内容。 Future 是一个泛型对象，表示程序在将来的某个时刻能够获取到一个值，泛型类型表示了该返回值的类型。当返回值是 Future 的方法被调用之后，Flutter（Dart）将">
+<meta name="keywords" content="Flutter 异步编程,await,sync,Future">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 开发（09）：Flutter 异步编程">
+<meta property="og:url" content="https://fiissh.tech/2019/flutter-async-program.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="本文主要介绍 Flutter 异步编程相关的内容。关键字 async、async、sync、sync、await、yield 以及 Future、Stream 和 Timer 对象构成了 Flutter 异步编程的全部内容。 Future 是一个泛型对象，表示程序在将来的某个时刻能够获取到一个值，泛型类型表示了该返回值的类型。当返回值是 Future 的方法被调用之后，Flutter（Dart）将">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1975877-7f5e775270e16dad?imageMogr2/auto-orient/strip%7CimageView2/2/w/471">
+<meta property="og:updated_time" content="2019-03-11T02:16:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter 开发（09）：Flutter 异步编程">
+<meta name="twitter:description" content="本文主要介绍 Flutter 异步编程相关的内容。关键字 async、async、sync、sync、await、yield 以及 Future、Stream 和 Timer 对象构成了 Flutter 异步编程的全部内容。 Future 是一个泛型对象，表示程序在将来的某个时刻能够获取到一个值，泛型类型表示了该返回值的类型。当返回值是 Future 的方法被调用之后，Flutter（Dart）将">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1975877-7f5e775270e16dad?imageMogr2/auto-orient/strip%7CimageView2/2/w/471">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="肥言肥语" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://fiissh.tech/2019/flutter-async-program.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Flutter 开发（09）：Flutter 异步编程 | 肥言肥语</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-65174745-4');
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+  <script type="text/javascript">
+    var _speedMark = new Date();
+  </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥言肥语</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">肥肥鱼胡说八道的地方</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-async-program.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter 开发（09）：Flutter 异步编程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-11 10:16:59" itemprop="dateCreated datePublished" datetime="2019-03-11T10:16:59+08:00">2019-03-11</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要介绍 <code>Flutter</code> 异步编程相关的内容。关键字 <code>async</code>、<code>async</code><sup><em></em></sup>、<code>sync</code>、<code>sync</code><sup></sup>、<code>await</code>、<code>yield</code> 以及 <code>Future</code>、<code>Stream</code> 和 <code>Timer</code> 对象构成了 <code>Flutter</code> 异步编程的全部内容。</p>
+<p><code>Future</code> 是一个泛型对象，表示程序在将来的某个时刻能够获取到一个值，泛型类型表示了该返回值的类型。当返回值是 <code>Future</code> 的方法被调用之后，<code>Flutter</code>（<code>Dart</code>）将会做两件事情：</p>
+<ul>
+<li>将需要执行的的任务添加到异步队列中，并返回一个未完成的 <code>Future</code> 对象</li>
+<li>如果任务的运行结果有效（包括异常信息），<code>Future</code> 以该值完成任务的执行。如果需要使用 <code>Future</code> 中的值，可以使用如下两种方式：<ul>
+<li>使用 <code>async</code> 和 <code>await</code> 关键字</li>
+<li>使用 <code>Future API</code></li>
+</ul>
+</li>
+</ul>
+<p><code>Stream</code> 也是一个泛型对象，表示异步数据的流通管道。它只允许从一端插入数据并通过管道从另外一端流出数据。为了控制 <code>Stream</code>，我们通常使用 <code>StreamController</code> 对 <code>Stream</code> 进行管理：</p>
+<ul>
+<li><code>StreamController</code> 提供了类型为 <code>StreamSink</code> 的 <code>sink</code> 属性作为数据的入口</li>
+<li><code>StreamController</code> 提供了 <code>stream</code> 属性作为数据的出口</li>
+</ul>
+<p>在<code>Dart 1.9</code> 中引入了函数生成器的概念，利用惰性方法计算结果序列，以提升性能。生成器有两种类型：</p>
+<ul>
+<li>同步生成器：在需要的时候才生成值，然后使用者从生成器中拉取。使用 <code>sync</code><sup>*</sup> 表示</li>
+<li>异步生成器：会以它自身的速度生成值，然后推送到使用者可以使用的地方。使用 <code>async</code><sup>*</sup> 表示</li>
+</ul>
+<p><code>Timer</code> 提供了一种使用计时器的异步任务的执行方式，<br><a id="more"></a></p>
+<h2 id="async-和-await"><a href="#async-和-await" class="headerlink" title="async 和 await"></a>async 和 await</h2><p>从 <code>Dart 1.9</code> 开始，<code>Dart</code> 添加了 <code>async</code> 和 <code>await</code> 关键字用来实现异步的功能。它们允许我们编写看起来像是同步代码而且不需要使用 <code>Future</code> 的异步代码。在方法体前面使用 <code>async</code> 关键字修饰即表示这是一个异步方法。对调用者来说，调用 <code>async</code> 方法和其他方法没有什么区别，而且对于 <code>return</code> 返回值来说也没有什么影响。</p>
+<p>非异步调用的方法定义如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> getVersionName() &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'1.0.0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用方式：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> versionName = getVersionName();</span><br></pre></td></tr></table></figure>
+<p><code>async</code> 修饰的异步方法最终将返回值封装为 <code>Future</code> 对象。即：使用 <code>async</code> 修饰的异步方法，其返回值类型需要封装为 <code>Future</code> 对象。<code>getVersionName()</code> 方法修改为异步方法之后定义如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="built_in">String</span>&gt; getVersionName() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'1.0.0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用方式：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> versionName = <span class="keyword">await</span> getVersionName();</span><br></pre></td></tr></table></figure>
+<p>如果同步方法的返回值类型为 <code>T</code>，那么该方法异步方式的返回值类型应该是 <code>Future&lt;T&gt;</code>。如果同步方法中返回值类型为 <code>Future&lt;T&gt;</code>，那么对应的异步方法的返回值类型同样是 <code>Future&lt;T&gt;</code> 而不是 <code>Future&lt;Future&lt;T&gt;&gt;</code>。</p>
+<p>如果异步方法没有显式的使用 <code>return</code> 返回一个值，那么在 <code>Flutter</code> 中将自动封装一个 <code>Future&lt;Null&gt;</code> 作为返回值。</p>
+<p>需要注意的是，<code>await</code> 只能在 <code>async</code> 修饰的方法中使用，而且可以使用多次。使用 <code>await</code> 修饰的方法会自动进入阻塞状态，一直到任务执行完成并返回对应的值。</p>
+<h2 id="函数生成器"><a href="#函数生成器" class="headerlink" title="函数生成器"></a>函数生成器</h2><p>在 <code>Dart 1.9</code> 中引入了函数生成器的概念，利用惰性函数计算结果序列，以提升性能。</p>
+<p>函数生成器有两种类型：同步生成器和异步生成器。同步生成器在需要的时候才生成值，然后使用者从生成器中拉取。异步生成器会以它自身的速度生成值，然后推送到使用者可以使用的地方。</p>
+<h3 id="同步生成器：sync"><a href="#同步生成器：sync" class="headerlink" title="同步生成器：sync*"></a>同步生成器：sync<sup>*</sup></h3><p>通过在方法主体前添加 <code>sync</code><sup>*</sup> 可以标记该方法为同步生成器。同步生成器返回一个 <code>Iterable&lt;T&gt;</code> 泛型对象，并使用 <code>yield</code> 语句来传递值。以获取第一个自然数 <code>n</code> 为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsTo(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Begin"</span>);</span><br><span class="line">  <span class="built_in">int</span> k = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &lt; n) <span class="keyword">yield</span> k++;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"End"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当调用方法 <code>naturalsTo</code> 的时候，会立刻返回 <code>Iterable&lt;int&gt;</code> 对象。在我们调用 <code>iterator.moveNext()</code> 之前，函数的主体并不会执行。当运行该方法时，代码会执行到 <code>yield</code> 关键字修饰的位置，并暂停运行，此时 <code>moveNext()</code> 方法会返回 <code>true</code>。方法会在下一次调用 <code>moveNext()</code> 的时候恢复执行。当循环结束的时候，上述方法会隐式的执行 <code>return</code> 并终止迭代，此时 <code>moveNext()</code> 方法会返回 <code>false</code>。</p>
+<p>我们通过如下代码晚上上述方法的调用：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iterator = naturalsTo(<span class="number">3</span>).iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (iterator.moveNext()) &#123;</span><br><span class="line">  <span class="built_in">print</span>(iterator.current);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Begin</span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">End</span><br></pre></td></tr></table></figure>
+<h3 id="异步生成器：async"><a href="#异步生成器：async" class="headerlink" title="异步生成器：async*"></a>异步生成器：async<sup>*</sup></h3><p>通过在方法主体前添加 <code>async</code><sup>*</sup> 可以标记该方法为异步生成器。异步生成器返回一个 <code>Stream</code> 对象，并使用 <code>yield</code> 语句来传递值。以自然数生成器为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;<span class="built_in">int</span>&gt; asynchronousNaturalsTo(<span class="built_in">int</span> n) <span class="keyword">async</span>* &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Begin"</span>);</span><br><span class="line">  <span class="built_in">int</span> k = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (k &lt; n) <span class="keyword">yield</span> k++;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"End"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过如下代码完成调用：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">asynchronousNaturalsTo(<span class="number">3</span>).listen((v) &#123;</span><br><span class="line">  <span class="built_in">print</span>(v);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">/// outputs</span></span><br><span class="line"><span class="comment">/// I/flutter (19802): Begin</span></span><br><span class="line"><span class="comment">/// I/flutter (19802): 0</span></span><br><span class="line"><span class="comment">/// I/flutter (19802): 1</span></span><br><span class="line"><span class="comment">/// I/flutter (19802): 2</span></span><br><span class="line"><span class="comment">/// I/flutter (19802): End</span></span><br></pre></td></tr></table></figure>
+<p>当调用 <code>asynchronousNaturalsTo</code> 方法的时候，程序会立刻返回 <code>Stream&lt;int&gt;</code> 对象，但是函数体并没有执行。一旦开始 <code>listen</code> 监听数据流，方法体就开始执行。当执行到 <code>yield</code> 修饰的位置的时候，会将 <code>yield</code> 修饰的表达式的运算结果添加到 <code>Stream</code> 数据流中。异步生成器没有必要暂停，因为数据流可以通过 <code>StreamSubscription</code> 进行控制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">StreamSubscription&lt;int&gt; subscription = asynchronousNaturalsTo(3).listen(null);</span><br><span class="line">subscription.onData((value) &#123;</span><br><span class="line">  print(value);</span><br><span class="line">  if (value == 1) &#123;</span><br><span class="line">    subscription.pause();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以通过 <code>StreamSubscription</code> 来控制 <code>Stream</code> 的暂停(<code>subscription.pause()</code>)和取消(<code>subscription.cancel()</code>)。如果被暂停，方法会执行到 <code>yield</code> 修饰的位置，然后暂停，直到我们通过 <code>subscription.resume()</code> 恢复 <code>Stream</code>。</p>
+<h3 id="yield-和-yield"><a href="#yield-和-yield" class="headerlink" title="yield 和 yield*"></a>yield 和 yield<sup>*</sup></h3><p>在上述的示例中，可以使用 <code>yield</code> 方便的传递值。如果我们的生成器函数中使用到了递归调用，那么使用 <code>yield</code> 将会带来一些性能问题。以从大到小获取自然数的的代码为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsDownFrom(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">yield</span> n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i <span class="keyword">in</span> naturalsDownFrom(n - <span class="number">1</span>)) &#123;</span><br><span class="line">      <span class="keyword">yield</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码通过递归调用的方式获取自然数。需要注意的是，我们每次调用 <code>naturalsDownFrom</code> 方法都会构建一个新的序列，并通过遍历新的序列然后使用 <code>yield</code> 将元素插入到当前序列中。我们在代码的一些位置插入输出来进行分析：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> level = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsDownFrom(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Begin"</span>);</span><br><span class="line">    level = level + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'当前 n 为：<span class="subst">$n</span>  level 执行次数：<span class="subst">$level</span>'</span>);</span><br><span class="line">    <span class="keyword">yield</span> n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i <span class="keyword">in</span> naturalsDownFrom(n - <span class="number">1</span>)) &#123;</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">'当前 i 为：<span class="subst">$i</span>  level 执行次数：<span class="subst">$level</span>'</span>);</span><br><span class="line">      <span class="keyword">yield</span> i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"End"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">I/flutter (31880): Begin</span><br><span class="line">I/flutter (31880): 当前 n 为：3  level 执行次数：1</span><br><span class="line">I/flutter (31880): Begin</span><br><span class="line">I/flutter (31880): 当前 n 为：2  level 执行次数：2</span><br><span class="line">I/flutter (31880): 当前 i 为：2  level 执行次数：2</span><br><span class="line">I/flutter (31880): Begin</span><br><span class="line">I/flutter (31880): 当前 n 为：1  level 执行次数：3</span><br><span class="line">I/flutter (31880): 当前 i 为：1  level 执行次数：3</span><br><span class="line">I/flutter (31880): 当前 i 为：1  level 执行次数：3</span><br><span class="line">I/flutter (31880): End</span><br><span class="line">I/flutter (31880): End</span><br></pre></td></tr></table></figure>
+<p>在上述代码中：</p>
+<ul>
+<li>当 <code>n</code> 为3时，只执行了一次 <code>yield n</code></li>
+<li>当 <code>n</code> 为2时，先执行了一次 <code>yield n</code>，然后执行了一次 <code>yield i</code>(实际上是执行了一次 <code>n = 3</code> 时的逻辑)</li>
+<li>当 <code>n</code> 为1时，先执行了一次 <code>yield n</code>，然后执行了两次 <code>yield i</code>（实际上是分别执行了 <code>n = 3</code> 和 <code>n = 2</code> 时的逻辑）</li>
+</ul>
+<p>也就是说，这种方式下，使用 <code>yield</code> 传递值的次数总共执行了 $x(x-1)/2$ 次，时间复杂度为 $O(n^2)$，存在明显的性能问题。</p>
+<p>我们使用 <code>yield</code><sup>*</sup> 对原来的递归调用进行修改：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> level = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Iterable</span>&lt;<span class="built_in">int</span>&gt; naturalsDownFrom(<span class="built_in">int</span> n) <span class="keyword">sync</span>* &#123;</span><br><span class="line">  <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"Begin"</span>);</span><br><span class="line">    level = level + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'当前 n 为：<span class="subst">$n</span>  level 执行次数：<span class="subst">$level</span>'</span>);</span><br><span class="line">    <span class="keyword">yield</span> n;</span><br><span class="line">    <span class="keyword">yield</span>* naturalsDownFrom(n - <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"End"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">I/flutter (32505): Begin</span><br><span class="line">I/flutter (32505): 当前 n 为：3  level 执行次数：1</span><br><span class="line">I/flutter (32505): Begin</span><br><span class="line">I/flutter (32505): 当前 n 为：2  level 执行次数：2</span><br><span class="line">I/flutter (32505): Begin</span><br><span class="line">I/flutter (32505): 当前 n 为：1  level 执行次数：3</span><br><span class="line">I/flutter (32505): End</span><br><span class="line">I/flutter (32505): End</span><br></pre></td></tr></table></figure>
+<p>使用 <code>yield</code><sup><em></em></sup> 调整之后，通过 <code>yield</code> 传递值的过程只有三次。<code>yield</code><sup></sup> 的作用是：将 <code>yield</code><sup><em></em></sup> 后面的子序列（在 <code>sync</code><sup></sup> 方法中，子序列必须是一个 <code>Iterable</code> 可迭代对象；在 <code>async</code><sup>*</sup> 方法中，子序列必须是一个 <code>Stream</code> 数据流）的所有元素插入到当前创建的序列中，而不是创建新的序列。</p>
+<p>综上，<code>yield</code> 在递归调用中造成性能开销过大的本质原因是，生成器函数在每次调用的时候都会生成一个新的序列。在递归调用中，需要额外的开销将子序列的元素插入到当前序列中。</p>
+<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>如果要使用 <code>Future</code>，需要在代码中导入相应的库：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:async'</span>;</span><br></pre></td></tr></table></figure>
+<p><code>Future</code> 表示一个异步任务在将来执行时产生的结果。<code>Flutter</code> 使用的 <code>Dart</code> 语言是单线程模型的语言，在 <code>Flutter</code> 中使用 <code>isolate</code>（协程）来表示一个异步任务。在 <code>Flutter</code> 线程的消息机制中，有一个消息循环（<code>event loop</code>）和两个队列（<code>event queue</code> 和 <code>microtask queue</code>）：</p>
+<ul>
+<li><code>event queue</code> 中包含所有的的外来事件，包括 <code>I/O</code>、<code>mouse events</code>、<code>drawing events</code>、<code>timers</code> 以及 <code>isolate</code> 之间的消息等。在任意的 <code>isolate</code> 中新增的事件都会放入到 <code>even loop</code> 中等待执行</li>
+<li><code>microtask queue</code> 只在当前 <code>isolate</code> 的任务队列中排队，优先级高于 <code>event queue</code>，主要是通过 <code>scheduleMicrotask</code> 来调度</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/1975877-7f5e775270e16dad?imageMogr2/auto-orient/strip%7CimageView2/2/w/471" alt></p>
+<p><code>Flutter</code> 中的事件处理遵循如下规则：</p>
+<ul>
+<li>首先处理 <code>microtask queue</code> 中的任务（事件）</li>
+<li>处理完 <code>microtask queue</code> 中的所有任务之后，从 <code>event queue</code> 中取出一个任务进行处理</li>
+<li>回到 <code>microtask queue</code>，处理其中的任务，然后重复上述过程</li>
+</ul>
+<p>那么 <code>Flutter</code> 中是如何实现异步任务的呢？我们只需要将任务放入到 <code>microtask queue</code> 或者 <code>event queue</code> 中即可。通过 <code>Future.microtask</code> 接口（实际上使用了 <code>scheduleMicrotask</code>）可以将任务放置在 <code>microtask queue</code>。而通过 <code>Future</code> 的构造方法 <code>Future(FutureOr&lt;T&gt; computation())</code> 创建的任务则放置到了 <code>event queue</code> 中（实际上是通过 <code>Timer.run</code> 实现的）。</p>
+<h3 id="创建异步（同步）任务"><a href="#创建异步（同步）任务" class="headerlink" title="创建异步（同步）任务"></a>创建异步（同步）任务</h3><p><code>Future</code> 中提供了多个接口用于创建异步或同步任务：</p>
+<ul>
+<li>使用 <code>factory Future(FutureOr&lt;T&gt; computation())</code>：该方法可以在 <code>event loop</code> 中创建一个异步任务</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future(() =&gt; <span class="built_in">print</span>(<span class="string">'在 event queue 中运行的 Future'</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>factory Future.delayed(Duration duration, [FutureOr&lt;T&gt; computation()])</code>：该方法可以在 <code>event loop</code> 中创建一个延时执行的异步任务</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future.delayed(<span class="keyword">const</span> <span class="built_in">Duration</span>(seconds:<span class="number">1</span>), () =&gt; <span class="built_in">print</span>(<span class="string">'1秒后在 event queue 中运行的 Future'</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>factory Future.microtask(FutureOr&lt;T&gt; computation())</code>：该方法可以在 <code>microtask queue</code> 中创建一个异步任务</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future.microtask(() =&gt; <span class="built_in">print</span>(<span class="string">'在 microtask queue 里运行的 Future'</span>));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>factory Future.sync(FutureOr&lt;T&gt; computation())</code>：该方法可以创建一个同步任务</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future.<span class="keyword">sync</span>(() =&gt; <span class="built_in">print</span>(<span class="string">'同步运行的Future'</span>));</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，<code>Future.sync</code> 创建的同步任务指的是构造 <code>Future</code> 是传入的 <code>computation()</code> 对象是同步执行的。但是通过 <code>then</code> 注册的回调方法是在 <code>microtask queue</code> 中执行的。</p>
+<h4 id="Completer"><a href="#Completer" class="headerlink" title="Completer"></a>Completer</h4><p><code>future.dart</code> 中有一个很特殊的类：<code>Completer</code>。我们通过 <code>Future</code> 的接口向队列添加任务之后，我们只能被动的通过注册的回调方法接收结果或者处理错误。而 <code>Completer</code> 提供了一系列接口允许我们对 <code>Future</code> 的执行过程进行控制。一个比较好的示例是 <a href="https://github.com/dart-lang/http/blob/21e02c10c042cbd396d39b825dc7538ea6cccab8/lib/src/utils.dart" target="_blank" rel="noopener">http/http.dart 库</a> 中的 <code>store</code> 方法：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Future store(Stream stream, EventSink sink) &#123;</span><br><span class="line">  <span class="keyword">var</span> completer = <span class="keyword">new</span> Completer();</span><br><span class="line">  stream.listen(sink.add, onError: sink.addError, onDone: () &#123;</span><br><span class="line">    sink.close();</span><br><span class="line">    completer.complete();</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> completer.future;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="then"><a href="#then" class="headerlink" title="then"></a>then</h3><p><code>Future</code>通过向 <code>then()</code> 方法注册回调方法来接收返回的结果：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;R&gt; then&lt;R&gt;(FutureOr&lt;R&gt; onValue(T value), &#123;<span class="built_in">Function</span> onError&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果任务正确执行并返回了正确的值（非异常值），<code>onValue</code> 回调方法会被调用。此时通过 <code>value</code> 获取对应的返回值。另外，<code>then</code> 方法中还有一个可选的 <code>onError</code> 回调方法用于处理 <code>onValue</code> 回调方法执行过程中出现的异常信息。如果不注册该回调方法，那么将默认通过 <code>catchError</code> 返回异常信息。</p>
+<p>需要注意的是，<code>onError</code> 的回调方法需要提供一个或两个参数，其中第二个参数为 可选的 <code>StackTrace</code> 对象。</p>
+<p>需要注意的是，在肥肥测试的过程中 <code>onError</code> 并没有被执行，而是将异常信息交给了 <code>catchError</code> 进行处理。目前不确定是何种原因造成的问题。测试使用的代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getVersionName().then((value) &#123;</span><br><span class="line">  <span class="built_in">print</span>(value);</span><br><span class="line">  <span class="built_in">String</span> result = <span class="keyword">null</span>;</span><br><span class="line">  result.substring(<span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">&#125;, onError: (<span class="built_in">Object</span> e, StackTrace st) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'出现异常 onError： &#123;e.toString()&#125;'</span>);</span><br><span class="line">&#125;).catchError((<span class="built_in">Object</span> e) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'出现异常 catchError：&#123;e.toString()&#125;'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="catchError"><a href="#catchError" class="headerlink" title="catchError"></a>catchError</h3><p><code>Future</code> 通过向 <code>catchError</code> 接口注册回调方法的方式来处理异常：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;T&gt; catchError(<span class="built_in">Function</span> onError, &#123;<span class="built_in">bool</span> test(<span class="built_in">Object</span> error)&#125;);</span><br></pre></td></tr></table></figure>
+<p>异步任务执行的过程中出现的异常信息将会由 <code>catchError</code> 进行处理。</p>
+<p>我们也可以通过 <code>Future.error</code> 返回错误信息，该错误信息也会由 <code>catchError</code> 进行处理。</p>
+<p>另外，<code>catchError</code> 方法还有一个可选的 <code>test</code> 参数用于接收一个回调。如果该方法返回 <code>true</code>，那么 <code>catchError</code> 捕获的异常信息将会先由 <code>test</code> 参数对应的回调方法进行响应，然后再由 <code>onError</code> 参数对应的回调方法进行响应。如果返回 <code>false</code>，那么 <code>test</code> 参数对应的回调执行之后，<code>onError</code> 参数对应的回调则不再执行，应用程序将会抛出 <code>Unhandled Exception</code>。</p>
+<h3 id="whenComplete"><a href="#whenComplete" class="headerlink" title="whenComplete"></a>whenComplete</h3><p><code>Future</code> 通过向 <code>whenComplete</code> 接口注册回调方法的方式来保证特定的代码逻辑一定能够得到执行。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;T&gt; whenComplete(FutureOr action());</span><br></pre></td></tr></table></figure>
+<p>与使用 <code>try-catch-finally</code> 捕获异常信息类似的，<code>Future</code> 可以通过 <code>whenComplete</code> 的回调方法保证无论何种情况都会保证代码的执行。</p>
+<h3 id="Future-wait"><a href="#Future-wait" class="headerlink" title="Future.wait"></a>Future.wait</h3><p>如果需要调用多个异步方法并且一并将返回值返回，可以使用 <code>Future.wait</code> 接口。当所有 <code>Future</code> 完成后，返回 <code>List</code> 类型的值列表：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Future&lt;<span class="built_in">List</span>&lt;T&gt;&gt; wait&lt;T&gt;(<span class="built_in">Iterable</span>&lt;Future&lt;T&gt;&gt; futures, &#123;<span class="built_in">bool</span> eagerError: <span class="keyword">false</span>, <span class="keyword">void</span> cleanUp(T successValue)&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Future-doWhile"><a href="#Future-doWhile" class="headerlink" title="Future.doWhile"></a>Future.doWhile</h3><p>如果需要执行循环的任务，可以使用 <code>Future.doWhile</code>。只有当执行结果返回 <code>false</code> 的时候才会停止：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> Future doWhile(FutureOr&lt;<span class="built_in">bool</span>&gt; action())</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+  <img id="wechat_subscriber_qcode" src="/uploads/qrcode_for_gh_5da62d49fddb_258.jpg" alt="fiissh.zhao wechat" style="width: 200px; max-width: 100%;">
+  <div>微信扫一扫，关注我的公众号</div>
+</div>
+
+      </div>
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>fiissh.zhao</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://fiissh.tech/2019/flutter-async-program.html" title="Flutter 开发（09）：Flutter 异步编程">https://fiissh.tech/2019/flutter-async-program.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flutter-异步编程/" rel="tag"># Flutter 异步编程</a>
+          
+            <a href="/tags/await/" rel="tag"># await</a>
+          
+            <a href="/tags/sync/" rel="tag"># sync</a>
+          
+            <a href="/tags/future/" rel="tag"># Future</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/resolved-version-for-app-and-test-app-differ-error.html" rel="next" title="Android Studio 编译 Resolved Versions for App (26.1.0) and Test App (27.1.1) Differ 错误">
+                <i class="fa fa-chevron-left"></i> Android Studio 编译 Resolved Versions for App (26.1.0) and Test App (27.1.1) Differ 错误
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/the-art-of-war-5.html" rel="prev" title="孙子兵法：兵势第五">
+                孙子兵法：兵势第五 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/homercat.png" alt="fiissh.zhao">
+            
+              <p class="site-author-name" itemprop="name">fiissh.zhao</p>
+              <p class="site-description motion-element" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发者</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/fiissh" title="GitHub &rarr; https://github.com/fiissh" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail &rarr; mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#async-和-await"><span class="nav-number">1.</span> <span class="nav-text">async 和 await</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数生成器"><span class="nav-number">2.</span> <span class="nav-text">函数生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#同步生成器：sync"><span class="nav-number">2.1.</span> <span class="nav-text">同步生成器：sync*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步生成器：async"><span class="nav-number">2.2.</span> <span class="nav-text">异步生成器：async*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield-和-yield"><span class="nav-number">2.3.</span> <span class="nav-text">yield 和 yield*</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future"><span class="nav-number">3.</span> <span class="nav-text">Future</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建异步（同步）任务"><span class="nav-number">3.1.</span> <span class="nav-text">创建异步（同步）任务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Completer"><span class="nav-number">3.1.1.</span> <span class="nav-text">Completer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#then"><span class="nav-number">3.2.</span> <span class="nav-text">then</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catchError"><span class="nav-number">3.3.</span> <span class="nav-text">catchError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whenComplete"><span class="nav-number">3.4.</span> <span class="nav-text">whenComplete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Future-wait"><span class="nav-number">3.5.</span> <span class="nav-text">Future.wait</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Future-doWhile"><span class="nav-number">3.6.</span> <span class="nav-text">Future.doWhile</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fiissh.zhao</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66117115";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        appId: 'CxKgREkYU3T289wFDUJfKhsX-gzGzoHsz',
+        appKey: 'N8X4SJ2E1ARwc9hEM2tmhr20',
+        placeholder: '请留下您的脚印',
+    });
+  </script>
+
+ 
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

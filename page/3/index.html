@@ -1,0 +1,2955 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+<meta name="keywords" content="肥肥鱼,fiissh.zhao,fiissh,SDK,Android,Android SDK,flutter">
+<meta property="og:type" content="website">
+<meta property="og:title" content="肥言肥语">
+<meta property="og:url" content="https://fiissh.tech/page/3/index.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="肥言肥语">
+<meta name="twitter:description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="肥言肥语" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://fiissh.tech/page/3/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>肥言肥语</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-65174745-4');
+  </script>
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+  <script type="text/javascript">
+    var _speedMark = new Date();
+  </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">肥言肥语</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">肥肥鱼胡说八道的地方</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/the-art-of-war-3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/the-art-of-war-3.html" class="post-title-link" itemprop="url">孙子兵法：谋攻第三</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-07 18:51:26" itemprop="dateCreated datePublished" datetime="2019-03-07T18:51:26+08:00">2019-03-07</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/孙子兵法/" itemprop="url" rel="index"><span itemprop="name">孙子兵法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>孙子曰：　</p>
+<p>夫用兵之法，全国为上，破国次之；全军为上，破军次之；全旅为上，破旅次之；全卒为上，破卒次之；全伍为上，破伍次之。</p>
+<p>是故百战百胜，非善之善也；不战而屈人之兵，善之善者也。故上兵伐谋，其次伐交，其次伐兵，其下攻城。攻城之法，为不得已。修橹轒辒，具器械，三月而后成；距堙，又三月而后已。将不胜其忿而蚁附之，杀士卒三分之一，而城不拔者，此攻之灾也。故善用兵者，屈人之兵而非战也，拔人之城而非攻也，毁人之国而非久也，必以全争于天下，故兵不顿而利可全，此谋攻之法也。　</p>
+<p>故用兵之法，十则围之，五则攻之，倍则分之，敌则能战之，少则能逃之，不若则能避之。故小敌之坚，大敌之擒也。　</p>
+<p>夫将者，国之辅也。辅周则国必强，辅隙则国必弱。故君之所以患于军者三：不知军之不可以进而谓之进，不知军之不可以退而谓之退，是谓縻军；不知三军之事而同三军之政，则军士惑矣；不知三军之权而同三军之任，则军士疑矣。三军既惑且疑，则诸侯之难至矣。是谓乱军引胜。　</p>
+<p>故知胜有五：知可以战与不可以战者胜，识众寡之用者胜，上下同欲者胜，以虞待不虞者胜，将能而君不御者胜。此五者，知胜之道也。故曰：知己知彼，百战不贻；不知彼而知己，一胜一负；不知彼不知己，每战必败。　</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/the-art-of-war-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/the-art-of-war-2.html" class="post-title-link" itemprop="url">孙子兵法：作战第二</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-07 18:44:55" itemprop="dateCreated datePublished" datetime="2019-03-07T18:44:55+08:00">2019-03-07</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/孙子兵法/" itemprop="url" rel="index"><span itemprop="name">孙子兵法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>孙子曰：</p>
+<p>凡用兵之法，驰车千驷，革车千乘，带甲十万，千里馈粮。则内外之费，宾客之用，胶漆之材，车甲之奉，日费千金，然后十万之师举矣。</p>
+<p>其用战也，胜久则钝兵挫锐，攻城则力屈，久暴师则国用不足。夫钝兵挫锐，屈力殚货，则诸侯乘其弊而起，虽有智者不能善其后矣。故兵闻拙速，未睹巧之久也。夫兵久而国利者，未之有也。故不尽知用兵之害者，则不能尽知用兵之利也。</p>
+<p>善用兵者，役不再籍，粮不三载，取用于国，因粮于敌，故军食可足也。国之贫于师者远输，远输则百姓贫；近师者贵卖，贵卖则百姓财竭，财竭则急于丘役。力屈中原，内虚于家，百姓之费，十去其七；公家之费，破军罢马，甲胄矢弓，戟盾矛橹，丘牛大车，十去其六。故智将务食于敌，食敌一钟，当吾二十钟；忌（上面草字头，下面忌字）杆一石，当吾二十石。故杀敌者，怒也；取敌之利者，货也。车战得车十乘以上，赏其先得者而更其旌旗。车杂而乘之，卒善而养之，是谓胜敌而益强。</p>
+<p>故兵贵胜，不贵久。</p>
+<p>故知兵之将，民之司命。国家安危之主也。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/the-art-of-war-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/the-art-of-war-1.html" class="post-title-link" itemprop="url">孙子兵法：始计第一</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-07 18:39:31" itemprop="dateCreated datePublished" datetime="2019-03-07T18:39:31+08:00">2019-03-07</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/孙子兵法/" itemprop="url" rel="index"><span itemprop="name">孙子兵法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>孙子曰：</p>
+<p>兵者，国之大事，死生之地，存亡之道，不可不察也。</p>
+<p>故经之以五事，校之以计，而索其情：一曰道，二曰天，三曰地，四曰将，五曰法。道者，令民于上同意，可与之死，可与之生，而不危也；天者，阴阳、寒暑、时制也；地者，远近、险易、广狭、死生也；将者，智、信、仁、勇、严也；法者，曲制、官道、主用也。凡此五者，将莫不闻，知之者胜，不知之者不胜。故校之以计，而索其情，曰：主孰有道？将孰有能？天地孰得？法令孰行？兵众孰强？士卒孰练？赏罚孰明？吾以此知胜负矣。将听吾计，用之必胜，留之；将不听吾计，用之必败，去之。</p>
+<p>计利以听，乃为之势，以佐其外。势者，因利而制权也。兵者，诡道也。故能而示之不能，用而示之不用，近而示之远，远而示之近。利而诱之，乱而取之，实而备之，强而避之，怒而挠之，卑而骄之，佚而劳之，亲而离之，攻其无备，出其不意。此兵家之胜，不可先传也。</p>
+<p>夫未战而庙算胜者，得算多也；未战而庙算不胜者，得算少也。多算胜少算，而况于无算乎！吾以此观之，胜负见矣。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/android-sdk-developer-override.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/android-sdk-developer-override.html" class="post-title-link" itemprop="url">Android SDK 开发（00）：概述</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-06 15:10:24" itemprop="dateCreated datePublished" datetime="2019-03-06T15:10:24+08:00">2019-03-06</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/android-sdk/" itemprop="url" rel="index"><span itemprop="name">Android SDK</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>广泛意义上的 <code>SDK</code> 一般指特定的用于应用程序开发的工具包，例如 <code>Android</code> 开发过程中使用的 <code>Android SDK</code>。而狭义上的 <code>SDK</code> 则是基于广义 <code>SDK</code> 开发的独立于具体业务且能够完成特定功能的一组工具的集合，例如支付宝的支付 <code>SDK</code>、极光的推送 <code>SDK</code>以及各种广告 <code>SDK</code>等。</p>
+<p>通常情况下，<code>SDK</code> 在应用程序开发过程中是作为特定功能的提供者的角色出现的。</p>
+<p>与 <code>Android</code> 应用程序开发人员面向的是最终用户所不同的是，<code>SDK</code> 开发者往往面对的是应用程序开发人员。由于 <code>SDK</code> 自身的特性以及分发方式、对宿主的侵入性、风险考量等因素的影响，与应用程序开发所不同的是，<code>SDK</code> 对于稳定性的要求变得极为苛刻。应用程序开发过程中可以通过版本迭代的方式快速（相对于 <code>SDK</code> 的发版情况）推进新的需求或者修复发现的问题，而 <code>SDK</code> 由于受其自身版本发布的特性（只能嵌入到宿主的项目中）的制约，对于新的需求的推进或者 <code>BUG</code> 修复之后的版本迭代将会变得极其缓慢，且在一定程度上成倍的增加了沟通成本。</p>
+<p>本系列文章将围绕 <code>SDK</code> 开发的主题，在架构设计、设计指标、测试、版本发布以及安全性等方面展开讨论。整个 <code>Android SDK</code> 开发系列的文章基于肥肥近几年来 <code>SDK</code> 开发过程中总结的经验。</p>
+<p>由于肥肥自身知识储备的局限性，本系列文章所讨论的内容并不具备普适性。如果您对本系列文章中的观点持有不同的意见，欢迎您发邮件给我 <a href="mailto:`fiissh.zhao@gmail.com" target="_blank" rel="noopener">`fiissh.zhao@gmail.com</a>`。</p>
+<h2 id="SDK-产品设计"><a href="#SDK-产品设计" class="headerlink" title="SDK 产品设计"></a>SDK 产品设计</h2><h3 id="SDK-与应用程序在产品设计方面的差异"><a href="#SDK-与应用程序在产品设计方面的差异" class="headerlink" title="SDK 与应用程序在产品设计方面的差异"></a>SDK 与应用程序在产品设计方面的差异</h3><p><code>SDK</code> 的产品设计更多的是侧重于产品功能逻辑的设计。大多数情况下，<code>SDK</code> 是以 <code>API</code> 的形式对外提供服务。对于 <code>SDK</code> 开发人员来说，很多时候也要充当产品经理的角色参与到 <code>SDK</code> 的产品设计过程中。而由于 <code>SDK</code> 在测试和发版方面的特殊性，又要求我们必须在 <code>SDK</code> 产品设计的早期就要考虑这些因素。</p>
+<p>不同于应用程序开发过程中的产品设计要面向特定用户群体的设计思路，<code>SDK</code> 产品的设计则是面向特定的场景。大多数应用程序在设计之初，其面向的用户群体有着显著的群体特征，这就决定了应用类的产品在一开始就有了显著的用户画像，产品人员可以根据显著的用户特征和用户习惯来调整应用程序的功能、界面等设计。</p>
+<p><code>SDK</code> 类型的产品则是面向特定的使用场景，与用户群体无关。这也就要求 <code>SDK</code> 类型的产品在设计上要具备一定的普适性。</p>
+<h3 id="SDK-与应用程序在迭代计划方面的差异"><a href="#SDK-与应用程序在迭代计划方面的差异" class="headerlink" title="SDK 与应用程序在迭代计划方面的差异"></a>SDK 与应用程序在迭代计划方面的差异</h3><p>相对于应用程序的产品迭代速度（在正式版方面），<code>SDK</code> 类型的产品迭代速度往往会慢很多。一方面，<code>SDK</code> 类型的产品受限于测试过程，无法达到应用程序类型的产品发版速度，另一方面，<code>SDK</code> 类型的产品在发版之后，往往还有漫长的与宿主对接的过程。</p>
+<p>这也就要求我们在 <code>SDK</code> 发版方面一定要慎重。一旦线上版本大规模出现问题，<code>SDK</code> 类型的产品从发现问题到宿主接入发版需要相对漫长的时间，由此带来的损失将会变得非常高昂。</p>
+<p><code>SDK</code> 类型的产品往往通过如下两种方式的使用（或者两种方式都使用）来保证线上版本的稳定性以及对突出状况的紧急应对：</p>
+<ul>
+<li>发版前的线上测试：通常情况下，<code>SDK</code> 产品的开发团队都会维护有至少一个针对于 <code>SDK</code> 功能点全覆盖的测试应用程序（用户量级在百万级及以上最好）。在 <code>SDK</code> 正式发版前的阶段（通常是 <code>Beta</code> 版本阶段），通过专门的测试应用程序对 <code>SDK</code> 进行全功能覆盖的线上测试是非常有必要的。一方面能够针对的用户的真实环境进行测试，提前发现并解决问题。另一方面，可以在测试应用程序中接入 <code>SDK</code> 产品不方便接入的异常捕获和性能分析等一些辅助服务，这样能够获取到较为全面的崩溃、<code>ANR</code> 和性能方面的数据。</li>
+<li>细粒度的多维度云控系统：云端配置控制系统为我们提供了线上版本出现问题之后唯一的应对通道。通常情况下，如果 <code>SDK</code> 中的每一个模块都尽可能的配置了云端控制系统，并提供相应的容错机制，那么在线上版本出现问题时，至少能够启用紧急预案，将出现问题的模块屏蔽。云端控制系统和崩溃系统相结合的方式，可以有效地降低线上 <code>SDK</code> 出现问题时对宿主产品的影响。如果配置下发能够精确到单一用户，那么就可以实现多样化、细粒度的云端控制。</li>
+</ul>
+<p>云控系统的主要目的是提供了一种线上版本出现大规模问题时的紧急应对方案，在实际的开发过程中，严格的代码质量控制、严格且全面的测试才是保证线上版本的重要手段。</p>
+<p><code>SDK</code> 产品迭代的详细内容，会在本系列的其他文章中展开讨论。</p>
+<h3 id="SDK-与应用程序在服务器资源配置方面的差异"><a href="#SDK-与应用程序在服务器资源配置方面的差异" class="headerlink" title="SDK 与应用程序在服务器资源配置方面的差异"></a>SDK 与应用程序在服务器资源配置方面的差异</h3><p>在一定情况下，应用程序的用户增长和活跃模型是可预测的。这也就意味着我们可以有计划地增加服务器资源以保证服务端的稳定性。严格来说，<code>SDK</code> 类型的产品的用户增长和活跃模型也是可以预测的，但是 <code>SDK</code> 类型的产品由于其用户量级和活跃程度与宿主产品有关，这在一定程度上使得我们无法很好的预估服务器资源的开销。</p>
+<p>实时有效的服务器资源监控以及动态配置（扩容和降容）将变得尤为重要。这可以在一定程度上降低由于访问量激增所带来的一系列问题。基于集群和微服务的服务端架构能够很好地规避着一些问题。</p>
+<h3 id="SDK-与应用程序在使用三方资源方面的差异"><a href="#SDK-与应用程序在使用三方资源方面的差异" class="headerlink" title="SDK 与应用程序在使用三方资源方面的差异"></a>SDK 与应用程序在使用三方资源方面的差异</h3><p>三方资源通常是指提供特定功能的 <code>SDK</code> 以及开源框架等。通常情况下，<code>SDK</code> 中很少会依赖额外的第三方的 <code>SDK</code>（当然也会存在一些例外，例如广告聚合 <code>SDK</code> 等）。</p>
+<p>相对于应用程序，<code>SDK</code> 在使用开源框架方面会更为慎重一些。一方面，宿主对于接入的 <code>SDK</code> 的包体积是很敏感的。使用开源框架需要引入额外的包（<code>aar</code> 或者 <code>jar</code>）。这在一定程度上增加了宿主的接入成本。另一方面，<code>SDK</code> 中使用开源项目会为宿主带来额外的法律风险。受限于开源项目的开源协议，可能会要求宿主产品针对 <code>SDK</code> 使用的开源项目做特别说明。再者，如果 <code>SDK</code> 和宿主产品使用了同一个第三方框架的不同版本，也会带来一些不必要的麻烦。</p>
+<p><code>SDK</code> 使用第三方框架时需要慎重考量，如果使用第三方框架所带来的收益不能覆盖所带来的风险成本，那最好的方案是选择不使用。关于第三方框架的使用，会在本系列的其他文章中做详细讨论。</p>
+<h3 id="SDK-与应用程序在产品交付方面的差异"><a href="#SDK-与应用程序在产品交付方面的差异" class="headerlink" title="SDK 与应用程序在产品交付方面的差异"></a>SDK 与应用程序在产品交付方面的差异</h3><p>通常情况下，应用程序类产品的交付是安装包（<code>apk</code> 文件）的形式通过渠道商（<code>Google Play</code> 等）进行分发。而 <code>SDK</code> 类型的产品通常只有官网一个渠道对 <code>aar</code> 文件或者 <code>jar</code> 文件进行分发。另外，<code>SDK</code> 产品还需要提供额外的接入手册、说明手册等文档类产品以及演示用的 <code>Sample</code> 项目。</p>
+<p>应用程序产品往往会面向用户提供测试版等非正式版本，而 <code>SDK</code> 则通常只能提供正式版（但是不排除在某些情况下，宿主选择接入 <code>Beta</code> 阶段甚至更早阶段的 <code>SDK</code> 的情况）。这是由于相较于应用程序能够快速迭代的特性，<code>SDK</code> 类型的产品在版本迭代方面成本过高造成的。</p>
+<p>关于 <code>SDK</code> 类型的产品的发布渠道、接入手册等内容，会在本系列的其他文章中做详细讨论。</p>
+<h2 id="SDK-设计目标"><a href="#SDK-设计目标" class="headerlink" title="SDK 设计目标"></a>SDK 设计目标</h2><p>对于应用程序最终用户来说，大多数情况下他们是感知不到 <code>SDK</code> 的存在的（作者注：此处说法不是很确切）。从另一个角度来说，<code>SDK</code> 运行期间的资源开销（内存、电量、流量等）、需要的权限、出现的崩溃以及不兼容的情况，最终都归会给应用程序带来影响。这也就要求 <code>SDK</code> 开发人员把提升性能降低资源占用以及提升稳定性兼容性作为最重要的设计目标。</p>
+<p><code>SDK</code> 在开发过程中对于宿主主线程的使用也需要格外的慎重。理想情况下，在 <code>Android</code> 的体系架构中，主线程一般只用来渲染界面和处理用户交互事件。对于主线程过多的占用将会为宿主带来卡顿甚至 <code>ANR</code> 的风险。</p>
+<p>对于大多数应用程序来说，其包体积的大小是衡量应用程序质量的重要指标。这也就意味着宿主对于接入的 <code>SDK</code> 的包体积变得尤为敏感。</p>
+<p>对于全球化的应用程序来说，除了需要符合 <code>Google Play</code> 的的隐私政策之外，规避各个国家和地区额外的隐私条款也是非常重要的。<code>SDK</code> 作为应用程序的一部分，需要在隐私风险方面格外慎重。最基本的原则是尽可能不使用、不收集涉及隐私风险的数据或 <code>API</code>，如果必须使用，需要对此功能做出详细说明以及风险披露。</p>
+<p><code>SDK</code> 的设计目标会在本系列的其他文章中做详细说明。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文是 <code>Android SDK</code> 开发系列的第一篇文章，主要介绍了 <code>SDK</code> 和应用程序开发在产品设计以及设计目标方面的差异。在后续的文章中，将会围绕技术选型、<code>API</code> 设计、错误处理、数据交互、版本管理、文档管理以及测试等方面展开讨论。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-plugin-file-path-provider.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-plugin-file-path-provider.html" class="post-title-link" itemprop="url">Flutter 开发（08）：Flutter 插件开发（Flutter_file_path_provide）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-05 13:01:06" itemprop="dateCreated datePublished" datetime="2019-03-05T13:01:06+08:00">2019-03-05</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要介绍 <code>Flutter</code> 插件开发的相关内容，并在 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider" target="_blank" rel="noopener">path_provider/path_provider.dart</a> 插件项目的基础上开发我们自己的 <code>flutter_file_path_provide</code> 插件。</p>
+<p>本文中涉及到的主要技术是基于 <a href="https://fiissh.tech/2019/flutter-platform-specific.html">Flutter 开发（07）：编写平台相关的代码</a>。当然，在我们的 <code>flutter_file_path_provide</code> 插件项目中只使用到了 <code>MethodChannel</code>。另外两种平台通道我们将在其他文章中介绍。</p>
+<p>由于肥肥从事 <code>Android SDK</code> 开发，所以 <code>flutter_file_path_provide</code> 插件项目中的 <code>iOS</code> 部分在本文撰写时并没有实现。<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/flutter-plugin-file-path-provider.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-platform-specific.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-platform-specific.html" class="post-title-link" itemprop="url">Flutter 开发（07）：编写平台相关的代码</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-01 10:33:14" itemprop="dateCreated datePublished" datetime="2019-03-01T10:33:14+08:00">2019-03-01</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>前面文章介绍的 <code>path_provider.dart</code> 库和 <code>shared_preferences.dart</code> 库的实际上是依赖于设备的具体环境的。比如说在 <code>shared_preferences.dart</code> 库在存储数据时，在 <code>Android</code> 设备上使用的是 <code>SharedPreference</code> 相关的功能，而在 <code>iOS</code> 上则是使用了 <code>NSUserDefaults</code> 的相关功能。换句话说，这些代码都是平台相关的。</p>
+<p>本文主要介绍 <code>Flutter</code> 中平台相关的代码的开发，其目的是快速了解 <code>Android</code> 和 <code>iOS</code> 原生代码与 <code>Flutter</code> 之间的通信。</p>
+<p>本文将以 <code>Flutter</code> 的官方 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider" target="_blank" rel="noopener">path_provider/path_provider.dart</a> 库作为示例。</p>
+<p>平台通道的作用是在 <code>Flutter</code> 和设备之间传递消息，如下所示：</p>
+<p><img src="/images/flutter-platform-channel.png" alt="flutter-platform-channel"></p>
+<p><code>Flutter</code> 中平台特定的 <code>API</code> 支持并不依赖于代码生成，而是依赖于灵活的消息传递方式：</p>
+<ul>
+<li>应用程序的 <code>Flutter</code> 部分通过平台通道（<code>Platform Channel</code>）将消息发送到该应用程序的设备平台（<code>Android</code> 或 <code>iOS</code>）</li>
+<li>设备平台通过对平台通道的监听接收到消息之后，调用设备平台上对应的 <code>API</code>（使用设备平台原生开发语言），然后将响应数据发送回应用程序的 <code>Flutter</code> 部分</li>
+</ul>
+<p>本文中有大量的内容参考自阿里咸鱼技术团队的 <a href="https://zhuanlan.zhihu.com/p/43163159" target="_blank" rel="noopener">深入理解 Flutter Platform Channel</a> 一文。该文章对 <code>Flutter</code> 的平台通道有非常详细的讲解。</p>
+<p>再次表达对咸鱼团队的感谢以及对肥肥作为伸手党的不齿。<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/flutter-platform-specific.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-sharedpreference-by-shared-preference.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-sharedpreference-by-shared-preference.html" class="post-title-link" itemprop="url">Flutter 开发（06）：Flutter 中 SharedPreference</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-28 16:10:35" itemprop="dateCreated datePublished" datetime="2019-02-28T16:10:35+08:00">2019-02-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要介绍 <code>Flutter</code> 上 <code>SharedPreference</code> 的使用，其目的是介绍 <code>shared_preferences.dart</code> 库的使用。<a href="https://github.com/flutter/plugins/tree/master/packages/shared_preferences" target="_blank" rel="noopener">shared_preferences.dart</a> 官方开源的轻量级数据存储库，并且屏蔽了 <code>Android</code> 和 <code>iOS</code> 平台上使用 <code>K-V</code> 型数据的差异。</p>
+<p>使用 <code>shared_preferences.dart</code> 前需要添加配置并更新依赖：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shared_preferences: ^<span class="number">0.5</span><span class="number">.1</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>然后，在需要使用该库的地方引入该库：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:shared_preferences/shared_preferences.dart'</span>;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/flutter-sharedpreference-by-shared-preference.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-use-file-by-pathprovider.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-use-file-by-pathprovider.html" class="post-title-link" itemprop="url">Flutter 开发（05）：Flutter 中使用文件（path_provider.dart）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-28 10:13:29" itemprop="dateCreated datePublished" datetime="2019-02-28T10:13:29+08:00">2019-02-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文主要介绍 <code>Flutter</code> 中 <code>Android</code> 和 <code>iOS</code> 两个平台下文件存储位置，主要目的是掌握 <code>Flutter</code> 官方开源项目 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider" target="_blank" rel="noopener">path_provider/path_provider.dart</a> 的使用。</p>
+<p>使用 <code>path_provider.dart</code> 库之前，需要先在 <code>pubspec.yaml</code> 文件的 <code>dependencies:</code> 中添加如下依赖：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path_provider: ^<span class="number">0.5</span><span class="number">.0</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>然后在项目的根目录中使用如下命令更新依赖：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages <span class="keyword">get</span></span><br></pre></td></tr></table></figure>
+<p>最后，在项目中需要使用的地方引入该库：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:path_provider/path_provider.dart'</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="使用-path-provider-dart"><a href="#使用-path-provider-dart" class="headerlink" title="使用 path_provider.dart"></a>使用 path_provider.dart</h2><p><code>path_provider.dart</code> 库屏蔽了 <code>Android</code> 和 <code>iOS</code> 两个平台上文件存储路径的差异。<code>path_provider.dart</code> 库主要提供了如下几个方法用于获取存储路径：</p>
+<ul>
+<li><code>getTemporaryDirectory()</code>：获取临时文件夹，针对于 <code>Android</code> 设备 <code>getCacheDir()</code> 和 <code>iOS</code> 设备 <code>NSTemporaryDirectory()</code> 返回的值</li>
+<li><code>getApplicationDocumentsDirectory()</code>：获取 <code>Document</code> 文件夹，针对 <code>Android</code> 设备的 <code>AppDate</code> 目录，<code>iOS</code> 设备的 <code>NSDocumentDirectory</code> 目录</li>
+<li><code>getExternalStorageDirectory()</code>： 获取存储卡目录，只有 <code>Android</code> 设备可用</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-use-file-by-dart-io.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-use-file-by-dart-io.html" class="post-title-link" itemprop="url">Flutter 开发（04）：Flutter 中使用文件（Dart:io）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-28 09:13:29" itemprop="dateCreated datePublished" datetime="2019-02-28T09:13:29+08:00">2019-02-28</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要介绍 <code>Flutter</code> 中针对文件的操作，主要目的是掌握使用 <code>dart:io</code> 库相关方法操作文件。</p>
+<p>本文是基于 <code>Dart V2.1.0</code> 和 <code>Flutter V1.0.0</code> 版本进行的介绍。</p>
+<p><code>Flutter</code> 操作文件的类主要涉及到：</p>
+<ul>
+<li><code>Directory</code>：用于操作文件目录</li>
+<li><code>File</code>： 用于操作文件</li>
+<li><code>Stream</code>：用于接收数据流（<code>dart:async</code> 库）</li>
+</ul>
+<p>如果要使用 <code>dart:io</code> 库，我们需要在使用的位置导入：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:io'</span>;</span><br></pre></td></tr></table></figure>
+<p>如果需要使用到 <code>Stream</code>，那么还需要导入：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'dart:async'</span>;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/flutter-use-file-by-dart-io.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2019/flutter-http-request.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fiissh.zhao">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发者">
+      <meta itemprop="image" content="/images/homercat.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/flutter-http-request.html" class="post-title-link" itemprop="url">Flutter 开发（03）：Http 请求</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-27 10:30:46" itemprop="dateCreated datePublished" datetime="2019-02-27T10:30:46+08:00">2019-02-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要介绍 <code>Flutter</code> 项目中的 <code>Http</code> 网络请求。本文介绍的重点是，<code>Flutter</code> 对 <code>dart:io</code> 库中的 <code>HttpClient</code> 的使用，以及开源 <code>Flutter</code> 网络请求库 <a href="https://github.com/dart-lang/http" target="_blank" rel="noopener">package:http/http.dart</a> 的使用。</p>
+<p>本文介绍的所有特性是基于 <code>Flutter V1.0.0</code> 以及 <code>Dart V2.1.0</code>。</p>
+<p>由于 <code>dart:io</code> 库对于 <code>POST</code> 请求支持不好，本文中只简单介绍了使用 <code>dart:io</code> 库发起 <code>GET</code> 请求的情况。<code>http/http.dart</code> 库我们也只介绍 <code>GET</code> 请求和 <code>POST</code> 请求的使用，对于其他类型的情况，可参考官方文档。</p>
+<p><code>dio/dio.dart</code> 库也是非常优秀的 <code>Http</code> 请求库，如果对其感兴趣，请移步项目地址：<a href="https://github.com/flutterchina/dio" target="_blank" rel="noopener">dio/dio.dart</a>。<br>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/flutter-http-request.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </p></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/homercat.png" alt="fiissh.zhao">
+            
+              <p class="site-author-name" itemprop="name">fiissh.zhao</p>
+              <p class="site-description motion-element" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发者</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">44</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/fiissh" title="GitHub &rarr; https://github.com/fiissh" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail &rarr; mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fiissh.zhao</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+  <script>
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66117115";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="/js/src/Valine.min.js"></script>
+
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        appId: 'CxKgREkYU3T289wFDUJfKhsX-gzGzoHsz',
+        appKey: 'N8X4SJ2E1ARwc9hEM2tmhr20',
+        placeholder: '请留下您的脚印',
+    });
+  </script>
+
+ 
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
