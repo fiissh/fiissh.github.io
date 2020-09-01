@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android Studio 使用 Setting Repository 同步配置信息</title>
+    <url>//2019/android-studio-setting-repository.html</url>
+    <content><![CDATA[<p><code>Setting Repository</code> 是 <code>IntelliJ IDEA（Android Studio）</code> 的一项配置托管服务，我们可以通过在 <code>Github</code> 或者其他 <code>Git</code> 服务上创建一个 <code>Git Repository</code> 的方式统一托管、同步配置信息：</p>
+<ul>
+<li>在 <code>Github</code> 创建一个代码仓库（例如： <code>android-studio-setting-repository</code>）</li>
+<li>在 <code>Github</code> 上创建一个 <code>Personal access tokens</code>（保留 <code>read</code> 和 <code>write</code> 相关权限即可）</li>
+<li>将版本库地址填入 <code>Android Studio</code> 的 <code>File/Setting Repository/Upstream URL</code>（尽量使用 <code>https</code> 而不是 <code>ssh</code> 的方式）</li>
+<li>点击 <code>Overwrite Remote</code> 完成配置信息的提交</li>
+</ul>
+<blockquote>
+<p><code>Overwrite Remote</code> 是将本地配置信息写入到远程仓库，<code>Overwrite Load</code> 是将远程仓库的信息写入到本地，<code>Merge</code> 则是合并两者之间的差异。</p>
+</blockquote>
+<p>我的 <code>Android Studio</code> 配置仓库为 <a href="https://github.com/fiissh/android-studio-setting-repository">fiissh/android-studio-setting-repository</a>。</p>
+]]></content>
+      <categories>
+        <category>Android Studio</category>
+      </categories>
+      <tags>
+        <tag>Setting Repository</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android Studio 插件</title>
-    <url>//android-studio-plugin.html</url>
+    <url>//2018/android-studio-plugin.html</url>
     <content><![CDATA[<p><code>Android Studio</code> 常用插件记录：</p>
 <ul>
 <li><code>.ignore</code>: 快速根据项目类型生成 <code>Git</code> 版本库的 <code>.ignore</code> 文件</li>
@@ -29,30 +51,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Android Studio 使用 Setting Repository 同步配置信息</title>
-    <url>//android-studio-setting-repository.html</url>
-    <content><![CDATA[<p><code>Setting Repository</code> 是 <code>IntelliJ IDEA（Android Studio）</code> 的一项配置托管服务，我们可以通过在 <code>Github</code> 或者其他 <code>Git</code> 服务上创建一个 <code>Git Repository</code> 的方式统一托管、同步配置信息：</p>
-<ul>
-<li>在 <code>Github</code> 创建一个代码仓库（例如： <code>android-studio-setting-repository</code>）</li>
-<li>在 <code>Github</code> 上创建一个 <code>Personal access tokens</code>（保留 <code>read</code> 和 <code>write</code> 相关权限即可）</li>
-<li>将版本库地址填入 <code>Android Studio</code> 的 <code>File/Setting Repository/Upstream URL</code>（尽量使用 <code>https</code> 而不是 <code>ssh</code> 的方式）</li>
-<li>点击 <code>Overwrite Remote</code> 完成配置信息的提交</li>
-</ul>
-<blockquote>
-<p><code>Overwrite Remote</code> 是将本地配置信息写入到远程仓库，<code>Overwrite Load</code> 是将远程仓库的信息写入到本地，<code>Merge</code> 则是合并两者之间的差异。</p>
-</blockquote>
-<p>我的 <code>Android Studio</code> 配置仓库为 <a href="https://github.com/fiissh/android-studio-setting-repository">fiissh/android-studio-setting-repository</a>。</p>
-]]></content>
-      <categories>
-        <category>Android Studio</category>
-      </categories>
-      <tags>
-        <tag>Setting Repository</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Android 线程和线程池简介</title>
-    <url>//android-thread-pool-executor.html</url>
+    <url>//2019/android-thread-pool-executor.html</url>
     <content><![CDATA[<p><code>Android</code> 中使用线程有多种不同的方式，其中最根本的是通过 <code>Thread</code> 或 <code>Runnable</code> 派生线程对象。</p>
 <p>但是，使用 <code>Thread</code> 或 <code>Runnable</code> 实现多线程的方式，无法有效的在任务结束之后将结果返回。为了解决这一问题，<code>Java</code> 额外提供了 <code>Callable</code> 和 <code>FutureTask</code> 两种创建线程的方式，允许我们在线程执行完成之后得到返回的结果。</p>
 <p>另外，基于 <code>Thread</code>、<code>Runnable</code>、<code>Callable</code> 和 <code>FutureTask</code> 的封装，<code>Android</code> 系统中还提供了如下多线程的实现方式：</p>
@@ -192,7 +192,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（01）：Dart 语言常用库索引</title>
-    <url>//dart-language-libraries.html</url>
+    <url>//2019/dart-language-libraries.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Dart</code> 语言中常用的库，并不做详细介绍，只作为索引的目的。</p>
 <p>本文中介绍的 <code>Dart</code> 语言特性是基于 <code>Dart 2.1.0</code>。</p>
 <p><code>Dart</code> 中的库可以分为如下三种类型：</p>
@@ -250,7 +250,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（03）：Http 请求</title>
-    <url>//flutter-http-request.html</url>
+    <url>//2019/flutter-http-request.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 项目中的 <code>Http</code> 网络请求。本文介绍的重点是，<code>Flutter</code> 对 <code>dart:io</code> 库中的 <code>HttpClient</code> 的使用，以及开源 <code>Flutter</code> 网络请求库 <a href="https://github.com/dart-lang/http">package:http/http.dart</a> 的使用。</p>
 <p>本文介绍的所有特性是基于 <code>Flutter V1.0.0</code> 以及 <code>Dart V2.1.0</code>。</p>
 <p>由于 <code>dart:io</code> 库对于 <code>POST</code> 请求支持不好，本文中只简单介绍了使用 <code>dart:io</code> 库发起 <code>GET</code> 请求的情况。<code>http/http.dart</code> 库我们也只介绍 <code>GET</code> 请求和 <code>POST</code> 请求的使用，对于其他类型的情况，可参考官方文档。</p>
@@ -316,8 +316,92 @@
       </tags>
   </entry>
   <entry>
+    <title>Flutter 开发（02）：Flutter 开发环境的搭建（macOS）</title>
+    <url>//2019/fluuter-macos-environemnt-setup.html</url>
+    <content><![CDATA[<p>本文主要介绍 <code>macOS</code> 下 <code>Flutter</code> 开发环境的搭建。由于肥肥主要从事 <code>Android SDK</code> 开发，故本文中一些内容仅围绕 <code>Android</code> 展开。</p>
+<p><code>Android</code> 和 <code>iOS</code> 开发环境的搭建不在本文的讨论范围。</p>
+<p>本文基于 <code>Flutter V1.0.0</code> 展开讨论。</p>
+<a id="more"></a>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>如果需要安装运行 <code>Flutter</code>，那么您的设备应该满足如下最低要求：</p>
+<ul>
+<li><code>64-bit</code> 的 <code>macOS</code></li>
+<li>不少于 <code>700M</code> 的磁盘可用空间</li>
+<li>已经正常安装 <code>AndroidStudio</code> 或 <code>IntelliJ IDEA</code> 和 <code>XCode</code></li>
+<li>已经正常安装如下命令行工具：<ul>
+<li><code>bash</code></li>
+<li><code>mkdir</code></li>
+<li><code>rm</code></li>
+<li><code>git</code></li>
+<li><code>curl</code></li>
+<li><code>unzip</code></li>
+<li><code>which</code></li>
+<li>可能会需要使用 <code>brew</code></li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是，畅通的网络环境是 <code>Flutter</code> 开发必不可少的。</p>
+<h2 id="获取并安装-Flutter-SDK"><a href="#获取并安装-Flutter-SDK" class="headerlink" title="获取并安装 Flutter SDK"></a>获取并安装 Flutter SDK</h2><h3 id="下载-Flutter-SDK"><a href="#下载-Flutter-SDK" class="headerlink" title="下载 Flutter SDK"></a>下载 Flutter SDK</h3><p>我们可以在 <code>Flutter</code> 官网的 <a href="https://flutter.dev/docs/development/tools/sdk/archive?tab=macos#macos">Flutter SDK archive</a> 获取最新的 <code>Flutter SDK</code>。</p>
+<p>目前最新的 <code>Flutter SDK</code> 为 <code>V1.0.0</code> 版本。您可以直接点击 <a href="https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">下载 Flutter SDK V1.0.0 Stable for macOS</a> 来下载官方的 <code>Flutter SDK</code> 版本，也可以通过点击 <a href="https://pan.baidu.com/s/1f7es65Kyg2RMb2aVEHErFw">下载 Flutter SDK V1.0.0 Stable for macOS</a> 从百度网盘进行下载。</p>
+<p><code>Github</code> 上也托管了 <code>Flutter SDK</code>，我们也可以在 <a href="https://github.com/flutter/flutter/releases">flutter/flutter release</a> 上下载对应的安装包。</p>
+<p>如果上述官方下载地址均无法访问，请使用 <code>Google</code> 为国内用户部署的镜像服务下载。<a href="https://https//flutter-io.cn/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">点击使用国内镜像下载 Flutter SDK V1.0.0 Stable for macOS</a>。</p>
+<p><code>Flutter</code> 国内镜像的地址为 <a href="https://flutter-io.cn/">https://flutter-io.cn</a>。</p>
+<p>如果在后续使用 <code>Flutter</code> 的过程中由于网络而造成的问题，比如执行 <code>flutter doctor</code> 时无法访问网络，或者创建 <code>Flutter</code> 项目时一直处于 <code>create flutter project</code> 过程中，那么请尝试使用代理或者在 <code>.bash_profile</code> 文件中做如下配置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PUB_HOSTED_URL=https://pub.flutter-io.cn</span><br><span class="line">export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压缩-Flutter-SDK"><a href="#解压缩-Flutter-SDK" class="headerlink" title="解压缩 Flutter SDK"></a>解压缩 Flutter SDK</h3><p>在下载好 <code>Flutter SDK</code> 之后，我们需要将 <code>Flutter SDK</code> 解压缩：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip flutter_macos_v1.0.0-stable.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>第一步，打开 <code>.bash_profile</code> 文件（路径通常是 <code>~/.bash_profile</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>第二步，在 <code>.bash_profile</code> 文件的末尾添加如下字段：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PATH=PATH_TO_FLUTTER_GIT_DIRECTORY/flutter/bin:$PATH</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">其中，`PATH_TO_FLUTTER_GIT_DIRECTORY` 为你的 `Flutter SDK` 安装路径。</span><br><span class="line"></span><br><span class="line">保存并退出编辑器。</span><br><span class="line"></span><br><span class="line">第三步，执行如下命令刷新环境变量：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果使用 <code>zsh</code> 终端，请在 <code>~/.zshrc</code> 文件的末尾添加 <code>source ~/.bash_profile</code>。</p>
+</blockquote>
+<h3 id="运行-flutter-doctor"><a href="#运行-flutter-doctor" class="headerlink" title="运行 flutter doctor"></a>运行 flutter doctor</h3><p>运行如下命令查看是否需要安装其他依赖项：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+
+<p>该命令会对设备的环境进行检测并最终显示一份检测结果。请仔细阅读错误提示并按照要求进行安装。下图显示了检测通过之后的最终输出：</p>
+<p><img src="/images/flutter-doctor-result.jpg" alt="flutter-doctor-result.jpg"></p>
+<blockquote>
+<p>由于肥肥使用 <code>IntelliJ IDEA</code> 进行 <code>Android</code> 开发，故而忽略 <code>Android Studio</code> 未安装的提示。</p>
+</blockquote>
+<h3 id="安装插件（Android-环境）"><a href="#安装插件（Android-环境）" class="headerlink" title="安装插件（Android 环境）"></a>安装插件（Android 环境）</h3><p>无论使用 <code>Android Studio</code> 还是 <code>IntelliJ IDEA</code>，都需要安装 <code>Dart</code> 插件和 <code>Flutter</code> 插件。</p>
+<p><code>Dart</code> 插件的作用是提供对 <code>Dart</code> 语言的基础支持，<code>Flutter</code> 插件则提供对 <code>Flutter</code> 开发的支持。</p>
+<p>安装插件的具体方案请参考 <code>Android Studio</code> 或 <code>IntelliJ IDEA</code> 对安装插件的介绍。</p>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>选择 <code>File &gt; New Flutter Project &gt; Flutter application </code>，输入项目名称（比如 <code>flutter_sample</code>），最终可以创建一个 <code>Flutter</code> 项目:</p>
+<p><img src="/images/flutter-sample-project.jpg" alt="flutter-sample-project.jpg"></p>
+<p>其中，<code>android</code> 目录是是配到 <code>Android</code> 设备的项目，<code>ios</code> 目录是是配到 <code>iOS</code> 设备的项目，<code>lib</code> 目录是我们编写的 <code>Dart</code> 代码的目录。</p>
+<blockquote>
+<p>与纯粹的 <code>Android</code> 开发不同的是，在 <code>Android Studio</code> 中也可以将项目部署到 <code>iOS</code>。</p>
+</blockquote>
+<p>此时，点击 <code>Run</code> 运行项目，编译部署之后，我们可以看到默认的 <code>Flutter</code> 项目的界面。</p>
+<h3 id="Flutter-项目的热重载"><a href="#Flutter-项目的热重载" class="headerlink" title="Flutter 项目的热重载"></a>Flutter 项目的热重载</h3><p><code>Flutter</code> 可以通过热重载实现快速的开发周期，热重载的目的是无需重启应用程序就能实时加载修改后的代码，并且不会丢失状态：</p>
+<ul>
+<li>在应用运行之后，不要点击 <code>Stop</code> 结束运行</li>
+<li>修改相应的代码</li>
+<li>调用 <code>Sava All</code>（保存）或者点击热重载按钮（⚡️）</li>
+</ul>
+<p>之后，应用程序会立刻更新为我们修改完之后的状态。</p>
+<p>热重载技术是通过将最新的源代码文件注入到正在运行的 <code>Dart VM</code> 中来实现的。这个过程不仅仅支持修改字符串内容，还支持添加新的类、新的方法和字段以及更新现有的方法。但是需要注意的是，如下几种类型的更改无法通过热更新的方式实现：</p>
+<ul>
+<li>全局变量的初始化</li>
+<li>静态字段的初始化</li>
+<li><code>main()</code> 应用程序的方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>Flutter 环境搭建</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Flutter 开发（04）：Flutter 中使用文件（dart:io）</title>
-    <url>//flutter-use-file-by-dart-io.html</url>
+    <url>//2019/flutter-use-file-by-dart-io.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 中针对文件的操作，主要目的是掌握使用 <code>dart:io</code> 库相关方法操作文件。</p>
 <p>本文是基于 <code>Dart V2.1.0</code> 和 <code>Flutter V1.0.0</code> 版本进行的介绍。</p>
 <p><code>Flutter</code> 操作文件的类主要涉及到：</p>
@@ -405,92 +489,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Flutter 开发（02）：Flutter 开发环境的搭建（macOS）</title>
-    <url>//fluuter-macos-environemnt-setup.html</url>
-    <content><![CDATA[<p>本文主要介绍 <code>macOS</code> 下 <code>Flutter</code> 开发环境的搭建。由于肥肥主要从事 <code>Android SDK</code> 开发，故本文中一些内容仅围绕 <code>Android</code> 展开。</p>
-<p><code>Android</code> 和 <code>iOS</code> 开发环境的搭建不在本文的讨论范围。</p>
-<p>本文基于 <code>Flutter V1.0.0</code> 展开讨论。</p>
-<a id="more"></a>
-<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>如果需要安装运行 <code>Flutter</code>，那么您的设备应该满足如下最低要求：</p>
-<ul>
-<li><code>64-bit</code> 的 <code>macOS</code></li>
-<li>不少于 <code>700M</code> 的磁盘可用空间</li>
-<li>已经正常安装 <code>AndroidStudio</code> 或 <code>IntelliJ IDEA</code> 和 <code>XCode</code></li>
-<li>已经正常安装如下命令行工具：<ul>
-<li><code>bash</code></li>
-<li><code>mkdir</code></li>
-<li><code>rm</code></li>
-<li><code>git</code></li>
-<li><code>curl</code></li>
-<li><code>unzip</code></li>
-<li><code>which</code></li>
-<li>可能会需要使用 <code>brew</code></li>
-</ul>
-</li>
-</ul>
-<p>需要注意的是，畅通的网络环境是 <code>Flutter</code> 开发必不可少的。</p>
-<h2 id="获取并安装-Flutter-SDK"><a href="#获取并安装-Flutter-SDK" class="headerlink" title="获取并安装 Flutter SDK"></a>获取并安装 Flutter SDK</h2><h3 id="下载-Flutter-SDK"><a href="#下载-Flutter-SDK" class="headerlink" title="下载 Flutter SDK"></a>下载 Flutter SDK</h3><p>我们可以在 <code>Flutter</code> 官网的 <a href="https://flutter.dev/docs/development/tools/sdk/archive?tab=macos#macos">Flutter SDK archive</a> 获取最新的 <code>Flutter SDK</code>。</p>
-<p>目前最新的 <code>Flutter SDK</code> 为 <code>V1.0.0</code> 版本。您可以直接点击 <a href="https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">下载 Flutter SDK V1.0.0 Stable for macOS</a> 来下载官方的 <code>Flutter SDK</code> 版本，也可以通过点击 <a href="https://pan.baidu.com/s/1f7es65Kyg2RMb2aVEHErFw">下载 Flutter SDK V1.0.0 Stable for macOS</a> 从百度网盘进行下载。</p>
-<p><code>Github</code> 上也托管了 <code>Flutter SDK</code>，我们也可以在 <a href="https://github.com/flutter/flutter/releases">flutter/flutter release</a> 上下载对应的安装包。</p>
-<p>如果上述官方下载地址均无法访问，请使用 <code>Google</code> 为国内用户部署的镜像服务下载。<a href="https://https//flutter-io.cn/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">点击使用国内镜像下载 Flutter SDK V1.0.0 Stable for macOS</a>。</p>
-<p><code>Flutter</code> 国内镜像的地址为 <a href="https://flutter-io.cn/">https://flutter-io.cn</a>。</p>
-<p>如果在后续使用 <code>Flutter</code> 的过程中由于网络而造成的问题，比如执行 <code>flutter doctor</code> 时无法访问网络，或者创建 <code>Flutter</code> 项目时一直处于 <code>create flutter project</code> 过程中，那么请尝试使用代理或者在 <code>.bash_profile</code> 文件中做如下配置：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PUB_HOSTED_URL=https://pub.flutter-io.cn</span><br><span class="line">export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn</span><br></pre></td></tr></table></figure>
-
-<h3 id="解压缩-Flutter-SDK"><a href="#解压缩-Flutter-SDK" class="headerlink" title="解压缩 Flutter SDK"></a>解压缩 Flutter SDK</h3><p>在下载好 <code>Flutter SDK</code> 之后，我们需要将 <code>Flutter SDK</code> 解压缩：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip flutter_macos_v1.0.0-stable.zip</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>第一步，打开 <code>.bash_profile</code> 文件（路径通常是 <code>~/.bash_profile</code>）：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<p>第二步，在 <code>.bash_profile</code> 文件的末尾添加如下字段：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PATH=PATH_TO_FLUTTER_GIT_DIRECTORY/flutter/bin:$PATH</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">其中，`PATH_TO_FLUTTER_GIT_DIRECTORY` 为你的 `Flutter SDK` 安装路径。</span><br><span class="line"></span><br><span class="line">保存并退出编辑器。</span><br><span class="line"></span><br><span class="line">第三步，执行如下命令刷新环境变量：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果使用 <code>zsh</code> 终端，请在 <code>~/.zshrc</code> 文件的末尾添加 <code>source ~/.bash_profile</code>。</p>
-</blockquote>
-<h3 id="运行-flutter-doctor"><a href="#运行-flutter-doctor" class="headerlink" title="运行 flutter doctor"></a>运行 flutter doctor</h3><p>运行如下命令查看是否需要安装其他依赖项：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
-
-<p>该命令会对设备的环境进行检测并最终显示一份检测结果。请仔细阅读错误提示并按照要求进行安装。下图显示了检测通过之后的最终输出：</p>
-<p><img src="/images/flutter-doctor-result.jpg" alt="flutter-doctor-result.jpg"></p>
-<blockquote>
-<p>由于肥肥使用 <code>IntelliJ IDEA</code> 进行 <code>Android</code> 开发，故而忽略 <code>Android Studio</code> 未安装的提示。</p>
-</blockquote>
-<h3 id="安装插件（Android-环境）"><a href="#安装插件（Android-环境）" class="headerlink" title="安装插件（Android 环境）"></a>安装插件（Android 环境）</h3><p>无论使用 <code>Android Studio</code> 还是 <code>IntelliJ IDEA</code>，都需要安装 <code>Dart</code> 插件和 <code>Flutter</code> 插件。</p>
-<p><code>Dart</code> 插件的作用是提供对 <code>Dart</code> 语言的基础支持，<code>Flutter</code> 插件则提供对 <code>Flutter</code> 开发的支持。</p>
-<p>安装插件的具体方案请参考 <code>Android Studio</code> 或 <code>IntelliJ IDEA</code> 对安装插件的介绍。</p>
-<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>选择 <code>File &gt; New Flutter Project &gt; Flutter application </code>，输入项目名称（比如 <code>flutter_sample</code>），最终可以创建一个 <code>Flutter</code> 项目:</p>
-<p><img src="/images/flutter-sample-project.jpg" alt="flutter-sample-project.jpg"></p>
-<p>其中，<code>android</code> 目录是是配到 <code>Android</code> 设备的项目，<code>ios</code> 目录是是配到 <code>iOS</code> 设备的项目，<code>lib</code> 目录是我们编写的 <code>Dart</code> 代码的目录。</p>
-<blockquote>
-<p>与纯粹的 <code>Android</code> 开发不同的是，在 <code>Android Studio</code> 中也可以将项目部署到 <code>iOS</code>。</p>
-</blockquote>
-<p>此时，点击 <code>Run</code> 运行项目，编译部署之后，我们可以看到默认的 <code>Flutter</code> 项目的界面。</p>
-<h3 id="Flutter-项目的热重载"><a href="#Flutter-项目的热重载" class="headerlink" title="Flutter 项目的热重载"></a>Flutter 项目的热重载</h3><p><code>Flutter</code> 可以通过热重载实现快速的开发周期，热重载的目的是无需重启应用程序就能实时加载修改后的代码，并且不会丢失状态：</p>
-<ul>
-<li>在应用运行之后，不要点击 <code>Stop</code> 结束运行</li>
-<li>修改相应的代码</li>
-<li>调用 <code>Sava All</code>（保存）或者点击热重载按钮（⚡️）</li>
-</ul>
-<p>之后，应用程序会立刻更新为我们修改完之后的状态。</p>
-<p>热重载技术是通过将最新的源代码文件注入到正在运行的 <code>Dart VM</code> 中来实现的。这个过程不仅仅支持修改字符串内容，还支持添加新的类、新的方法和字段以及更新现有的方法。但是需要注意的是，如下几种类型的更改无法通过热更新的方式实现：</p>
-<ul>
-<li>全局变量的初始化</li>
-<li>静态字段的初始化</li>
-<li><code>main()</code> 应用程序的方法</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Flutter</category>
-      </categories>
-      <tags>
-        <tag>Flutter 环境搭建</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flutter 开发（05）：Flutter 中使用文件（path_provider.dart）</title>
-    <url>//flutter-use-file-by-pathprovider.html</url>
+    <url>//2019/flutter-use-file-by-pathprovider.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 中 <code>Android</code> 和 <code>iOS</code> 两个平台下文件存储位置，主要目的是掌握 <code>Flutter</code> 官方开源项目 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 的使用。</p>
 <p>使用 <code>path_provider.dart</code> 库之前，需要先在 <code>pubspec.yaml</code> 文件的 <code>dependencies:</code> 中添加如下依赖：</p>
 <figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">path_provider: ^<span class="number">0.5</span><span class="number">.0</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -518,7 +518,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（06）：Flutter 中 SharedPreference</title>
-    <url>//flutter-sharedpreference-by-shared-preference.html</url>
+    <url>//2019/flutter-sharedpreference-by-shared-preference.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 上 <code>SharedPreference</code> 的使用，其目的是介绍 <code>shared_preferences.dart</code> 库的使用。<a href="https://github.com/flutter/plugins/tree/master/packages/shared_preferences">shared_preferences.dart</a> 官方开源的轻量级数据存储库，并且屏蔽了 <code>Android</code> 和 <code>iOS</code> 平台上使用 <code>K-V</code> 型数据的差异。</p>
 <p>使用 <code>shared_preferences.dart</code> 前需要添加配置并更新依赖：</p>
 <figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">shared_preferences: ^<span class="number">0.5</span><span class="number">.1</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -558,7 +558,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（10）：Flutter 的运行模式</title>
-    <url>//flutter-running-mode.html</url>
+    <url>//2019/flutter-running-mode.html</url>
     <content><![CDATA[<p>本文主要是对 <code>Flutter</code> 的基本框架进行介绍。本文主要参考了 <a href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 一文。<a href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 是一篇非常优秀的介绍 <code>Flutter</code> 原理的文章。</p>
 <p><code>Flutter</code> 的设计目标是高性能的跨平台的（<code>Android</code> 和 <code>iOS</code>）<code>UI</code> 框架。与传统的基于 <code>WebView</code> 的（例如 <code>Cordova</code> 或者 <code>AppCan</code> 等框架）或者基于原生控件系统的（例如 <code>React Native</code>）跨平台开发框架所不同的是，<code>Flutter</code> 是基于跨平台的渲染引擎 <code>Skia</code> 来实现的全新的跨平台的开发框架。这也就是说，<code>Flutter</code> 对于设备平台的依赖只有图形渲染相关的部分，这在一定程度上保证了不同平台、不同设备上的一致的用户体验。从执行效率的角度来说，<code>Flutter</code> 使用的 <code>Dart</code> 语言相较于其他大多数跨平台开发框架使用的 <code>JavaScript</code> 语言在执行效率上高效很多。</p>
 <a id="more"></a>
@@ -608,7 +608,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（11）：Flutter 层异常捕获</title>
-    <url>//flutter-exception-handler.html</url>
+    <url>//2019/flutter-exception-handler.html</url>
     <content><![CDATA[<p><code>Flutter</code> 中的异常可以分为同步异常和异步异常。通常情况下我们可以使用 <code>try-catch</code> 捕获同步异常，而异步异常则需要使用 <code>Flutter</code> 提供的其他 <code>API</code>。</p>
 <a id="more"></a>
 <h2 id="使用-try-catch-捕获异常"><a href="#使用-try-catch-捕获异常" class="headerlink" title="使用 try-catch 捕获异常"></a>使用 try-catch 捕获异常</h2><p>与 <code>Java</code> 语言类似的，<code>Dart</code> 中提供了 <code>try-catch</code> 代码块用于对同步异常的捕获：</p>
@@ -657,7 +657,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（12）：MethodChannel 的使用</title>
-    <url>//flutter-method-channel.html</url>
+    <url>//2019/flutter-method-channel.html</url>
     <content><![CDATA[<p>在 <code>Flutter</code> 中，<code>MethodChannel</code> 允许我们发送与方法调用相关的消息。<code>MethodChannel</code> 适用于 <code>Flutter</code> 端和设备平台端进行直接的方法调用，这种方法调用是双向的，即既可以通过 <code>MethodChannel</code> 从 <code>Flutter</code> 调用设备平台上的方法，也可以从设备平台上调用 <code>Flutter</code> 层的代码。</p>
 <a id="more"></a>
 
@@ -748,7 +748,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（13）：EventChannel 的使用</title>
-    <url>//flutter-event-channel.html</url>
+    <url>//2019/flutter-event-channel.html</url>
     <content><![CDATA[<p><code>EventChannel</code> 适用于 <code>Flutter</code> 端和设备平台端数据事件的通信。比较常见的使用 <code>EventChannel</code> 的场景是通过广播监听（<code>Android</code> 平台上的 <code>BroadcastReceiver</code>）动态的监听设备事件。</p>
 <p>本文中的示例代码是 <code>Flutter</code> 官方示例，感兴趣的小伙伴可以移步 <a href="https://github.com/flutter/flutter/tree/master/examples/platform_channel">flutter/examples/platform_channel/</a>。</p>
 <a id="more"></a>
@@ -783,38 +783,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Flutter 开发（14）：BasicMessageChannel 的使用</title>
-    <url>//flutter-basic-message-channel.html</url>
-    <content><![CDATA[<p>与 <code>MethodChannel</code> 和 <code>EventChannel</code> 接收一个 <code>MethodCodec</code> 对象所不同的是，<code>BasicMessageChannel</code> 接收一个 <code>MessageCodec&lt;T&gt;</code> 作为其编解码器的实现。<code>BasicMessageChannel</code> 允许我们使用自定义的消息编解码器进行异步消息传递。</p>
-<p>本文中所使用的代码示例出自 <code>Flutter</code> 官方示例，感兴趣的小伙伴请移步 <a href="https://github.com/flutter/flutter/tree/master/examples/flutter_view">flutter/examples/flutter_view</a></p>
-<a id="more"></a>
-<h2 id="BasicMessageChannel-的初始化"><a href="#BasicMessageChannel-的初始化" class="headerlink" title="BasicMessageChannel 的初始化"></a>BasicMessageChannel 的初始化</h2><p><code>BasicMessageChannel</code> 不提供默认的 <code>MessageCodec</code> 的实现，我们需要在初始化 <code>BasicMessageChannel</code> 时指定具体的 <code>MessageCodec</code>。我们以使用 <code>StringCodec</code> 初始化 <code>BasicMessageChannel</code> 并传递 <code>String</code> 类型的数据为例：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BasicMessageChannel&lt;<span class="built_in">String</span>&gt; platform = BasicMessageChannel&lt;<span class="built_in">String</span>&gt;(_channel, StringCodec());</span><br></pre></td></tr></table></figure>
-
-<p>对象初始化之后，我们通过 <code>setMessageHandler</code> 方法设置一个 <code>MessageHandler</code> 回调函数：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">platform.setMessageHandler(_handlePlatformIncrement);</span><br><span class="line">Future&lt;<span class="built_in">String</span>&gt; _handlePlatformIncrement(<span class="built_in">String</span> message) <span class="keyword">async</span> &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">    _counter++;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> _emptyMessage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初始化完成之后，我们可以通过 <code>platform.send(&#39;pong&#39;);</code> 向设备平台端发送一个 <code>String</code> 类型的数据。</p>
-<h2 id="设备平台-Android-端的初始化"><a href="#设备平台-Android-端的初始化" class="headerlink" title="设备平台 Android 端的初始化"></a>设备平台 Android 端的初始化</h2><p>相应的，我们需要在设备平台端（<code>Android</code>） 初始化 <code>BasicMessageChannel</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">messageChannel = <span class="keyword">new</span> BasicMessageChannel&lt;&gt;(flutterView, CHANNEL, StringCodec.INSTANCE);</span><br><span class="line">messageChannel.</span><br><span class="line">    setMessageHandler(<span class="keyword">new</span> MessageHandler&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(String s, Reply&lt;String&gt; reply)</span> </span>&#123;</span><br><span class="line">            onFlutterIncrement();</span><br><span class="line">            reply.reply(EMPTY_MESSAGE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>设备平台端收到数据之后，<code>onMessage</code> 方法会被触发。</p>
-<p>同样的，在设备平台端可以使用 <code>messageChannel.send(PING);</code> 向 <code>Flutter</code> 端发送 <code>String</code> 类型的数据，<code>Flutter</code> 端收到数据之后，<code>_handlePlatformIncrement</code> 方法会被触发。</p>
-<h2 id="BasicMessageChannel-的原理"><a href="#BasicMessageChannel-的原理" class="headerlink" title="BasicMessageChannel 的原理"></a>BasicMessageChannel 的原理</h2><p>与 <code>MethodChannel</code> 一样，<code>BasicMessageChannel</code> 在发送数据时需要先通过 <code>codec</code> 将消息编码，然后通过 <code>BinaryMessages</code> 将编码之后的消息发送出去，最后通过 <code>codec</code> 再将返回值进行解码：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">Future&lt;T&gt; send(T message) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> codec.decodeMessage(<span class="keyword">await</span> BinaryMessages.send(name, codec.encodeMessage(message)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>BasicMessageChannel</code> 提供了一种机制允许我们自己定义消息的编解码器。相应的，<code>Flutter</code> 中已经提供了 <code>BinaryCodec</code>、<code>StringCodec</code> 和 <code>JSONMessageCodec</code> 作为常用数据类型的编解码器实现。如果还不能满足需求，我们可以通过扩展 <code>MessageCodec&lt;T&gt;</code> 达到目的。</p>
-]]></content>
-      <categories>
-        <category>Flutter</category>
-      </categories>
-      <tags>
-        <tag>BasicMessageChannel</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git Commit Message 模板</title>
-    <url>//git-commit-template.html</url>
+    <url>//2019/git-commit-template.html</url>
     <content><![CDATA[<h2 id="Commit-Message-规范"><a href="#Commit-Message-规范" class="headerlink" title="Commit Message 规范"></a>Commit Message 规范</h2><p>每一个 <code>Commit Message</code> 应该包含一个 <code>header</code>、<code>body</code> 和 <code>footer</code>。其中，<code>header</code>、<code>body</code> 和 <code>footer</code> 之间以空行作为间隔。<code>header</code> 是必须要填写的：</p>
 <ul>
 <li><code>header</code> 通常包含此次提交的类型：<ul>
@@ -849,8 +819,38 @@
       </tags>
   </entry>
   <entry>
+    <title>Flutter 开发（14）：BasicMessageChannel 的使用</title>
+    <url>//2019/flutter-basic-message-channel.html</url>
+    <content><![CDATA[<p>与 <code>MethodChannel</code> 和 <code>EventChannel</code> 接收一个 <code>MethodCodec</code> 对象所不同的是，<code>BasicMessageChannel</code> 接收一个 <code>MessageCodec&lt;T&gt;</code> 作为其编解码器的实现。<code>BasicMessageChannel</code> 允许我们使用自定义的消息编解码器进行异步消息传递。</p>
+<p>本文中所使用的代码示例出自 <code>Flutter</code> 官方示例，感兴趣的小伙伴请移步 <a href="https://github.com/flutter/flutter/tree/master/examples/flutter_view">flutter/examples/flutter_view</a></p>
+<a id="more"></a>
+<h2 id="BasicMessageChannel-的初始化"><a href="#BasicMessageChannel-的初始化" class="headerlink" title="BasicMessageChannel 的初始化"></a>BasicMessageChannel 的初始化</h2><p><code>BasicMessageChannel</code> 不提供默认的 <code>MessageCodec</code> 的实现，我们需要在初始化 <code>BasicMessageChannel</code> 时指定具体的 <code>MessageCodec</code>。我们以使用 <code>StringCodec</code> 初始化 <code>BasicMessageChannel</code> 并传递 <code>String</code> 类型的数据为例：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BasicMessageChannel&lt;<span class="built_in">String</span>&gt; platform = BasicMessageChannel&lt;<span class="built_in">String</span>&gt;(_channel, StringCodec());</span><br></pre></td></tr></table></figure>
+
+<p>对象初始化之后，我们通过 <code>setMessageHandler</code> 方法设置一个 <code>MessageHandler</code> 回调函数：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">platform.setMessageHandler(_handlePlatformIncrement);</span><br><span class="line">Future&lt;<span class="built_in">String</span>&gt; _handlePlatformIncrement(<span class="built_in">String</span> message) <span class="keyword">async</span> &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">    _counter++;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> _emptyMessage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化完成之后，我们可以通过 <code>platform.send(&#39;pong&#39;);</code> 向设备平台端发送一个 <code>String</code> 类型的数据。</p>
+<h2 id="设备平台-Android-端的初始化"><a href="#设备平台-Android-端的初始化" class="headerlink" title="设备平台 Android 端的初始化"></a>设备平台 Android 端的初始化</h2><p>相应的，我们需要在设备平台端（<code>Android</code>） 初始化 <code>BasicMessageChannel</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">messageChannel = <span class="keyword">new</span> BasicMessageChannel&lt;&gt;(flutterView, CHANNEL, StringCodec.INSTANCE);</span><br><span class="line">messageChannel.</span><br><span class="line">    setMessageHandler(<span class="keyword">new</span> MessageHandler&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(String s, Reply&lt;String&gt; reply)</span> </span>&#123;</span><br><span class="line">            onFlutterIncrement();</span><br><span class="line">            reply.reply(EMPTY_MESSAGE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>设备平台端收到数据之后，<code>onMessage</code> 方法会被触发。</p>
+<p>同样的，在设备平台端可以使用 <code>messageChannel.send(PING);</code> 向 <code>Flutter</code> 端发送 <code>String</code> 类型的数据，<code>Flutter</code> 端收到数据之后，<code>_handlePlatformIncrement</code> 方法会被触发。</p>
+<h2 id="BasicMessageChannel-的原理"><a href="#BasicMessageChannel-的原理" class="headerlink" title="BasicMessageChannel 的原理"></a>BasicMessageChannel 的原理</h2><p>与 <code>MethodChannel</code> 一样，<code>BasicMessageChannel</code> 在发送数据时需要先通过 <code>codec</code> 将消息编码，然后通过 <code>BinaryMessages</code> 将编码之后的消息发送出去，最后通过 <code>codec</code> 再将返回值进行解码：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">Future&lt;T&gt; send(T message) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> codec.decodeMessage(<span class="keyword">await</span> BinaryMessages.send(name, codec.encodeMessage(message)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>BasicMessageChannel</code> 提供了一种机制允许我们自己定义消息的编解码器。相应的，<code>Flutter</code> 中已经提供了 <code>BinaryCodec</code>、<code>StringCodec</code> 和 <code>JSONMessageCodec</code> 作为常用数据类型的编解码器实现。如果还不能满足需求，我们可以通过扩展 <code>MessageCodec&lt;T&gt;</code> 达到目的。</p>
+]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>BasicMessageChannel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OutOfMemoryError:pthread_create (1040KB stack) failed 异常分析</title>
-    <url>//oom-exception-caused-by-pthread-create-failed.html</url>
+    <url>//2020/oom-exception-caused-by-pthread-create-failed.html</url>
     <content><![CDATA[<p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
 <p>从崩溃的堆栈信息中可以分析出引发该 <code>OOM</code> 的主要与 <code>OkHttp</code> 有关系，而业务场景中都是普通的数据请求（<code>JSON</code>），并没有使用 <code>BitMap</code> 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。</p>
 <p>虽然堆栈信息不尽相同，但是最终从大量堆栈 <code>LOG</code> 中分析出有价值的信息：</p>
@@ -874,7 +874,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（07）：编写平台相关的代码</title>
-    <url>//flutter-platform-specific.html</url>
+    <url>//2019/flutter-platform-specific.html</url>
     <content><![CDATA[<p>前面文章介绍的 <code>path_provider.dart</code> 库和 <code>shared_preferences.dart</code> 库的实际上是依赖于设备的具体环境的。比如说在 <code>shared_preferences.dart</code> 库在存储数据时，在 <code>Android</code> 设备上使用的是 <code>SharedPreference</code> 相关的功能，而在 <code>iOS</code> 上则是使用了 <code>NSUserDefaults</code> 的相关功能。换句话说，这些代码都是平台相关的。</p>
 <p>本文主要介绍 <code>Flutter</code> 中平台相关的代码的开发，其目的是快速了解 <code>Android</code> 和 <code>iOS</code> 原生代码与 <code>Flutter</code> 之间的通信。</p>
 <p>本文将以 <code>Flutter</code> 的官方 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 库作为示例。</p>
@@ -1133,7 +1133,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（08）：Flutter 插件开发（flutter_file_path_provide）</title>
-    <url>//flutter-plugin-file-path-provider.html</url>
+    <url>//2019/flutter-plugin-file-path-provider.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 插件开发的相关内容，并在 <a href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 插件项目的基础上开发我们自己的 <code>flutter_file_path_provide</code> 插件。</p>
 <p>本文中涉及到的主要技术是基于 <a href="https://fiissh.tech/2019/flutter-platform-specific.html">Flutter 开发（07）：编写平台相关的代码</a>。当然，在我们的 <code>flutter_file_path_provide</code> 插件项目中只使用到了 <code>MethodChannel</code>。另外两种平台通道我们将在其他文章中介绍。</p>
 <p>由于肥肥从事 <code>Android SDK</code> 开发，所以 <code>flutter_file_path_provide</code> 插件项目中的 <code>iOS</code> 部分在本文撰写时并没有实现。</p>
@@ -1227,7 +1227,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（09）：Flutter 异步编程</title>
-    <url>//flutter-async-program.html</url>
+    <url>//2019/flutter-async-program.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 异步编程相关的内容。关键字 <code>async</code>、<code>async</code><sup>*</sup>、<code>sync</code>、<code>sync</code><sup>*</sup>、<code>await</code>、<code>yield</code> 以及 <code>Future</code>、<code>Stream</code> 和 <code>Timer</code> 对象构成了 <code>Flutter</code> 异步编程的全部内容。</p>
 <p><code>Future</code> 是一个泛型对象，表示程序在将来的某个时刻能够获取到一个值，泛型类型表示了该返回值的类型。当返回值是 <code>Future</code> 的方法被调用之后，<code>Flutter</code>（<code>Dart</code>）将会做两件事情：</p>
 <ul>
@@ -1389,7 +1389,7 @@
   </entry>
   <entry>
     <title>Flutter 开发（00）：Dart 语言语法预览</title>
-    <url>//dart-language-language-tour.html</url>
+    <url>//2019/dart-language-language-tour.html</url>
     <content><![CDATA[<p>本文主要针对 <code>Dart</code> 语言的语法规则以及常用概念进行介绍，主要目标是快速了解 <code>Dart</code> 的主要特性。</p>
 <p>本文中介绍的 <code>Dart</code> 语言特性是基于 <code>Dart 2.1.0</code>。由于肥肥本身从事于 <code>Android</code> 开发多年，使用 <code>Java</code> 作为主要开发语言，所以在整理、撰写本文时会选择性的忽略一些语言特性的介绍。</p>
 <p>本文是基于官网文档 <a href="https://www.dartlang.org/guides/language/language-tour">A Tour of the Dart Language</a>以及 <a href="http://dart.goodev.org/">Dart 翻译小组</a>翻译的 <a href="http://dart.goodev.org/guides/language/language-tour">Dart 语法概览</a> 文档。</p>
@@ -2380,7 +2380,7 @@
   </entry>
   <entry>
     <title>Android 设计模式概述</title>
-    <url>//android-source-design-pattern-index.html</url>
+    <url>//2020/android-source-design-pattern-index.html</url>
     <content><![CDATA[<p>如何提高软件系统的可维护性和可复用性是面向对象程序设计思想需要解决的核心问题。在面向对象程序设计中，可维护性的复用是以设计原则为基础的。每一个设计原则都蕴含着面向对象程序设计的思想，可以从不同的角度提升一个软件系统的架构水平。</p>
 <p>面向对象程序设计原则是为支撑可维护性的复用而诞生的，它们是从很多的设计方案中总结出来的指导性原则，通常体现在设计模式中。</p>
 <a id="more"></a>

@@ -24,22 +24,21 @@
     var CONFIG = {"hostname":"fiissh.tech","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="本文主要介绍 Flutter 中 Android 和 iOS 两个平台下文件存储位置，主要目的是掌握 Flutter 官方开源项目 path_provider&#x2F;path_provider.dart 的使用。 使用 path_provider.dart 库之前，需要先在 pubspec.yaml 文件的 dependencies: 中添加如下依赖： 1path_provider: ^0.5.0+1">
+  <meta name="description" content="Setting Repository 是 IntelliJ IDEA（Android Studio） 的一项配置托管服务，我们可以通过在 Github 或者其他 Git 服务上创建一个 Git Repository 的方式统一托管、同步配置信息：  在 Github 创建一个代码仓库（例如： android-studio-setting-repository） 在 Github 上创建一个 Per">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter 开发（05）：Flutter 中使用文件（path_provider.dart）">
-<meta property="og:url" content="https://fiissh.tech/index.html/flutter-use-file-by-pathprovider.html">
+<meta property="og:title" content="Android Studio 使用 Setting Repository 同步配置信息">
+<meta property="og:url" content="https://fiissh.tech/index.html/2019/android-studio-setting-repository.html">
 <meta property="og:site_name" content="肥言肥语">
-<meta property="og:description" content="本文主要介绍 Flutter 中 Android 和 iOS 两个平台下文件存储位置，主要目的是掌握 Flutter 官方开源项目 path_provider&#x2F;path_provider.dart 的使用。 使用 path_provider.dart 库之前，需要先在 pubspec.yaml 文件的 dependencies: 中添加如下依赖： 1path_provider: ^0.5.0+1">
+<meta property="og:description" content="Setting Repository 是 IntelliJ IDEA（Android Studio） 的一项配置托管服务，我们可以通过在 Github 或者其他 Git 服务上创建一个 Git Repository 的方式统一托管、同步配置信息：  在 Github 创建一个代码仓库（例如： android-studio-setting-repository） 在 Github 上创建一个 Per">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2019-02-28T02:13:29.000Z">
-<meta property="article:modified_time" content="2019-02-28T02:13:29.000Z">
+<meta property="article:published_time" content="2019-11-06T02:56:51.000Z">
+<meta property="article:modified_time" content="2019-11-06T02:56:51.000Z">
 <meta property="article:author" content="肥肥鱼">
-<meta property="article:tag" content="Flutter 文件">
-<meta property="article:tag" content="path_provider">
+<meta property="article:tag" content="Setting Repository">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://fiissh.tech/index.html/flutter-use-file-by-pathprovider.html">
+<link rel="canonical" href="https://fiissh.tech/index.html/2019/android-studio-setting-repository.html">
 
 
 <script class="page-configurations">
@@ -52,7 +51,7 @@
   };
 </script>
 
-  <title>Flutter 开发（05）：Flutter 中使用文件（path_provider.dart） | 肥言肥语</title>
+  <title>Android Studio 使用 Setting Repository 同步配置信息 | 肥言肥语</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
     <script>
@@ -210,7 +209,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -222,7 +221,6 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-path-provider-dart"><span class="nav-number">1.</span> <span class="nav-text">使用 path_provider.dart</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -297,7 +295,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/flutter-use-file-by-pathprovider.html">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/android-studio-setting-repository.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/homercat.png">
@@ -313,7 +311,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Flutter 开发（05）：Flutter 中使用文件（path_provider.dart）
+          Android Studio 使用 Setting Repository 同步配置信息
         </h1>
 
         <div class="post-meta-container">
@@ -324,7 +322,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-02-28 10:13:29" itemprop="dateCreated datePublished" datetime="2019-02-28T10:13:29+08:00">2019-02-28</time>
+      <time title="创建时间：2019-11-06 10:56:51" itemprop="dateCreated datePublished" datetime="2019-11-06T10:56:51+08:00">2019-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,7 +330,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+          <a href="/categories/Android-Studio/" itemprop="url" rel="index"><span itemprop="name">Android Studio</span></a>
         </span>
     </span>
 
@@ -346,22 +344,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本文主要介绍 <code>Flutter</code> 中 <code>Android</code> 和 <code>iOS</code> 两个平台下文件存储位置，主要目的是掌握 <code>Flutter</code> 官方开源项目 <a target="_blank" rel="noopener" href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 的使用。</p>
-<p>使用 <code>path_provider.dart</code> 库之前，需要先在 <code>pubspec.yaml</code> 文件的 <code>dependencies:</code> 中添加如下依赖：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path_provider: ^<span class="number">0.5</span><span class="number">.0</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>然后在项目的根目录中使用如下命令更新依赖：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages <span class="keyword">get</span></span><br></pre></td></tr></table></figure>
-
-<p>最后，在项目中需要使用的地方引入该库：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:path_provider/path_provider.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用-path-provider-dart"><a href="#使用-path-provider-dart" class="headerlink" title="使用 path_provider.dart"></a>使用 path_provider.dart</h2><p><code>path_provider.dart</code> 库屏蔽了 <code>Android</code> 和 <code>iOS</code> 两个平台上文件存储路径的差异。<code>path_provider.dart</code> 库主要提供了如下几个方法用于获取存储路径：</p>
+        <p><code>Setting Repository</code> 是 <code>IntelliJ IDEA（Android Studio）</code> 的一项配置托管服务，我们可以通过在 <code>Github</code> 或者其他 <code>Git</code> 服务上创建一个 <code>Git Repository</code> 的方式统一托管、同步配置信息：</p>
 <ul>
-<li><code>getTemporaryDirectory()</code>：获取临时文件夹，针对于 <code>Android</code> 设备 <code>getCacheDir()</code> 和 <code>iOS</code> 设备 <code>NSTemporaryDirectory()</code> 返回的值</li>
-<li><code>getApplicationDocumentsDirectory()</code>：获取 <code>Document</code> 文件夹，针对 <code>Android</code> 设备的 <code>AppDate</code> 目录，<code>iOS</code> 设备的 <code>NSDocumentDirectory</code> 目录</li>
-<li><code>getExternalStorageDirectory()</code>： 获取存储卡目录，只有 <code>Android</code> 设备可用</li>
+<li>在 <code>Github</code> 创建一个代码仓库（例如： <code>android-studio-setting-repository</code>）</li>
+<li>在 <code>Github</code> 上创建一个 <code>Personal access tokens</code>（保留 <code>read</code> 和 <code>write</code> 相关权限即可）</li>
+<li>将版本库地址填入 <code>Android Studio</code> 的 <code>File/Setting Repository/Upstream URL</code>（尽量使用 <code>https</code> 而不是 <code>ssh</code> 的方式）</li>
+<li>点击 <code>Overwrite Remote</code> 完成配置信息的提交</li>
 </ul>
+<blockquote>
+<p><code>Overwrite Remote</code> 是将本地配置信息写入到远程仓库，<code>Overwrite Load</code> 是将远程仓库的信息写入到本地，<code>Merge</code> 则是合并两者之间的差异。</p>
+</blockquote>
+<p>我的 <code>Android Studio</code> 配置仓库为 <a target="_blank" rel="noopener" href="https://github.com/fiissh/android-studio-setting-repository">fiissh/android-studio-setting-repository</a>。</p>
 
     </div>
 
@@ -379,7 +372,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://fiissh.tech/index.html/flutter-use-file-by-pathprovider.html" title="Flutter 开发（05）：Flutter 中使用文件（path_provider.dart）">https://fiissh.tech/index.html/flutter-use-file-by-pathprovider.html</a>
+      <a href="https://fiissh.tech/index.html/2019/android-studio-setting-repository.html" title="Android Studio 使用 Setting Repository 同步配置信息">https://fiissh.tech/index.html/2019/android-studio-setting-repository.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -388,21 +381,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Flutter-%E6%96%87%E4%BB%B6/" rel="tag"># Flutter 文件</a>
-              <a href="/tags/path-provider/" rel="tag"># path_provider</a>
+              <a href="/tags/Setting-Repository/" rel="tag"># Setting Repository</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/flutter-use-file-by-dart-io.html" rel="prev" title="Flutter 开发（04）：Flutter 中使用文件（dart:io）">
-                  <i class="fa fa-chevron-left"></i> Flutter 开发（04）：Flutter 中使用文件（dart:io）
+                <a href="/2019/git-commit-template.html" rel="prev" title="Git Commit Message 模板">
+                  <i class="fa fa-chevron-left"></i> Git Commit Message 模板
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/flutter-sharedpreference-by-shared-preference.html" rel="next" title="Flutter 开发（06）：Flutter 中 SharedPreference">
-                  Flutter 开发（06）：Flutter 中 SharedPreference <i class="fa fa-chevron-right"></i>
+                <a href="/2020/oom-exception-caused-by-pthread-create-failed.html" rel="next" title="OutOfMemoryError:pthread_create (1040KB stack) failed 异常分析">
+                  OutOfMemoryError:pthread_create (1040KB stack) failed 异常分析 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

@@ -24,26 +24,24 @@
     var CONFIG = {"hostname":"fiissh.tech","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="本文主要是对 Flutter 的基本框架进行介绍。本文主要参考了 美团技术团队-Flutter 原理与实践 一文。美团技术团队-Flutter 原理与实践 是一篇非常优秀的介绍 Flutter 原理的文章。 Flutter 的设计目标是高性能的跨平台的（Android 和 iOS）UI 框架。与传统的基于 WebView 的（例如 Cordova 或者 AppCan 等框架）或者基于原生控件系统的">
+  <meta name="description" content="本文主要介绍 macOS 下 Flutter 开发环境的搭建。由于肥肥主要从事 Android SDK 开发，故本文中一些内容仅围绕 Android 展开。 Android 和 iOS 开发环境的搭建不在本文的讨论范围。 本文基于 Flutter V1.0.0 展开讨论。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flutter 开发（10）：Flutter 的运行模式">
-<meta property="og:url" content="https://fiissh.tech/index.html/flutter-running-mode.html">
+<meta property="og:title" content="Flutter 开发（02）：Flutter 开发环境的搭建（macOS）">
+<meta property="og:url" content="https://fiissh.tech/index.html/2019/fluuter-macos-environemnt-setup.html">
 <meta property="og:site_name" content="肥言肥语">
-<meta property="og:description" content="本文主要是对 Flutter 的基本框架进行介绍。本文主要参考了 美团技术团队-Flutter 原理与实践 一文。美团技术团队-Flutter 原理与实践 是一篇非常优秀的介绍 Flutter 原理的文章。 Flutter 的设计目标是高性能的跨平台的（Android 和 iOS）UI 框架。与传统的基于 WebView 的（例如 Cordova 或者 AppCan 等框架）或者基于原生控件系统的">
+<meta property="og:description" content="本文主要介绍 macOS 下 Flutter 开发环境的搭建。由于肥肥主要从事 Android SDK 开发，故本文中一些内容仅围绕 Android 展开。 Android 和 iOS 开发环境的搭建不在本文的讨论范围。 本文基于 Flutter V1.0.0 展开讨论。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.techug.com/wordpress/wp-content/uploads/2018/07/66372-20180706175503147-184515056.jpg">
-<meta property="og:image" content="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2018a/9924fbed.png">
-<meta property="og:image" content="https://p1.meituan.net/travelcube/89aa7ce412124d5618877589b07f115426247.png">
-<meta property="og:image" content="https://p0.meituan.net/travelcube/ef7a282f280957a1a67020a2aa7922f524600.png">
-<meta property="article:published_time" content="2019-03-14T03:26:40.000Z">
-<meta property="article:modified_time" content="2019-03-14T03:26:40.000Z">
+<meta property="og:image" content="https://fiissh.tech/images/flutter-doctor-result.jpg">
+<meta property="og:image" content="https://fiissh.tech/images/flutter-sample-project.jpg">
+<meta property="article:published_time" content="2019-02-26T07:31:21.000Z">
+<meta property="article:modified_time" content="2019-02-26T07:31:21.000Z">
 <meta property="article:author" content="肥肥鱼">
-<meta property="article:tag" content="Flutter 运行模式">
+<meta property="article:tag" content="Flutter 环境搭建">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.techug.com/wordpress/wp-content/uploads/2018/07/66372-20180706175503147-184515056.jpg">
+<meta name="twitter:image" content="https://fiissh.tech/images/flutter-doctor-result.jpg">
 
 
-<link rel="canonical" href="https://fiissh.tech/index.html/flutter-running-mode.html">
+<link rel="canonical" href="https://fiissh.tech/index.html/2019/fluuter-macos-environemnt-setup.html">
 
 
 <script class="page-configurations">
@@ -56,7 +54,7 @@
   };
 </script>
 
-  <title>Flutter 开发（10）：Flutter 的运行模式 | 肥言肥语</title>
+  <title>Flutter 开发（02）：Flutter 开发环境的搭建（macOS） | 肥言肥语</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
     <script>
@@ -226,7 +224,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">Flutter 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Framework-%E5%B1%82"><span class="nav-number">1.1.</span> <span class="nav-text">Framework 层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Engine-%E5%B1%82"><span class="nav-number">1.2.</span> <span class="nav-text">Engine 层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Embedder-%E5%B1%82"><span class="nav-number">1.3.</span> <span class="nav-text">Embedder 层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E7%9A%84%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">Flutter 的运行模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug-%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">Debug 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Release-%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">Release 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile-%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">Profile 模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-%E6%A8%A1%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">Test 模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">Flutter 应用程序运行机制</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%B9%B6%E5%AE%89%E8%A3%85-Flutter-SDK"><span class="nav-number">2.</span> <span class="nav-text">获取并安装 Flutter SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD-Flutter-SDK"><span class="nav-number">2.1.</span> <span class="nav-text">下载 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%BC%A9-Flutter-SDK"><span class="nav-number">2.2.</span> <span class="nav-text">解压缩 Flutter SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-flutter-doctor"><span class="nav-number">2.4.</span> <span class="nav-text">运行 flutter doctor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%EF%BC%88Android-%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">安装插件（Android 环境）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flutter-%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%83%AD%E9%87%8D%E8%BD%BD"><span class="nav-number">3.1.</span> <span class="nav-text">Flutter 项目的热重载</span></a></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -301,7 +299,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/flutter-running-mode.html">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/fluuter-macos-environemnt-setup.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/homercat.png">
@@ -317,7 +315,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Flutter 开发（10）：Flutter 的运行模式
+          Flutter 开发（02）：Flutter 开发环境的搭建（macOS）
         </h1>
 
         <div class="post-meta-container">
@@ -328,7 +326,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-03-14 11:26:40" itemprop="dateCreated datePublished" datetime="2019-03-14T11:26:40+08:00">2019-03-14</time>
+      <time title="创建时间：2019-02-26 15:31:21" itemprop="dateCreated datePublished" datetime="2019-02-26T15:31:21+08:00">2019-02-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -350,45 +348,79 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>本文主要是对 <code>Flutter</code> 的基本框架进行介绍。本文主要参考了 <a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 一文。<a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 是一篇非常优秀的介绍 <code>Flutter</code> 原理的文章。</p>
-<p><code>Flutter</code> 的设计目标是高性能的跨平台的（<code>Android</code> 和 <code>iOS</code>）<code>UI</code> 框架。与传统的基于 <code>WebView</code> 的（例如 <code>Cordova</code> 或者 <code>AppCan</code> 等框架）或者基于原生控件系统的（例如 <code>React Native</code>）跨平台开发框架所不同的是，<code>Flutter</code> 是基于跨平台的渲染引擎 <code>Skia</code> 来实现的全新的跨平台的开发框架。这也就是说，<code>Flutter</code> 对于设备平台的依赖只有图形渲染相关的部分，这在一定程度上保证了不同平台、不同设备上的一致的用户体验。从执行效率的角度来说，<code>Flutter</code> 使用的 <code>Dart</code> 语言相较于其他大多数跨平台开发框架使用的 <code>JavaScript</code> 语言在执行效率上高效很多。</p>
+        <p>本文主要介绍 <code>macOS</code> 下 <code>Flutter</code> 开发环境的搭建。由于肥肥主要从事 <code>Android SDK</code> 开发，故本文中一些内容仅围绕 <code>Android</code> 展开。</p>
+<p><code>Android</code> 和 <code>iOS</code> 开发环境的搭建不在本文的讨论范围。</p>
+<p>本文基于 <code>Flutter V1.0.0</code> 展开讨论。</p>
 <a id="more"></a>
-<h2 id="Flutter-架构"><a href="#Flutter-架构" class="headerlink" title="Flutter 架构"></a>Flutter 架构</h2><p><code>Flutter</code> 的架构主要由三部分组成：</p>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>如果需要安装运行 <code>Flutter</code>，那么您的设备应该满足如下最低要求：</p>
 <ul>
-<li><code>Framework</code> 层</li>
-<li><code>Engine</code> 层</li>
-<li><code>Embedder</code> 层</li>
+<li><code>64-bit</code> 的 <code>macOS</code></li>
+<li>不少于 <code>700M</code> 的磁盘可用空间</li>
+<li>已经正常安装 <code>AndroidStudio</code> 或 <code>IntelliJ IDEA</code> 和 <code>XCode</code></li>
+<li>已经正常安装如下命令行工具：<ul>
+<li><code>bash</code></li>
+<li><code>mkdir</code></li>
+<li><code>rm</code></li>
+<li><code>git</code></li>
+<li><code>curl</code></li>
+<li><code>unzip</code></li>
+<li><code>which</code></li>
+<li>可能会需要使用 <code>brew</code></li>
 </ul>
-<p><img src="http://www.techug.com/wordpress/wp-content/uploads/2018/07/66372-20180706175503147-184515056.jpg" alt="Flutter 架构"></p>
-<h3 id="Framework-层"><a href="#Framework-层" class="headerlink" title="Framework 层"></a>Framework 层</h3><p><code>Flutter</code> 的 <code>Framework</code> 层使用 <code>Dart</code> 语言实现，包括了 <code>Material Design</code> （针对于 <code>Android</code> 平台）和 <code>Cupertino</code> （对于 <code>iOS</code> 平台）两种风格的文本、图片、按钮等基础 <code>Widget</code>、以及动画、手势处理和渲染引擎等模块。这一部分的源代码对应的是 <code>Flutter</code> 仓库下的 <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/tree/master/packages">flutter/packages/</a> <code>Flutter</code> 包以及 <a target="_blank" rel="noopener" href="https://github.com/flutter/engine/tree/master/sky/packages/sky_engine">engine/sky/packages/sky_engine/</a> 仓库下的 <code>io</code>、<code>async</code> 和 <code>ui</code> 等 <code>package</code>。</p>
-<p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2018a/9924fbed.png"></p>
-<p><code>Flutter</code> 提供了非常丰富的控件，通过对不同类型的控件的嵌套和组合，我们可以方便的构建出任意功能、任意复杂度的界面。与其他将控件、控制器、布局以及其他属性分离开的框架不同的是，<code>Flutter</code> 提供了统一的对象模型：<code>Widget</code>。</p>
-<p><code>Widget</code> 本身由许多更小的、功能单一的 <code>Widget</code> 组成。</p>
-<h3 id="Engine-层"><a href="#Engine-层" class="headerlink" title="Engine 层"></a>Engine 层</h3><p><code>Flutter</code> 的 <code>Engine</code> 层主要包含 <code>Skia</code>、<code>Dart</code> 和 <code>Text</code> 三部分。<code>Engine</code> 主要使用 <code>C/C++</code> 开发。</p>
-<p><code>Skia</code> 是开源的二维图形渲染库，提供了适用于多种平台的通用 <code>API</code>。</p>
-<p><code>Dart</code> 主要包括 <code>Dart Runtime</code>、<code>Garbage Collection</code>，如果是 <code>Debug</code> 模式的话，该部分还提供了对 <code>JIT</code>（<code>Just In Time</code>）的支持。<code>Release</code> 和 <code>Profile</code> 模式下，是通过 <code>AOT</code>（<code>Ahead of Time</code>）编译成了原生代码，并不包含 <code>JIT</code> 部分。</p>
-<p><code>Text</code> 是文本渲染库。<code>Android</code> 上使用 <code>FreeType</code> 渲染，<code>iOS</code>上使用 <code>CoreGraphics</code> 进行渲染。</p>
-<h3 id="Embedder-层"><a href="#Embedder-层" class="headerlink" title="Embedder 层"></a>Embedder 层</h3><p><code>Embedder</code> 层主要包含 <code>Surface</code>、线程以及插件等，是 <code>Flutter</code> 的嵌入层，主要负责把 <code>Flutter</code> 嵌入到各个平台上。</p>
-<h2 id="Flutter-的运行模式"><a href="#Flutter-的运行模式" class="headerlink" title="Flutter 的运行模式"></a>Flutter 的运行模式</h2><p><code>Flutter</code> 提供了四种运行模式：</p>
+</li>
+</ul>
+<p>需要注意的是，畅通的网络环境是 <code>Flutter</code> 开发必不可少的。</p>
+<h2 id="获取并安装-Flutter-SDK"><a href="#获取并安装-Flutter-SDK" class="headerlink" title="获取并安装 Flutter SDK"></a>获取并安装 Flutter SDK</h2><h3 id="下载-Flutter-SDK"><a href="#下载-Flutter-SDK" class="headerlink" title="下载 Flutter SDK"></a>下载 Flutter SDK</h3><p>我们可以在 <code>Flutter</code> 官网的 <a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/tools/sdk/archive?tab=macos#macos">Flutter SDK archive</a> 获取最新的 <code>Flutter SDK</code>。</p>
+<p>目前最新的 <code>Flutter SDK</code> 为 <code>V1.0.0</code> 版本。您可以直接点击 <a target="_blank" rel="noopener" href="https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">下载 Flutter SDK V1.0.0 Stable for macOS</a> 来下载官方的 <code>Flutter SDK</code> 版本，也可以通过点击 <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1f7es65Kyg2RMb2aVEHErFw">下载 Flutter SDK V1.0.0 Stable for macOS</a> 从百度网盘进行下载。</p>
+<p><code>Github</code> 上也托管了 <code>Flutter SDK</code>，我们也可以在 <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/releases">flutter/flutter release</a> 上下载对应的安装包。</p>
+<p>如果上述官方下载地址均无法访问，请使用 <code>Google</code> 为国内用户部署的镜像服务下载。<a target="_blank" rel="noopener" href="https://https//flutter-io.cn/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip">点击使用国内镜像下载 Flutter SDK V1.0.0 Stable for macOS</a>。</p>
+<p><code>Flutter</code> 国内镜像的地址为 <a target="_blank" rel="noopener" href="https://flutter-io.cn/">https://flutter-io.cn</a>。</p>
+<p>如果在后续使用 <code>Flutter</code> 的过程中由于网络而造成的问题，比如执行 <code>flutter doctor</code> 时无法访问网络，或者创建 <code>Flutter</code> 项目时一直处于 <code>create flutter project</code> 过程中，那么请尝试使用代理或者在 <code>.bash_profile</code> 文件中做如下配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PUB_HOSTED_URL=https://pub.flutter-io.cn</span><br><span class="line">export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压缩-Flutter-SDK"><a href="#解压缩-Flutter-SDK" class="headerlink" title="解压缩 Flutter SDK"></a>解压缩 Flutter SDK</h3><p>在下载好 <code>Flutter SDK</code> 之后，我们需要将 <code>Flutter SDK</code> 解压缩：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip flutter_macos_v1.0.0-stable.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>第一步，打开 <code>.bash_profile</code> 文件（路径通常是 <code>~/.bash_profile</code>）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<p>第二步，在 <code>.bash_profile</code> 文件的末尾添加如下字段：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export PATH=PATH_TO_FLUTTER_GIT_DIRECTORY/flutter/bin:$PATH</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">其中，`PATH_TO_FLUTTER_GIT_DIRECTORY` 为你的 `Flutter SDK` 安装路径。</span><br><span class="line"></span><br><span class="line">保存并退出编辑器。</span><br><span class="line"></span><br><span class="line">第三步，执行如下命令刷新环境变量：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果使用 <code>zsh</code> 终端，请在 <code>~/.zshrc</code> 文件的末尾添加 <code>source ~/.bash_profile</code>。</p>
+</blockquote>
+<h3 id="运行-flutter-doctor"><a href="#运行-flutter-doctor" class="headerlink" title="运行 flutter doctor"></a>运行 flutter doctor</h3><p>运行如下命令查看是否需要安装其他依赖项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor</span><br></pre></td></tr></table></figure>
+
+<p>该命令会对设备的环境进行检测并最终显示一份检测结果。请仔细阅读错误提示并按照要求进行安装。下图显示了检测通过之后的最终输出：</p>
+<p><img src="/images/flutter-doctor-result.jpg" alt="flutter-doctor-result.jpg"></p>
+<blockquote>
+<p>由于肥肥使用 <code>IntelliJ IDEA</code> 进行 <code>Android</code> 开发，故而忽略 <code>Android Studio</code> 未安装的提示。</p>
+</blockquote>
+<h3 id="安装插件（Android-环境）"><a href="#安装插件（Android-环境）" class="headerlink" title="安装插件（Android 环境）"></a>安装插件（Android 环境）</h3><p>无论使用 <code>Android Studio</code> 还是 <code>IntelliJ IDEA</code>，都需要安装 <code>Dart</code> 插件和 <code>Flutter</code> 插件。</p>
+<p><code>Dart</code> 插件的作用是提供对 <code>Dart</code> 语言的基础支持，<code>Flutter</code> 插件则提供对 <code>Flutter</code> 开发的支持。</p>
+<p>安装插件的具体方案请参考 <code>Android Studio</code> 或 <code>IntelliJ IDEA</code> 对安装插件的介绍。</p>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>选择 <code>File &gt; New Flutter Project &gt; Flutter application </code>，输入项目名称（比如 <code>flutter_sample</code>），最终可以创建一个 <code>Flutter</code> 项目:</p>
+<p><img src="/images/flutter-sample-project.jpg" alt="flutter-sample-project.jpg"></p>
+<p>其中，<code>android</code> 目录是是配到 <code>Android</code> 设备的项目，<code>ios</code> 目录是是配到 <code>iOS</code> 设备的项目，<code>lib</code> 目录是我们编写的 <code>Dart</code> 代码的目录。</p>
+<blockquote>
+<p>与纯粹的 <code>Android</code> 开发不同的是，在 <code>Android Studio</code> 中也可以将项目部署到 <code>iOS</code>。</p>
+</blockquote>
+<p>此时，点击 <code>Run</code> 运行项目，编译部署之后，我们可以看到默认的 <code>Flutter</code> 项目的界面。</p>
+<h3 id="Flutter-项目的热重载"><a href="#Flutter-项目的热重载" class="headerlink" title="Flutter 项目的热重载"></a>Flutter 项目的热重载</h3><p><code>Flutter</code> 可以通过热重载实现快速的开发周期，热重载的目的是无需重启应用程序就能实时加载修改后的代码，并且不会丢失状态：</p>
 <ul>
-<li><code>Debug</code> 模式</li>
-<li><code>Release</code> 模式</li>
-<li><code>Profile</code> 模式</li>
-<li><code>Test</code> 模式</li>
+<li>在应用运行之后，不要点击 <code>Stop</code> 结束运行</li>
+<li>修改相应的代码</li>
+<li>调用 <code>Sava All</code>（保存）或者点击热重载按钮（⚡️）</li>
 </ul>
-<p>上述四种模式在 <code>Flutter</code> 编译时是完全独立的。</p>
-<h3 id="Debug-模式"><a href="#Debug-模式" class="headerlink" title="Debug 模式"></a>Debug 模式</h3><p><code>Debug</code> 模式可以在真机和模拟器上运行。该模式会打开所有的断言（包括 <code>debugging</code> 信息、<code>debugger aida</code> 和服务扩展），优化了快速 <code>develop/run</code> 循环，但是没有优化执行速度、二进制文件和部署。<code>Android Studio</code> 的 <code>run</code> 命令或者 <code>flutter run</code> 命名都是以该模式运行应用程序的。对应的编译命令为 <code>sky/tools/gn --android</code> 或者  <code>sky/tools/gn --ios</code>。</p>
-<h3 id="Release-模式"><a href="#Release-模式" class="headerlink" title="Release 模式"></a>Release 模式</h3><p><code>Release</code> 模式只能在真机中运行，不能在模拟器中运行。该模式会关闭所有的断言（包括 <code>debugging</code> 信息、<code>debugger aida</code> 和服务扩展），优化启动速度并减少包体积。该模式是为了部署应用程序给最终的用户使用的。使用 <code>flutter run --release</code> 命令可以让应用程序在该模式下运行。对应的编译命令为 <code>sky/tools/gn --android --runtime-mode=release</code> 或者 <code>sky/tools/gn --ios --runtime-mode=release</code>。</p>
-<h3 id="Profile-模式"><a href="#Profile-模式" class="headerlink" title="Profile 模式"></a>Profile 模式</h3><p><code>Profile</code> 模式只能在真机上运行，不能在模拟器中运行。该模式除了启用了服务扩展和 <code>tracing</code>（包含一些最低限度支持 <code>tracing</code> 运行的功能），其他方面和 <code>Release</code> 模式是一样的。使用 <code>flutter run --profile</code> 命令可以应用程序在该模式下运行。对应的编译命令为 <code>sky/tools/gn --android --runtime-mode=profile</code> 或者 <code>sky/tools/gn --ios --runtime-mode=profile</code>。</p>
-<h3 id="Test-模式"><a href="#Test-模式" class="headerlink" title="Test 模式"></a>Test 模式</h3><p><code>Test</code> 模式只能在桌面上运行，与 <code>Debug</code> 模式基本上一样。</p>
-<h2 id="Flutter-应用程序运行机制"><a href="#Flutter-应用程序运行机制" class="headerlink" title="Flutter 应用程序运行机制"></a>Flutter 应用程序运行机制</h2><p>在 <code>Android</code> 系统上，<code>Flutter</code> 构建出的 <code>APK</code> 在运行时会将所有 <code>assets</code> 目录下的资源文件解压到应用程序私有文件目录中的 <code>flutter</code> 目录下，主要包括处理字符编码的 <code>icudtl.dat</code>，以及 <code>Debug</code> 模式的 <code>kernel_blob.bin</code>、<code>platform.dill</code> 和 <code>Release</code> 模式下的4个 <code>snapshot</code> 文件。</p>
-<p>默认情况下，<code>Flutter</code> 在 <code>Application</code> 的 <code>onCreate</code> 时调用 <code>FlutterMain</code> 的 <code>startInitialization</code> 方法来启动解压任务，然后在 <code>FlutterActivityDelegate</code> 的 <code>onCreate</code> 中调用 <code>FlutterMain</code> 的 <code>ensureInitializationComplete</code> 等待解压任务结束。</p>
-<p><code>Flutter</code> 在 <code>Debug</code> 模式下使用 <code>JIT</code> 编译方式，主要是为了支持热加载功能：</p>
-<p><img src="https://p1.meituan.net/travelcube/89aa7ce412124d5618877589b07f115426247.png"></p>
-<p>触发热加载时 <code>Flutter</code> 会检测发生改变的 <code>Dart</code> 文件，将其同步到应用程序私有缓存目录下，<code>Dart VM</code> 加载并且修改对应的类或者方法，重建控件树后立即就可以在设备上看到效果。</p>
-<p>在 <code>Release</code> 模式下，<code>Flutter</code> 会直接将 <code>snapshot</code> 文件映射到内存中执行其中的指令：</p>
-<p><img src="https://p0.meituan.net/travelcube/ef7a282f280957a1a67020a2aa7922f524600.png"></p>
-<p>在 <code>Release</code> 模式下，<code>FlutterActivityDelegate</code> 的 <code>onCreate</code> 中调用 <code>FlutterMain</code> 的 <code>ensureInitializationComplete</code> 方法时会将 <code>AndroidManifest</code> 中设置的 <code>snapshot</code> 文件名等运行参数设置到对应的 <code>C/C++</code> 同名类对象中，构造 <code>FlutterNativeView</code> 实例时调用 <code>nativeAttach</code> 来初始化 <code>Dart VM</code>，最后运行编译好的 <code>Dart</code> 代码。</p>
+<p>之后，应用程序会立刻更新为我们修改完之后的状态。</p>
+<p>热重载技术是通过将最新的源代码文件注入到正在运行的 <code>Dart VM</code> 中来实现的。这个过程不仅仅支持修改字符串内容，还支持添加新的类、新的方法和字段以及更新现有的方法。但是需要注意的是，如下几种类型的更改无法通过热更新的方式实现：</p>
+<ul>
+<li>全局变量的初始化</li>
+<li>静态字段的初始化</li>
+<li><code>main()</code> 应用程序的方法</li>
+</ul>
 
     </div>
 
@@ -406,7 +438,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://fiissh.tech/index.html/flutter-running-mode.html" title="Flutter 开发（10）：Flutter 的运行模式">https://fiissh.tech/index.html/flutter-running-mode.html</a>
+      <a href="https://fiissh.tech/index.html/2019/fluuter-macos-environemnt-setup.html" title="Flutter 开发（02）：Flutter 开发环境的搭建（macOS）">https://fiissh.tech/index.html/2019/fluuter-macos-environemnt-setup.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -415,20 +447,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Flutter-%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F/" rel="tag"># Flutter 运行模式</a>
+              <a href="/tags/Flutter-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="tag"># Flutter 环境搭建</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/flutter-async-program.html" rel="prev" title="Flutter 开发（09）：Flutter 异步编程">
-                  <i class="fa fa-chevron-left"></i> Flutter 开发（09）：Flutter 异步编程
+                <a href="/2019/dart-language-libraries.html" rel="prev" title="Flutter 开发（01）：Dart 语言常用库索引">
+                  <i class="fa fa-chevron-left"></i> Flutter 开发（01）：Dart 语言常用库索引
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/flutter-exception-handler.html" rel="next" title="Flutter 开发（11）：Flutter 层异常捕获">
-                  Flutter 开发（11）：Flutter 层异常捕获 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/flutter-http-request.html" rel="next" title="Flutter 开发（03）：Http 请求">
+                  Flutter 开发（03）：Http 请求 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
