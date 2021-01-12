@@ -249,73 +249,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Flutter 开发（03）：Http 请求</title>
-    <url>//2019/flutter-http-request.html</url>
-    <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 项目中的 <code>Http</code> 网络请求。本文介绍的重点是，<code>Flutter</code> 对 <code>dart:io</code> 库中的 <code>HttpClient</code> 的使用，以及开源 <code>Flutter</code> 网络请求库 <a href="https://github.com/dart-lang/http">package:http/http.dart</a> 的使用。</p>
-<p>本文介绍的所有特性是基于 <code>Flutter V1.0.0</code> 以及 <code>Dart V2.1.0</code>。</p>
-<p>由于 <code>dart:io</code> 库对于 <code>POST</code> 请求支持不好，本文中只简单介绍了使用 <code>dart:io</code> 库发起 <code>GET</code> 请求的情况。<code>http/http.dart</code> 库我们也只介绍 <code>GET</code> 请求和 <code>POST</code> 请求的使用，对于其他类型的情况，可参考官方文档。</p>
-<p><code>dio/dio.dart</code> 库也是非常优秀的 <code>Http</code> 请求库，如果对其感兴趣，请移步项目地址：<a href="https://github.com/flutterchina/dio">dio/dio.dart</a>。</p>
-<a id="more"></a>
-<h2 id="dart-io"><a href="#dart-io" class="headerlink" title="dart:io"></a>dart:io</h2><p>如果使用 <code>HttpClient</code>，需要我们导入 <code>dart:io</code> 库：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;dart:io&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>导入 <code>dart:io</code> 库之后，我们可以使用 <code>new</code> 关键字创建 <code>HttpClient</code> 的实例对象：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> httpClient = <span class="keyword">new</span> HttpClient();</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>HttpClient</code> 的构造函数支持一个可选的 <code>SecurityContext</code> 参数。</p>
-</blockquote>
-<p>使用 <code>HttpClient</code> 发送请求之前，需要先使用 <code>Uri</code> 构建请求的 <code>Uri</code> 对象。以 <code>http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs</code> 请求接口为例：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Uri</span> uri = <span class="keyword">new</span> <span class="built_in">Uri</span>.http(<span class="string">&#x27;tj.nineton.cn&#x27;</span>, <span class="string">&#x27;/Heart/index/all&#x27;</span>, &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;CHSH000000&#x27;</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;zh-chs&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>最终，使用 <code>HttpClient</code> 发起请求的完整示例如下：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() <span class="keyword">async</span> &#123;</span><br><span class="line">  HttpClient client = <span class="keyword">new</span> HttpClient();</span><br><span class="line">  <span class="keyword">var</span> authority = <span class="string">&#x27;tj.nineton.cn&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> unencodedPath = <span class="string">&#x27;/Heart/index/all&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> params = &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;CHSH000000&#x27;</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;zh-chs&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Uri</span> uri = <span class="keyword">new</span> <span class="built_in">Uri</span>.http(authority, unencodedPath, params);</span><br><span class="line">  <span class="keyword">var</span> request = <span class="keyword">await</span> client.getUrl(uri);</span><br><span class="line">  <span class="keyword">var</span> response = <span class="keyword">await</span> request.close();</span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == HttpStatus.ok) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = <span class="keyword">await</span> response.transform(Utf8Decoder()).join();</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(response.toString());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>由于使用了 <code>response.transform(Utf8Decoder())</code> 方法，需要导入 <code>dart:convert</code> 库。</p>
-</blockquote>
-<h2 id="http-http-dart"><a href="#http-http-dart" class="headerlink" title="http/http.dart"></a>http/http.dart</h2><p><a href="https://github.com/dart-lang/http">package:http/http.dart</a> 是一个开源的基于 <code>Flutter</code> 的网络请求框架。</p>
-<p>使用 <code>http/http.dart</code> 库之前，我们需要先在 <code>pubspec.yaml</code> 文件中添加改库的依赖：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">dependencies:</span></span><br><span class="line">  <span class="attr">http:</span> <span class="string">^0.12.0+1</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>目前最新版为 <code>0.12.0+1</code>。更多信息请参考项目主页。</p>
-</blockquote>
-<p>然后在项目的根目录使用如下命令安装该库：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flutter packages get</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果使用 <code>pub</code> 工具，可以使用 <code>pub get</code> 命令。</p>
-</blockquote>
-<p>最后，在项目中需要使用的地方引入该库：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:http/http.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>或者使用别名的引用方式：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:http/http.dart&#x27;</span> <span class="keyword">as</span> http;</span><br></pre></td></tr></table></figure>
-
-<p>个人建议使用第二种方式进行引入（该章节的示例程序都默认使用了第二种引入方式）。</p>
-<h3 id="GET-请求"><a href="#GET-请求" class="headerlink" title="GET 请求"></a>GET 请求</h3><p>以 <code>http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs</code> 为例，使用 <code>http/http.dart</code> 发送 <code>GET</code> 请求的实例代码如下：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&#x27;http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> client = http.Client();</span><br><span class="line">  http.Response response = <span class="keyword">await</span> client.<span class="keyword">get</span>(url);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>或者使用如下方式：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&#x27;http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs&#x27;</span>;</span><br><span class="line">  http.Client().<span class="keyword">get</span>(url).then((http.Response response) &#123;</span><br><span class="line">    <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">      <span class="built_in">print</span>(responseMessage);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="POST-请求"><a href="#POST-请求" class="headerlink" title="POST 请求"></a>POST 请求</h3><p>与 <code>GET</code> 请求不同的是，<code>POST</code> 请求需要将数据写入到 <code>body</code> 里面：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestPost() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&quot;request_url&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> params = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;();</span><br><span class="line">  params[<span class="string">&#x27;param_1&#x27;</span>] = <span class="string">&quot;value_1&quot;</span>;</span><br><span class="line">  params[<span class="string">&#x27;param_2&#x27;</span>] = <span class="string">&quot;value_2&quot;</span>;</span><br><span class="line">  params[<span class="string">&#x27;param_3&#x27;</span>] = <span class="string">&quot;value_3&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> client = http.Client();</span><br><span class="line">  http.Response response = <span class="keyword">await</span> client.post(url, body: params);</span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>同样的，上述请求也可以使用如下代码实现：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestPost() &#123;</span><br><span class="line">   <span class="keyword">var</span> url = <span class="string">&quot;request_url&quot;</span>;</span><br><span class="line">   <span class="keyword">var</span> params = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;();</span><br><span class="line">   params[<span class="string">&#x27;param_1&#x27;</span>] = <span class="string">&quot;value_1&quot;</span>;</span><br><span class="line">   params[<span class="string">&#x27;param_2&#x27;</span>] = <span class="string">&quot;value_2&quot;</span>;</span><br><span class="line">   params[<span class="string">&#x27;param_3&#x27;</span>] = <span class="string">&quot;value_3&quot;</span>;</span><br><span class="line">   http.Client().post(url, body: params).then((http.Response response) &#123;</span><br><span class="line">     <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">       <span class="built_in">print</span>(responseMessage);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Flutter</category>
-      </categories>
-      <tags>
-        <tag>Flutter Http</tag>
-        <tag>http.dart</tag>
-        <tag>dart:io</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flutter 开发（02）：Flutter 开发环境的搭建（macOS）</title>
     <url>//2019/fluuter-macos-environemnt-setup.html</url>
     <content><![CDATA[<p>本文主要介绍 <code>macOS</code> 下 <code>Flutter</code> 开发环境的搭建。由于肥肥主要从事 <code>Android SDK</code> 开发，故本文中一些内容仅围绕 <code>Android</code> 展开。</p>
@@ -397,6 +330,73 @@
       </categories>
       <tags>
         <tag>Flutter 环境搭建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flutter 开发（03）：Http 请求</title>
+    <url>//2019/flutter-http-request.html</url>
+    <content><![CDATA[<p>本文主要介绍 <code>Flutter</code> 项目中的 <code>Http</code> 网络请求。本文介绍的重点是，<code>Flutter</code> 对 <code>dart:io</code> 库中的 <code>HttpClient</code> 的使用，以及开源 <code>Flutter</code> 网络请求库 <a href="https://github.com/dart-lang/http">package:http/http.dart</a> 的使用。</p>
+<p>本文介绍的所有特性是基于 <code>Flutter V1.0.0</code> 以及 <code>Dart V2.1.0</code>。</p>
+<p>由于 <code>dart:io</code> 库对于 <code>POST</code> 请求支持不好，本文中只简单介绍了使用 <code>dart:io</code> 库发起 <code>GET</code> 请求的情况。<code>http/http.dart</code> 库我们也只介绍 <code>GET</code> 请求和 <code>POST</code> 请求的使用，对于其他类型的情况，可参考官方文档。</p>
+<p><code>dio/dio.dart</code> 库也是非常优秀的 <code>Http</code> 请求库，如果对其感兴趣，请移步项目地址：<a href="https://github.com/flutterchina/dio">dio/dio.dart</a>。</p>
+<a id="more"></a>
+<h2 id="dart-io"><a href="#dart-io" class="headerlink" title="dart:io"></a>dart:io</h2><p>如果使用 <code>HttpClient</code>，需要我们导入 <code>dart:io</code> 库：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;dart:io&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>导入 <code>dart:io</code> 库之后，我们可以使用 <code>new</code> 关键字创建 <code>HttpClient</code> 的实例对象：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> httpClient = <span class="keyword">new</span> HttpClient();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>HttpClient</code> 的构造函数支持一个可选的 <code>SecurityContext</code> 参数。</p>
+</blockquote>
+<p>使用 <code>HttpClient</code> 发送请求之前，需要先使用 <code>Uri</code> 构建请求的 <code>Uri</code> 对象。以 <code>http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs</code> 请求接口为例：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Uri</span> uri = <span class="keyword">new</span> <span class="built_in">Uri</span>.http(<span class="string">&#x27;tj.nineton.cn&#x27;</span>, <span class="string">&#x27;/Heart/index/all&#x27;</span>, &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;CHSH000000&#x27;</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;zh-chs&#x27;</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>最终，使用 <code>HttpClient</code> 发起请求的完整示例如下：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() <span class="keyword">async</span> &#123;</span><br><span class="line">  HttpClient client = <span class="keyword">new</span> HttpClient();</span><br><span class="line">  <span class="keyword">var</span> authority = <span class="string">&#x27;tj.nineton.cn&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> unencodedPath = <span class="string">&#x27;/Heart/index/all&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> params = &#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;CHSH000000&#x27;</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;zh-chs&#x27;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Uri</span> uri = <span class="keyword">new</span> <span class="built_in">Uri</span>.http(authority, unencodedPath, params);</span><br><span class="line">  <span class="keyword">var</span> request = <span class="keyword">await</span> client.getUrl(uri);</span><br><span class="line">  <span class="keyword">var</span> response = <span class="keyword">await</span> request.close();</span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == HttpStatus.ok) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = <span class="keyword">await</span> response.transform(Utf8Decoder()).join();</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">print</span>(response.toString());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于使用了 <code>response.transform(Utf8Decoder())</code> 方法，需要导入 <code>dart:convert</code> 库。</p>
+</blockquote>
+<h2 id="http-http-dart"><a href="#http-http-dart" class="headerlink" title="http/http.dart"></a>http/http.dart</h2><p><a href="https://github.com/dart-lang/http">package:http/http.dart</a> 是一个开源的基于 <code>Flutter</code> 的网络请求框架。</p>
+<p>使用 <code>http/http.dart</code> 库之前，我们需要先在 <code>pubspec.yaml</code> 文件中添加改库的依赖：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">dependencies:</span></span><br><span class="line">  <span class="attr">http:</span> <span class="string">^0.12.0+1</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>目前最新版为 <code>0.12.0+1</code>。更多信息请参考项目主页。</p>
+</blockquote>
+<p>然后在项目的根目录使用如下命令安装该库：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">flutter packages get</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果使用 <code>pub</code> 工具，可以使用 <code>pub get</code> 命令。</p>
+</blockquote>
+<p>最后，在项目中需要使用的地方引入该库：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:http/http.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用别名的引用方式：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:http/http.dart&#x27;</span> <span class="keyword">as</span> http;</span><br></pre></td></tr></table></figure>
+
+<p>个人建议使用第二种方式进行引入（该章节的示例程序都默认使用了第二种引入方式）。</p>
+<h3 id="GET-请求"><a href="#GET-请求" class="headerlink" title="GET 请求"></a>GET 请求</h3><p>以 <code>http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs</code> 为例，使用 <code>http/http.dart</code> 发送 <code>GET</code> 请求的实例代码如下：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&#x27;http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs&#x27;</span>;</span><br><span class="line">  <span class="keyword">var</span> client = http.Client();</span><br><span class="line">  http.Response response = <span class="keyword">await</span> client.<span class="keyword">get</span>(url);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用如下方式：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestGet() &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&#x27;http://tj.nineton.cn/Heart/index/all?city=CHSH000000&amp;language=zh-chs&#x27;</span>;</span><br><span class="line">  http.Client().<span class="keyword">get</span>(url).then((http.Response response) &#123;</span><br><span class="line">    <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">      <span class="built_in">print</span>(responseMessage);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="POST-请求"><a href="#POST-请求" class="headerlink" title="POST 请求"></a>POST 请求</h3><p>与 <code>GET</code> 请求不同的是，<code>POST</code> 请求需要将数据写入到 <code>body</code> 里面：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestPost() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">&quot;request_url&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> params = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;();</span><br><span class="line">  params[<span class="string">&#x27;param_1&#x27;</span>] = <span class="string">&quot;value_1&quot;</span>;</span><br><span class="line">  params[<span class="string">&#x27;param_2&#x27;</span>] = <span class="string">&quot;value_2&quot;</span>;</span><br><span class="line">  params[<span class="string">&#x27;param_3&#x27;</span>] = <span class="string">&quot;value_3&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> client = http.Client();</span><br><span class="line">  http.Response response = <span class="keyword">await</span> client.post(url, body: params);</span><br><span class="line">  <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">    <span class="built_in">print</span>(responseMessage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的，上述请求也可以使用如下代码实现：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">httpRequestPost() &#123;</span><br><span class="line">   <span class="keyword">var</span> url = <span class="string">&quot;request_url&quot;</span>;</span><br><span class="line">   <span class="keyword">var</span> params = <span class="keyword">new</span> <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt;();</span><br><span class="line">   params[<span class="string">&#x27;param_1&#x27;</span>] = <span class="string">&quot;value_1&quot;</span>;</span><br><span class="line">   params[<span class="string">&#x27;param_2&#x27;</span>] = <span class="string">&quot;value_2&quot;</span>;</span><br><span class="line">   params[<span class="string">&#x27;param_3&#x27;</span>] = <span class="string">&quot;value_3&quot;</span>;</span><br><span class="line">   http.Client().post(url, body: params).then((http.Response response) &#123;</span><br><span class="line">     <span class="keyword">if</span> (response.statusCode == <span class="number">200</span>) &#123;</span><br><span class="line">       <span class="keyword">var</span> responseMessage = response.body;</span><br><span class="line">       <span class="built_in">print</span>(responseMessage);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>Flutter Http</tag>
+        <tag>http.dart</tag>
+        <tag>dart:io</tag>
       </tags>
   </entry>
   <entry>
@@ -783,6 +783,36 @@
       </tags>
   </entry>
   <entry>
+    <title>Flutter 开发（14）：BasicMessageChannel 的使用</title>
+    <url>//2019/flutter-basic-message-channel.html</url>
+    <content><![CDATA[<p>与 <code>MethodChannel</code> 和 <code>EventChannel</code> 接收一个 <code>MethodCodec</code> 对象所不同的是，<code>BasicMessageChannel</code> 接收一个 <code>MessageCodec&lt;T&gt;</code> 作为其编解码器的实现。<code>BasicMessageChannel</code> 允许我们使用自定义的消息编解码器进行异步消息传递。</p>
+<p>本文中所使用的代码示例出自 <code>Flutter</code> 官方示例，感兴趣的小伙伴请移步 <a href="https://github.com/flutter/flutter/tree/master/examples/flutter_view">flutter/examples/flutter_view</a></p>
+<a id="more"></a>
+<h2 id="BasicMessageChannel-的初始化"><a href="#BasicMessageChannel-的初始化" class="headerlink" title="BasicMessageChannel 的初始化"></a>BasicMessageChannel 的初始化</h2><p><code>BasicMessageChannel</code> 不提供默认的 <code>MessageCodec</code> 的实现，我们需要在初始化 <code>BasicMessageChannel</code> 时指定具体的 <code>MessageCodec</code>。我们以使用 <code>StringCodec</code> 初始化 <code>BasicMessageChannel</code> 并传递 <code>String</code> 类型的数据为例：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BasicMessageChannel&lt;<span class="built_in">String</span>&gt; platform = BasicMessageChannel&lt;<span class="built_in">String</span>&gt;(_channel, StringCodec());</span><br></pre></td></tr></table></figure>
+
+<p>对象初始化之后，我们通过 <code>setMessageHandler</code> 方法设置一个 <code>MessageHandler</code> 回调函数：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">platform.setMessageHandler(_handlePlatformIncrement);</span><br><span class="line">Future&lt;<span class="built_in">String</span>&gt; _handlePlatformIncrement(<span class="built_in">String</span> message) <span class="keyword">async</span> &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">    _counter++;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> _emptyMessage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化完成之后，我们可以通过 <code>platform.send(&#39;pong&#39;);</code> 向设备平台端发送一个 <code>String</code> 类型的数据。</p>
+<h2 id="设备平台-Android-端的初始化"><a href="#设备平台-Android-端的初始化" class="headerlink" title="设备平台 Android 端的初始化"></a>设备平台 Android 端的初始化</h2><p>相应的，我们需要在设备平台端（<code>Android</code>） 初始化 <code>BasicMessageChannel</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">messageChannel = <span class="keyword">new</span> BasicMessageChannel&lt;&gt;(flutterView, CHANNEL, StringCodec.INSTANCE);</span><br><span class="line">messageChannel.</span><br><span class="line">    setMessageHandler(<span class="keyword">new</span> MessageHandler&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(String s, Reply&lt;String&gt; reply)</span> </span>&#123;</span><br><span class="line">            onFlutterIncrement();</span><br><span class="line">            reply.reply(EMPTY_MESSAGE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>设备平台端收到数据之后，<code>onMessage</code> 方法会被触发。</p>
+<p>同样的，在设备平台端可以使用 <code>messageChannel.send(PING);</code> 向 <code>Flutter</code> 端发送 <code>String</code> 类型的数据，<code>Flutter</code> 端收到数据之后，<code>_handlePlatformIncrement</code> 方法会被触发。</p>
+<h2 id="BasicMessageChannel-的原理"><a href="#BasicMessageChannel-的原理" class="headerlink" title="BasicMessageChannel 的原理"></a>BasicMessageChannel 的原理</h2><p>与 <code>MethodChannel</code> 一样，<code>BasicMessageChannel</code> 在发送数据时需要先通过 <code>codec</code> 将消息编码，然后通过 <code>BinaryMessages</code> 将编码之后的消息发送出去，最后通过 <code>codec</code> 再将返回值进行解码：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">Future&lt;T&gt; send(T message) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> codec.decodeMessage(<span class="keyword">await</span> BinaryMessages.send(name, codec.encodeMessage(message)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>BasicMessageChannel</code> 提供了一种机制允许我们自己定义消息的编解码器。相应的，<code>Flutter</code> 中已经提供了 <code>BinaryCodec</code>、<code>StringCodec</code> 和 <code>JSONMessageCodec</code> 作为常用数据类型的编解码器实现。如果还不能满足需求，我们可以通过扩展 <code>MessageCodec&lt;T&gt;</code> 达到目的。</p>
+]]></content>
+      <categories>
+        <category>Flutter</category>
+      </categories>
+      <tags>
+        <tag>BasicMessageChannel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git Commit Message 模板</title>
     <url>//2019/git-commit-template.html</url>
     <content><![CDATA[<h2 id="Commit-Message-规范"><a href="#Commit-Message-规范" class="headerlink" title="Commit Message 规范"></a>Commit Message 规范</h2><p>每一个 <code>Commit Message</code> 应该包含一个 <code>header</code>、<code>body</code> 和 <code>footer</code>。其中，<code>header</code>、<code>body</code> 和 <code>footer</code> 之间以空行作为间隔。<code>header</code> 是必须要填写的：</p>
@@ -819,34 +849,12 @@
       </tags>
   </entry>
   <entry>
-    <title>Flutter 开发（14）：BasicMessageChannel 的使用</title>
-    <url>//2019/flutter-basic-message-channel.html</url>
-    <content><![CDATA[<p>与 <code>MethodChannel</code> 和 <code>EventChannel</code> 接收一个 <code>MethodCodec</code> 对象所不同的是，<code>BasicMessageChannel</code> 接收一个 <code>MessageCodec&lt;T&gt;</code> 作为其编解码器的实现。<code>BasicMessageChannel</code> 允许我们使用自定义的消息编解码器进行异步消息传递。</p>
-<p>本文中所使用的代码示例出自 <code>Flutter</code> 官方示例，感兴趣的小伙伴请移步 <a href="https://github.com/flutter/flutter/tree/master/examples/flutter_view">flutter/examples/flutter_view</a></p>
-<a id="more"></a>
-<h2 id="BasicMessageChannel-的初始化"><a href="#BasicMessageChannel-的初始化" class="headerlink" title="BasicMessageChannel 的初始化"></a>BasicMessageChannel 的初始化</h2><p><code>BasicMessageChannel</code> 不提供默认的 <code>MessageCodec</code> 的实现，我们需要在初始化 <code>BasicMessageChannel</code> 时指定具体的 <code>MessageCodec</code>。我们以使用 <code>StringCodec</code> 初始化 <code>BasicMessageChannel</code> 并传递 <code>String</code> 类型的数据为例：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> BasicMessageChannel&lt;<span class="built_in">String</span>&gt; platform = BasicMessageChannel&lt;<span class="built_in">String</span>&gt;(_channel, StringCodec());</span><br></pre></td></tr></table></figure>
-
-<p>对象初始化之后，我们通过 <code>setMessageHandler</code> 方法设置一个 <code>MessageHandler</code> 回调函数：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">platform.setMessageHandler(_handlePlatformIncrement);</span><br><span class="line">Future&lt;<span class="built_in">String</span>&gt; _handlePlatformIncrement(<span class="built_in">String</span> message) <span class="keyword">async</span> &#123;</span><br><span class="line">  setState(() &#123;</span><br><span class="line">    _counter++;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> _emptyMessage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初始化完成之后，我们可以通过 <code>platform.send(&#39;pong&#39;);</code> 向设备平台端发送一个 <code>String</code> 类型的数据。</p>
-<h2 id="设备平台-Android-端的初始化"><a href="#设备平台-Android-端的初始化" class="headerlink" title="设备平台 Android 端的初始化"></a>设备平台 Android 端的初始化</h2><p>相应的，我们需要在设备平台端（<code>Android</code>） 初始化 <code>BasicMessageChannel</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">messageChannel = <span class="keyword">new</span> BasicMessageChannel&lt;&gt;(flutterView, CHANNEL, StringCodec.INSTANCE);</span><br><span class="line">messageChannel.</span><br><span class="line">    setMessageHandler(<span class="keyword">new</span> MessageHandler&lt;String&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(String s, Reply&lt;String&gt; reply)</span> </span>&#123;</span><br><span class="line">            onFlutterIncrement();</span><br><span class="line">            reply.reply(EMPTY_MESSAGE);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>设备平台端收到数据之后，<code>onMessage</code> 方法会被触发。</p>
-<p>同样的，在设备平台端可以使用 <code>messageChannel.send(PING);</code> 向 <code>Flutter</code> 端发送 <code>String</code> 类型的数据，<code>Flutter</code> 端收到数据之后，<code>_handlePlatformIncrement</code> 方法会被触发。</p>
-<h2 id="BasicMessageChannel-的原理"><a href="#BasicMessageChannel-的原理" class="headerlink" title="BasicMessageChannel 的原理"></a>BasicMessageChannel 的原理</h2><p>与 <code>MethodChannel</code> 一样，<code>BasicMessageChannel</code> 在发送数据时需要先通过 <code>codec</code> 将消息编码，然后通过 <code>BinaryMessages</code> 将编码之后的消息发送出去，最后通过 <code>codec</code> 再将返回值进行解码：</p>
-<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line">Future&lt;T&gt; send(T message) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> codec.decodeMessage(<span class="keyword">await</span> BinaryMessages.send(name, codec.encodeMessage(message)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>BasicMessageChannel</code> 提供了一种机制允许我们自己定义消息的编解码器。相应的，<code>Flutter</code> 中已经提供了 <code>BinaryCodec</code>、<code>StringCodec</code> 和 <code>JSONMessageCodec</code> 作为常用数据类型的编解码器实现。如果还不能满足需求，我们可以通过扩展 <code>MessageCodec&lt;T&gt;</code> 达到目的。</p>
-]]></content>
+    <title>Java 四种引用类型</title>
+    <url>//2020/java-reference-type.html</url>
+    <content><![CDATA[]]></content>
       <categories>
-        <category>Flutter</category>
+        <category>Java</category>
       </categories>
-      <tags>
-        <tag>BasicMessageChannel</tag>
-      </tags>
   </entry>
   <entry>
     <title>OutOfMemoryError:pthread_create (1040KB stack) failed 异常分析</title>

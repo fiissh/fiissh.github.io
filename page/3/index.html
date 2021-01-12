@@ -233,14 +233,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -288,6 +288,101 @@
       
 
       
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/dart-language-language-tour.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/dart-language-language-tour.html" class="post-title-link" itemprop="url">Flutter 开发（00）：Dart 语言语法预览</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-21 15:14:40" itemprop="dateCreated datePublished" datetime="2019-02-21T15:14:40+08:00">2019-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文主要针对 <code>Dart</code> 语言的语法规则以及常用概念进行介绍，主要目标是快速了解 <code>Dart</code> 的主要特性。</p>
+<p>本文中介绍的 <code>Dart</code> 语言特性是基于 <code>Dart 2.1.0</code>。由于肥肥本身从事于 <code>Android</code> 开发多年，使用 <code>Java</code> 作为主要开发语言，所以在整理、撰写本文时会选择性的忽略一些语言特性的介绍。</p>
+<p>本文是基于官网文档 <a target="_blank" rel="noopener" href="https://www.dartlang.org/guides/language/language-tour">A Tour of the Dart Language</a>以及 <a target="_blank" rel="noopener" href="http://dart.goodev.org/">Dart 翻译小组</a>翻译的 <a target="_blank" rel="noopener" href="http://dart.goodev.org/guides/language/language-tour">Dart 语法概览</a> 文档。</p>
+<p>感谢先驱们对 <code>Dart</code> 社区做出的贡献，更感谢 <a target="_blank" rel="noopener" href="http://dart.goodev.org/">Dart 翻译小组</a>所付出的辛苦和贡献。</p>
+<p>在 <code>Dart</code> 中一些重要的概念如下：</p>
+<ul>
+<li>所有的东西都是对象，所有的对象都是类的实例。即使数字、方法、<code>null</code> 也都是对象。所有的对象都继承自 <code>Object</code> 类</li>
+<li>指定静态类型表明你的意图，并使检查类型检查成为可能</li>
+<li><code>Dart</code> 在运行前解析所有的代码，可以使用些小技巧，例如：通过使用类型或编译时常量，来捕捉错误或使代码运行的更快</li>
+<li><code>Dart</code> 支持顶级的函数，也支持类或对象的静态和实例方法。也可以在函数内部嵌套函数或本地函数</li>
+<li><code>Dart</code> 支持顶级的变量，也支持类或对象的静态变量和实例变量(也被称作字段或属性)</li>
+<li><code>Dart</code> 没有 <code>public</code>、<code>protected</code>、<code>private</code> 等关键字，如果一个标识符以 <code>_</code> 开头则表示私有</li>
+<li>标识符以小写字母或下划线 <code>_</code> 开头，后面跟着字符和数字的任意组合</li>
+<li><code>Dart</code> 中，明确区分表达式和语句</li>
+<li><code>Dart tools</code> 会报告两种类型的问题：警告(<code>warnings</code>)和错误(<code>errors</code>)。警告仅标志着你的代码可能不会工作，但并不会阻止程序执行；错误可能是编译时错误，也可能是运行时错误。编译时错误会阻止程序执行；运行时错误会在程序执行时抛出异常</li>
+<li><code>Dart</code> 有两种运行时模式：生产模式和检查模式。推荐在开发和 <code>debug</code> 时使用检查模式，生产环境中生产模式。生产模式是 <code>Dart</code> 程序默认的运行时模式</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/dart-language-language-tour.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -427,7 +522,7 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
