@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/index.html/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/index.html/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/index.html/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/index.html/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+<link rel="stylesheet" href="/index.html/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fiissh.tech","root":"/index.html/","images":"/index.html/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/index.html/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/index.html/js/config.js"></script>
+<meta name="description" content="本文主要介绍 Flutter 插件开发的相关内容，并在 path_provider&#x2F;path_provider.dart 插件项目的基础上开发我们自己的 flutter_file_path_provide 插件。 本文中涉及到的主要技术是基于 Flutter 开发（07）：编写平台相关的代码。当然，在我们的 flutter_file_path_provide 插件项目中只使用到了 MethodCh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 开发（08）：Flutter 插件开发（flutter_file_path_provide）">
+<meta property="og:url" content="https://fiissh.tech/index.html/2019/flutter-plugin-file-path-provider.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="本文主要介绍 Flutter 插件开发的相关内容，并在 path_provider&#x2F;path_provider.dart 插件项目的基础上开发我们自己的 flutter_file_path_provide 插件。 本文中涉及到的主要技术是基于 Flutter 开发（07）：编写平台相关的代码。当然，在我们的 flutter_file_path_provide 插件项目中只使用到了 MethodCh">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fiissh.tech/images/android-studio-welcome-page.jpg">
+<meta property="og:image" content="https://fiissh.tech/images/android-studio-select-flutter-plugin.jpg">
+<meta property="og:image" content="https://fiissh.tech/images/configure-new-flutter-plugin.jpg">
+<meta property="og:image" content="https://fiissh.tech/images/set-package-name.jpg">
+<meta property="og:image" content="https://fiissh.tech/images/flutter-project.jpg">
+<meta property="article:published_time" content="2019-03-05T05:01:06.000Z">
+<meta property="article:modified_time" content="2019-03-05T05:01:06.000Z">
+<meta property="article:author" content="肥肥鱼">
+<meta property="article:tag" content="Flutter 开发">
+<meta property="article:tag" content="Flutter 插件开发">
+<meta property="article:tag" content="flutter_file_path_provide">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fiissh.tech/images/android-studio-welcome-page.jpg">
+
+
+<link rel="canonical" href="https://fiissh.tech/index.html/2019/flutter-plugin-file-path-provider.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/index.html/2019/flutter-plugin-file-path-provider.html","path":"/2019/flutter-plugin-file-path-provider.html","title":"Flutter 开发（08）：Flutter 插件开发（flutter_file_path_provide）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter 开发（08）：Flutter 插件开发（flutter_file_path_provide） | 肥言肥语</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-65174745-4","only_pageview":false}</script>
+  <script src="/index.html/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/index.html/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/index.html/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/index.html/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">肥言肥语</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">肥肥鱼胡说八道的地方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/index.html/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/index.html/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8F%92%E4%BB%B6%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">创建插件项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">开发插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">2.2.</span> <span class="nav-text">插件的开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flutter-%E5%B1%82%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">2.2.1.</span> <span class="nav-text">Flutter 层的开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-%E7%AB%AF%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">2.2.2.</span> <span class="nav-text">Android 端的开发</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">发布插件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="肥肥鱼"
+      src="/index.html/images/homercat.png">
+  <p class="site-author-name" itemprop="name">肥肥鱼</p>
+  <div class="site-description" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/index.html/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/index.html/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/index.html/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fiissh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fiissh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail → mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-plugin-file-path-provider.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter 开发（08）：Flutter 插件开发（flutter_file_path_provide）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-05 13:01:06" itemprop="dateCreated datePublished" datetime="2019-03-05T13:01:06+08:00">2019-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要介绍 <code>Flutter</code> 插件开发的相关内容，并在 <a target="_blank" rel="noopener" href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 插件项目的基础上开发我们自己的 <code>flutter_file_path_provide</code> 插件。</p>
+<p>本文中涉及到的主要技术是基于 <a href="https://fiissh.tech/2019/flutter-platform-specific.html">Flutter 开发（07）：编写平台相关的代码</a>。当然，在我们的 <code>flutter_file_path_provide</code> 插件项目中只使用到了 <code>MethodChannel</code>。另外两种平台通道我们将在其他文章中介绍。</p>
+<p>由于肥肥从事 <code>Android SDK</code> 开发，所以 <code>flutter_file_path_provide</code> 插件项目中的 <code>iOS</code> 部分在本文撰写时并没有实现。</p>
+<span id="more"></span>
+<h2 id="创建插件项目"><a href="#创建插件项目" class="headerlink" title="创建插件项目"></a>创建插件项目</h2><p>第一步，打开 <code>Android Studio</code>，在首页面选择 <code>Start a new Flutter project</code>：</p>
+<p><img src="/images/android-studio-welcome-page.jpg" alt="android-studio-welcome-page.jpg"></p>
+<p>第二步，在 <code>New Flutter Project</code> 页面选择 <code>Flutter Plugin</code>，然后点击 <code>Next</code>：</p>
+<p><img src="/images/android-studio-select-flutter-plugin.jpg" alt="android-studio-select-flutter-plugin.jpg"></p>
+<p>第三步，在 <code>Configure the new Flutter plugin</code> 界面填写相关的项目信息（<code>flutter_file_path_provide</code>），然后点击 <code>Next</code>：</p>
+<p><img src="/images/configure-new-flutter-plugin.jpg" alt="configure-new-flutter-plugin.jpg"></p>
+<p>第四步，在 <code>Set the package name</code> 页面填写包名等信息（<code>tech.fiissh.flutter.plugin.path</code>），然后点击 <code>Finish</code>：</p>
+<p><img src="/images/set-package-name.jpg" alt="set-package-name.jpg"></p>
+<p>如果我们的 <code>Android</code> 和 <code>iOS</code> 的部分需要使用 <code>Kotlin</code> 和 <code>Swift</code> 进行开发，请分别勾选 <code>Include Kotlin support for Android code</code> 和 <code>Include Swift support for iOS code</code>。默认情况下 <code>Android</code> 将使用 <code>Java</code> 语言，<code>iOS</code> 将使用 <code>Object-C</code> 语言。</p>
+<p>本文中 <code>Android</code> 部分将使用 <code>Java</code> 语言进行开发。</p>
+<p>第五步，等待项目构建完成之后，我们将得到如下项目结构：</p>
+<p><img src="/images/flutter-project.jpg" alt="flutter-project.jpg"></p>
+<p>其中，<code>android</code> 目录是我们插件的 <code>Android</code> 部分的项目，用于编写 <code>Android</code> 的源代码。<code>ios</code> 目录是插件的 <code>iOS</code> 部分的项目，用于编写 <code>iOS</code> 的源代码。<code>example</code> 目录是我们插件项目的示例项目，其中包含了 <code>android</code> 和 <code>iOS</code> 两个平台的 <code>Module</code>。<code>lib</code> 目录则是我们编写 <code>Dart</code> 代码的地方。</p>
+<p>虽然我们在创建项目的过程中填写的包名为 <code>tech.fiissh.flutter.plugin.path</code>，但是项目创建完成之后，插件的 <code>Android</code> 部分的包名则为 <code>tech.fiissh.flutter.plugin.flutter_file_path_provide</code>，而 <code>example</code> 的 <code>Android</code> 部分的包名则为 <code>tech.fiissh.flutter.plugin.flutter_file_path_provide_example</code>。如果我们需要修改包名，请将对应项目的 <code>AndroidManifest.xml</code> 文件中的 <code>package</code> 属性、<code>build.gradle</code> 文件中的 <code>applicationId</code> 属性都进行修改。修改之后，插件部分我们使用 <code>tech.fiissh.flutter.plugin.path</code> 包名，<code>example</code> 部分我们使用 <code>tech.fiissh.flutter.sample.path</code> 包名。</p>
+<p>需要注意的是，修改报名之后，我们需要将项目根目录的 <code>pubspec.yaml</code> 文件中的 <code>plugin</code> 属性修改为新的包名：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">flutter:</span></span><br><span class="line">  <span class="comment"># This section identifies this Flutter project as a plugin project.</span></span><br><span class="line">  <span class="comment"># The androidPackage and pluginClass identifiers should not ordinarily</span></span><br><span class="line">  <span class="comment"># be modified. They are used by the tooling to maintain consistency when</span></span><br><span class="line">  <span class="comment"># adding or updating assets for this project.</span></span><br><span class="line">  <span class="attr">plugin:</span></span><br><span class="line">    <span class="attr">androidPackage:</span> <span class="string">tech.fiissh.flutter.plugin.path</span></span><br><span class="line">    <span class="attr">pluginClass:</span> <span class="string">FlutterFilePathProvidePlugin</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="开发插件"><a href="#开发插件" class="headerlink" title="开发插件"></a>开发插件</h2><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p>我们插件的主要功能是获取对应设备平台上的可用的存储目录，并将该目录的绝对地址实例化为 <code>Directory</code> 对象。根据 <code>Android</code> 和 <code>iOS</code> 上常用的存储目录，我们总结出几个不同的目录，对应的 <code>Flutter</code> 层的方法如下：</p>
+<ul>
+<li><code>getExternalStorageDirectory</code>：<code>Android</code> 平台下读取外部存储的路径，即 <code>SD</code> 卡目录，例如 <code>/storage/sdcard0/</code></li>
+<li><code>getExternalStorageApplicationTemporaryDirectory</code>：<code>Android</code> 平台下外部存储的缓存目录，例如 <code>/storage/emulated/0/Android/data/tech.fiissh.sample.path/temp/</code></li>
+<li><code>getInternalStorageApplicationTemporaryDirectory</code>： <code>Android</code> 平台下内部存储的缓存目录，例如 <code>/data/user/0/tech.fiissh.flutter.sample.path/temp/</code></li>
+<li><code>getExternalStorageApplicationCacheDirectory</code>: <code>Android</code> 平台下的外部存储的应用程序缓存目录，例如 <code>/storage/emulated/0/Android/data/tech.fiissh.sample.path/cache/</code></li>
+<li><code>getInternalStorageApplicationCacheDirectory</code>：<code>Android </code> 平台下的内部存储的应用程序缓存目录，例如 <code>/data/user/0/tech.fiissh.flutter.sample.path/cache/</code></li>
+<li><code>getExternalStorageApplicationDirectory</code>： <code>Android</code> 平台下外部存储的应用程序目录，例如 <code>/storage/emulated/0/Android/data/tech.fiissh.sample.path/files/</code></li>
+<li><code>getInternalStorageApplicationDirectory</code>： <code>Android</code> 平台下内部存储的应用程序目录，例如 <code>/data/user/0/tech.fiissh.flutter.sample.path/files/</code></li>
+</ul>
+<h3 id="插件的开发"><a href="#插件的开发" class="headerlink" title="插件的开发"></a>插件的开发</h3><h4 id="Flutter-层的开发"><a href="#Flutter-层的开发" class="headerlink" title="Flutter 层的开发"></a>Flutter 层的开发</h4><p>项目创建完成之后，<code>Android Studio</code> 已经为我们创建了一个简单的获取设备平台操作系统版本号的示例。</p>
+<p>我们打开 <code>lib/flutter_file_path_provide.dart</code> 文件，删除 <code>platformVersion</code> 方法，得到如下代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlutterFilePathProvide</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> MethodChannel _channel = <span class="keyword">const</span> MethodChannel(<span class="string">&#x27;flutter_file_path_provide&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>FlutterFilePathProvide</code> 类中已经默认创建了一个名称为 <code>flutter_file_path_provide</code> 的 <code>MethodChannel</code> 对象 <code>_channel</code>。</p>
+<p>根据我们在需求分析中定义的方法，我们得到如下 <code>FlutterFilePathProvide</code> 类：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlutterFilePathProvide</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> FlutterFilePathProvide();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _METHOD_CHANNEL_NAME = <span class="string">&#x27;fiissh.flutter.plugin/flutter_file_path_provide&#x27;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> MethodChannel _channel = <span class="keyword">const</span> MethodChannel(_METHOD_CHANNEL_NAME);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageDirectory&quot;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _EXTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY = <span class="string">&quot;getExternalStorageApplicationTemporaryDirectory&quot;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _INTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY = <span class="string">&quot;getInternalStorageApplicationTemporaryDirectory&quot;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _EXTERNAL_STORAGE_APPLICATION_CACHE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageApplicationCacheDirectory&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _EXTERNAL_STORAGE_APPLICATION_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageApplicationDirectory&quot;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _INTERNAL_STORAGE_APPLICATION_CACHE_DIRECTOR_METHOD_NAME = <span class="string">&quot;getInternalStorageApplicationCacheDirectory&quot;</span>;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _INTERNAL_STORAGE_APPLICATION_DIRECTOR_METHOD_NAME = <span class="string">&quot;getInternalStorageApplicationDirectory&quot;</span>;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getExternalStorageDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getExternalStorageApplicationCacheDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_EXTERNAL_STORAGE_APPLICATION_CACHE_DIRECTORY_METHOD_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getInternalStorageApplicationCacheDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_INTERNAL_STORAGE_APPLICATION_CACHE_DIRECTOR_METHOD_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getExternalStorageApplicationDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_EXTERNAL_STORAGE_APPLICATION_DIRECTORY_METHOD_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getInternalStorageApplicationDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_INTERNAL_STORAGE_APPLICATION_DIRECTOR_METHOD_NAME);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getExternalStorageApplicationTemporaryDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_EXTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; getInternalStorageApplicationTemporaryDirectory() <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> _getDirectory(_INTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Future&lt;Result&gt; _getDirectory(<span class="built_in">String</span> methodName, [<span class="built_in">String</span> extra]) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="built_in">String</span> path;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      path = <span class="keyword">await</span> _channel.invokeMethod(methodName, extra);</span><br><span class="line">      <span class="built_in">print</span>(path);</span><br><span class="line">      <span class="keyword">return</span> Result(Result.ERROR_CODE_SUCCESS, <span class="string">&#x27;success&#x27;</span>, Directory(<span class="string">&#x27;<span class="subst">$path</span>/&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">on</span> PlatformException <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="keyword">return</span> Result(<span class="built_in">num</span>.parse(e.code), e.message);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>_getDirectory(String methodName, [String extra])</code> 方法是所有方法调用的核心。其作用是 <code>_channel</code> 对象根据传递进来的 <code>methodName</code> 参数以及可选参数 <code>extra</code>，将调用传递到设备平台上与 <code>MethodChannel</code> 对应的 <code>MethodCallHandler</code>（<code>android/src/main/java/tech.fiissh.flutter.plugin.path/FlutterFilePathProvidePlugin</code>）对象。</p>
+<p><code>MethodChannel</code> 类除了 <code>name</code> 和 <code>codec</code> 属性之外，还有另外几个重要的方法：</p>
+<ul>
+<li><code>Future&lt;T&gt; invokeMethod&lt;T&gt;(String method, [dynamic arguments])</code></li>
+<li><code>Future&lt;List&lt;T&gt;&gt; invokeListMethod&lt;T&gt;(String method, [dynamic arguments])</code></li>
+<li><code>Future&lt;Map&lt;K, V&gt;&gt; invokeMapMethod&lt;K, V&gt;(String method, [dynamic arguments])</code></li>
+</ul>
+<p>上述三个方法，是 <code>MethodChannel</code> 方法调用最常用的方法。通过泛型的定义方式，使得其返回值可以有多种类型。另外的两个方法 <code>setMethodCallHandler</code> 和 <code>setMockMethodCallHandler</code> 则是用于设备平台通过平台通道调用 <code>Flutter</code> 层方法时使用。</p>
+<p>我们重点说一下 <code>_getDirectory</code> 方法。该方法是 <code>Flutter</code> 层发起调用并处理结果的最核心的方法。我们看到 <code>await _channel.invokeMethod(methodName, extra);</code> 调用之后会得到返回值 <code>path</code>，此时 <code>path</code> 就是我们需要的结果（<code>path</code> 为空的情况已经在 <code>Android</code> 端进行了判断）。此处通过异常捕获的方式捕获了 <code>PlatformException</code> 对象，并将该异常信息写入到 <code>Result</code> 中并返回。那么，<code>PlatformException</code> 是如何产生的呢？我们将会在 <code>Android</code> 端代码实现中做讲解。</p>
+<p><code>Result</code> 类用于对外提供结果，其定义如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Result</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="markdown">调用成功，此时 <span class="emphasis">_directory 不为 null</span></span></span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">int</span> ERROR_CODE_SUCCESS = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="markdown"><span class="emphasis">调用失败，设备平台返回值为空</span></span></span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">int</span> ERROR_CODE_UN_SUCCESS_NULL = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="markdown"><span class="emphasis">调用失败，设备平台出现异常</span></span></span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">int</span> ERROR_CODE_UN_SUCCESS_EXCEPTION = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="markdown"><span class="emphasis"> 调用失败，没有对应的方法</span></span></span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">int</span> ERROR_CODE_UN_SUCCESS_NOT_IMPLEMENT_METHOD = <span class="number">3</span>;</span><br><span class="line">  Directory _directory;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> _errorCode = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">String</span> _errorMessage = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  Result(<span class="keyword">this</span>._errorCode, [<span class="keyword">this</span>._errorMessage, <span class="keyword">this</span>._directory]);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span> <span class="keyword">get</span> errorMessage =&gt; _errorMessage;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> errorCode =&gt; _errorCode;</span><br><span class="line"></span><br><span class="line">  Directory <span class="keyword">get</span> directory =&gt; _directory;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Android-端的开发"><a href="#Android-端的开发" class="headerlink" title="Android 端的开发"></a>Android 端的开发</h4><p><code>Flutter</code> 层的代码开发完成之后，我们调用 <code>Flutter</code> 的方法，该方法将最终在 <code>Android</code> 端产生响应。</p>
+<p><code>Android</code> 层的代码实现在类 <code>FlutterFilePathProvidePlugin.java</code> 中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tech.fiissh.flutter.plugin.path;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Environment;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.flutter.plugin.common.MethodCall;</span><br><span class="line"><span class="keyword">import</span> io.flutter.plugin.common.MethodChannel;</span><br><span class="line"><span class="keyword">import</span> io.flutter.plugin.common.MethodChannel.MethodCallHandler;</span><br><span class="line"><span class="keyword">import</span> io.flutter.plugin.common.MethodChannel.Result;</span><br><span class="line"><span class="keyword">import</span> io.flutter.plugin.common.PluginRegistry.Registrar;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * FlutterFilePathProvidePlugin</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlutterFilePathProvidePlugin</span> <span class="keyword">implements</span> <span class="title">MethodCallHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _METHOD_CHANNEL_NAME = <span class="string">&quot;fiissh.flutter.plugin/flutter_file_path_provide&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _EXTERNAL_STORAGE_APPLICATION_CACHE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageApplicationCacheDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _EXTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY = <span class="string">&quot;getExternalStorageApplicationTemporaryDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _INTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY = <span class="string">&quot;getInternalStorageApplicationTemporaryDirectory&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _EXTERNAL_STORAGE_APPLICATION_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageApplicationDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _INTERNAL_STORAGE_APPLICATION_CACHE_DIRECTOR_METHOD_NAME = <span class="string">&quot;getInternalStorageApplicationCacheDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _INTERNAL_STORAGE_APPLICATION_DIRECTOR_METHOD_NAME = <span class="string">&quot;getInternalStorageApplicationDirectory&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Registrar registrar;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Plugin registration.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerWith</span><span class="params">(Registrar registrar)</span> </span>&#123;</span><br><span class="line">        FlutterFilePathProvidePlugin.registrar = registrar;</span><br><span class="line">        <span class="keyword">final</span> MethodChannel channel = <span class="keyword">new</span> MethodChannel(registrar.messenger(), _METHOD_CHANNEL_NAME);</span><br><span class="line">        channel.setMethodCallHandler(<span class="keyword">new</span> FlutterFilePathProvidePlugin());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall call, Result result)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (TextUtils.equals(call.method, _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getExternalStorageDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _EXTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getExternalStorageApplicationTemporaryDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _INTERNAL_STORAGE_APPLICATION_TEMPORARY_DIRECTORY)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getInternalStorageApplicationTemporaryDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _EXTERNAL_STORAGE_APPLICATION_CACHE_DIRECTORY_METHOD_NAME)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getExternalStorageApplicationCacheDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _EXTERNAL_STORAGE_APPLICATION_DIRECTORY_METHOD_NAME)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getExternalStorageApplicationDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _INTERNAL_STORAGE_APPLICATION_CACHE_DIRECTOR_METHOD_NAME)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getInternalStorageApplicationCacheDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (TextUtils.equals(call.method, _INTERNAL_STORAGE_APPLICATION_DIRECTOR_METHOD_NAME)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                String path = getInternalStorageApplicationDirectory();</span><br><span class="line">                <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                    result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    result.success(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result.error(<span class="string">&quot;3&quot;</span>, <span class="string">&quot;method notImplemented&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getExternalStorageDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Environment.getExternalStorageDirectory().getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getExternalStorageApplicationTemporaryDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getExternalCacheDir().getParent() + <span class="string">&quot;/temp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getInternalStorageApplicationTemporaryDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getCacheDir().getParent() + <span class="string">&quot;/temp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getExternalStorageApplicationCacheDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getExternalCacheDir().getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getInternalStorageApplicationCacheDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getCacheDir().getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getExternalStorageApplicationDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getExternalFilesDir(<span class="keyword">null</span>).getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/// 内部存储</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getInternalStorageApplicationDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> registrar.activeContext().getFilesDir().getAbsolutePath();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>FlutterFilePathProvidePlugin</code> 继承自 <code>MethodCallHandler</code> 并实现了 <code>onMethodCall(MethodCall call, Result result)</code>。该方法的作用是接收来自于 <code>Flutter</code> 层的方法调用，并将方法名称和参数等信息通过回调的方式传递到 <code>Android</code> 层。</p>
+<p>上述代码中，我们通过 <code>call.method</code> 和方法名称的一一对应关系来最终完成 <code>Android</code> 层代码的调用。以其中一个 <code>if</code> 语句为例，我们可以看到，在 <code>Android</code> 层的方法调用成功之后，会通过调用 <code>result.success</code> 将结果回写到 <code>Flutter</code> 层。如果调用不成功，则需要调用 <code>result.error</code> 将错误信息回写到 <code>Flutter</code> 层。</p>
+<p><code>Flutter</code> 层通过捕获 <code>PlatformException</code> 的方式读取到回写的错误信息。也就是说，<code>Android</code> 层的 <code>result.error</code> 调用最终体现在 <code>Flutter</code> 层是一个 <code>PlatformException</code> 异常。</p>
+<p>事实上，<code>result</code> 还有一个 <code>notImplemented</code> 方法用于表示找不到对应的方法。在上述示例中我们是以 <code>result.error</code> 调用的方法替代了 <code>notImplemented</code> 方法。</p>
+<p>静态方法 <code>registerWith</code> 最终在 <code>ManiActivity</code> 中得到调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FlutterFilePathProvidePlugin.registerWith(registry.registrarFor(<span class="string">&quot;tech.fiissh.flutter.plugin.path.FlutterFilePathProvidePlugin&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>上述方法中，<code>registrarFor</code> 方法最终返回一个 <code>PluginRegistry.Registrar</code> 对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Registrar</span> </span>&#123;</span><br><span class="line">    <span class="function">Activity <span class="title">activity</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Context <span class="title">context</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Context <span class="title">activeContext</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">BinaryMessenger <span class="title">messenger</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">TextureRegistry <span class="title">textures</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">PlatformViewRegistry <span class="title">platformViewRegistry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">FlutterView <span class="title">view</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">lookupKeyForAsset</span><span class="params">(String var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">String <span class="title">lookupKeyForAsset</span><span class="params">(String var1, String var2)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">publish</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">addRequestPermissionsResultListener</span><span class="params">(PluginRegistry.RequestPermissionsResultListener var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">addActivityResultListener</span><span class="params">(PluginRegistry.ActivityResultListener var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">addNewIntentListener</span><span class="params">(PluginRegistry.NewIntentListener var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">addUserLeaveHintListener</span><span class="params">(PluginRegistry.UserLeaveHintListener var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    PluginRegistry.<span class="function">Registrar <span class="title">addViewDestroyListener</span><span class="params">(PluginRegistry.ViewDestroyListener var1)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Registrar</code> 中持有当前 <code>Activity</code> 的 <code>Activity</code> 和 <code>Context</code> 实例，并定义了一些动态权限申请、打开其他 <code>Activity</code> 等相关的方法。</p>
+<h2 id="发布插件"><a href="#发布插件" class="headerlink" title="发布插件"></a>发布插件</h2><p>在插件开发完成之后（当然，<code>flutter_file_path_provide</code> 插件还没有开发完成），可以将插件发布到 <a target="_blank" rel="noopener" href="https://pub.dartlang.org/">Pub</a> 上。</p>
+<p>插件发布之前我们需要做如下准备工作：</p>
+<ul>
+<li>修改 <code>README.md</code>，撰写插件的使用说明</li>
+<li>修改 <code>CHANGELOG.md</code>，记录插件的版本变更</li>
+<li>修改 <code>LICENSE</code> 条款的文件</li>
+<li>撰写所有公共 <code>API</code> 说明</li>
+</ul>
+<p>上述准备工作完成之后，使用如下命令进行检查：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages pub publish --dry-run</span><br></pre></td></tr></table></figure>
+
+<p>最后，通过如下命令进行发布：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flutter packages pub publish</span><br></pre></td></tr></table></figure>
+
+<p>关于发布插件的详细信息，请参考 <a target="_blank" rel="noopener" href="https://www.dartlang.org/tools/pub/publishing">Publishing a Package</a>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/index.html/tags/Flutter-%E5%BC%80%E5%8F%91/" rel="tag"># Flutter 开发</a>
+              <a href="/index.html/tags/Flutter-%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag"># Flutter 插件开发</a>
+              <a href="/index.html/tags/flutter-file-path-provide/" rel="tag"># flutter_file_path_provide</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-platform-specific.html" rel="prev" title="Flutter 开发（07）：编写平台相关的代码">
+                  <i class="fa fa-chevron-left"></i> Flutter 开发（07）：编写平台相关的代码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-async-program.html" rel="next" title="Flutter 开发（09）：Flutter 异步编程">
+                  Flutter 开发（09）：Flutter 异步编程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">肥肥鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/index.html/js/comments.js"></script><script src="/index.html/js/utils.js"></script><script src="/index.html/js/motion.js"></script><script src="/index.html/js/schemes/muse.js"></script><script src="/index.html/js/next-boot.js"></script>
+
+  
+<script src="/index.html/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

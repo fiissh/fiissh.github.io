@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/index.html/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/index.html/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/index.html/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/index.html/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+<link rel="stylesheet" href="/index.html/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fiissh.tech","root":"/index.html/","images":"/index.html/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/index.html/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/index.html/js/config.js"></script>
+<meta name="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+<meta property="og:type" content="website">
+<meta property="og:title" content="肥言肥语">
+<meta property="og:url" content="https://fiissh.tech/index.html/index.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="肥肥鱼">
+<meta property="article:tag" content="肥肥鱼,fiissh.zhao,fiissh,SDK,Android,Android SDK,flutter">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fiissh.tech/index.html/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>肥言肥语</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-65174745-4","only_pageview":false}</script>
+  <script src="/index.html/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/index.html/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/index.html/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/index.html/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">肥言肥语</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">肥肥鱼胡说八道的地方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/index.html/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/index.html/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="肥肥鱼"
+      src="/index.html/images/homercat.png">
+  <p class="site-author-name" itemprop="name">肥肥鱼</p>
+  <div class="site-description" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/index.html/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/index.html/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/index.html/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fiissh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fiissh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail → mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2020/android-source-design-pattern-index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2020/android-source-design-pattern-index.html" class="post-title-link" itemprop="url">Android 设计模式概述</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-01 20:27:59 / 修改时间：21:41:34" itemprop="dateCreated datePublished" datetime="2020-09-01T20:27:59+08:00">2020-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如何提高软件系统的可维护性和可复用性是面向对象程序设计思想需要解决的核心问题。在面向对象程序设计中，可维护性的复用是以设计原则为基础的。每一个设计原则都蕴含着面向对象程序设计的思想，可以从不同的角度提升一个软件系统的架构水平。</p>
+<p>面向对象程序设计原则是为支撑可维护性的复用而诞生的，它们是从很多的设计方案中总结出来的指导性原则，通常体现在设计模式中。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2020/android-source-design-pattern-index.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2020/oom-exception-caused-by-pthread-create-failed.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2020/oom-exception-caused-by-pthread-create-failed.html" class="post-title-link" itemprop="url">OutOfMemoryError:pthread_create (1040KB stack) failed 异常分析</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-03-03 11:17:57" itemprop="dateCreated datePublished" datetime="2020-03-03T11:17:57+08:00">2020-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Exception/" itemprop="url" rel="index"><span itemprop="name">Exception</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
+<p>从崩溃的堆栈信息中可以分析出引发该 <code>OOM</code> 的主要与 <code>OkHttp</code> 有关系，而业务场景中都是普通的数据请求（<code>JSON</code>），并没有使用 <code>BitMap</code> 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。</p>
+<p>虽然堆栈信息不尽相同，但是最终从大量堆栈 <code>LOG</code> 中分析出有价值的信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: pthread_create (1040KB stack) failed: Try again</span><br><span class="line">at java.lang.Thread.nativeCreate(Native Method)</span><br><span class="line">at java.lang.Thread.start(Thread.java:<span class="number">733</span>)</span><br><span class="line">at tech.fiissh.base.utils.c.u(SourceFile:<span class="number">7</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">40</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">156</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a(SourceFile:<span class="number">30</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a$<span class="number">1.</span>handleMessage(SourceFile:<span class="number">6</span>)</span><br><span class="line">at android.os.Handler.dispatchMessage(Handler.java:<span class="number">105</span>)</span><br><span class="line">at android.os.Looper.loop(Looper.java:<span class="number">164</span>)</span><br><span class="line">at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6942</span>)</span><br><span class="line">at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:<span class="number">327</span>)</span><br><span class="line">at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">1374</span>)</span><br><span class="line"></span><br><span class="line">java.lang.OutOfMemoryErrorat java.lang.String.&lt;init&gt;(String.java:<span class="number">255</span>)</span><br><span class="line">at libcore.io.IoUtils$FileReader.toString(IoUtils.java:<span class="number">272</span>)</span><br><span class="line">at libcore.io.IoUtils.readFileAsString(IoUtils.java:<span class="number">114</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.readPinFile(CertPinManager.java:<span class="number">111</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.rebuild(CertPinManager.java:<span class="number">85</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.&lt;init&gt;(CertPinManager.java:<span class="number">49</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">137</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">97</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerFactoryImpl.engineGetTrustManagers(TrustManagerFactoryImpl.java:<span class="number">80</span>)</span><br><span class="line">at javax.net.ssl.TrustManagerFactory.getTrustManagers(TrustManagerFactory.java:<span class="number">219</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.internal.Util.platformTrustManager(Util.java:<span class="number">670</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient.&lt;init&gt;(OkHttpClient.java:<span class="number">256</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient$Builder.build(OkHttpClient.java:<span class="number">1035</span>)</span><br><span class="line">at tech.fiissh.base.common.net.e.b.&lt;init&gt;(OkHttpStack.java:<span class="number">73</span>)</span><br><span class="line">at tech.fiissh.base.common.net.g.&lt;init&gt;(NetworkDispatcher.java:<span class="number">51</span>)</span><br><span class="line">at tech.fiissh.base.common.net.i$<span class="number">1.</span>run(RequestQueue.java:<span class="number">110</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1112</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">587</span>)</span><br><span class="line">at java.lang.Thread.run(Thread.java:<span class="number">841</span>)</span><br></pre></td></tr></table></figure>
+
+<p>经过与源码文件进行比较，<code>OkHttpStack</code> 第73行的方法实际上是通过 <code>OkHttpClient.Builder</code> 来实例化一个 <code>OkHttpClient</code> 对象。</p>
+<p>通常情况下我们所理解的 <code>OOM</code> 是由于进程的可用堆内存不够（即 <code>Runtime.getRuntime().maxMemory()</code> 小于需要申请的内存大小）的情况下系统会抛出 <code>OutOfMemoryError</code>。其报错信息中详细的记录了我们的内存分配需求和可用堆内存的大小信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Failed to allocate a XXX <span class="keyword">byte</span> allocation with XXX free bytes and XXXKB until OOM</span><br></pre></td></tr></table></figure>
+
+<p>通过对 <code>pthread_create</code> 关键字的搜索，最终在 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:art/runtime/thread.cc">thread.cc</a> 中找到了抛出该异常的位置，并且通过对 <code>Thread::CreateNativeThread</code> 函数的分析发现，在创建线程时，系统会先判断当前线程数是否超过了系统对线程数的限制，如果超过该限制则抛出 <code>java.lang.OutOfMemoryError:pthread_create (XXXXKB stack) failed</code> 异常。</p>
+<p>那么，问题的根源在哪里？通过对代码的分析，发现每次发起一个网络请求的时候都会创建一个 <code>OkHttpClient</code>，而每个 <code>OkHttpClient</code> 对象都会初始化一个线程池（线程的生命周期又较长），如果在短时间内发起多次请求，那么线程池会被创建多个，而线程数也会随之增加。解决的方案则是将 <code>OkHttpClient</code> 通过单例的方式对外提供。</p>
+<p>针对上述线程创建的问题，可以参考 <a target="_blank" rel="noopener" href="https://juejin.im/entry/59f7ea06f265da43143ffee4">不可思议的OOM</a>，作者针对出现类似问题的场景做了深入分析。</p>
+<p>关于 <code>HTTPClient</code> 的问题，可以参考 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3b232d9f38c2">OkHttp竟然玩出OOM？</a>，作者针对为什么创建多个线程池的场景进行了深入的分析。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/android-studio-setting-repository.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/android-studio-setting-repository.html" class="post-title-link" itemprop="url">Android Studio 使用 Setting Repository 同步配置信息</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-11-06 10:56:51" itemprop="dateCreated datePublished" datetime="2019-11-06T10:56:51+08:00">2019-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Android-Studio/" itemprop="url" rel="index"><span itemprop="name">Android Studio</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>Setting Repository</code> 是 <code>IntelliJ IDEA（Android Studio）</code> 的一项配置托管服务，我们可以通过在 <code>Github</code> 或者其他 <code>Git</code> 服务上创建一个 <code>Git Repository</code> 的方式统一托管、同步配置信息：</p>
+<ul>
+<li>在 <code>Github</code> 创建一个代码仓库（例如： <code>android-studio-setting-repository</code>）</li>
+<li>在 <code>Github</code> 上创建一个 <code>Personal access tokens</code>（保留 <code>read</code> 和 <code>write</code> 相关权限即可）</li>
+<li>将版本库地址填入 <code>Android Studio</code> 的 <code>File/Setting Repository/Upstream URL</code>（尽量使用 <code>https</code> 而不是 <code>ssh</code> 的方式）</li>
+<li>点击 <code>Overwrite Remote</code> 完成配置信息的提交</li>
+</ul>
+<blockquote>
+<p><code>Overwrite Remote</code> 是将本地配置信息写入到远程仓库，<code>Overwrite Load</code> 是将远程仓库的信息写入到本地，<code>Merge</code> 则是合并两者之间的差异。</p>
+</blockquote>
+<p>我的 <code>Android Studio</code> 配置仓库为 <a target="_blank" rel="noopener" href="https://github.com/fiissh/android-studio-setting-repository">fiissh/android-studio-setting-repository</a>。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/git-commit-template.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/git-commit-template.html" class="post-title-link" itemprop="url">Git Commit Message 模板</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-10-29 12:15:17" itemprop="dateCreated datePublished" datetime="2019-10-29T12:15:17+08:00">2019-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Commit-Message-规范"><a href="#Commit-Message-规范" class="headerlink" title="Commit Message 规范"></a>Commit Message 规范</h2><p>每一个 <code>Commit Message</code> 应该包含一个 <code>header</code>、<code>body</code> 和 <code>footer</code>。其中，<code>header</code>、<code>body</code> 和 <code>footer</code> 之间以空行作为间隔。<code>header</code> 是必须要填写的：</p>
+<ul>
+<li><code>header</code> 通常包含此次提交的类型：<ul>
+<li><code>feat</code> 新特性</li>
+<li><code>fix</code> <code>bug</code> 修复</li>
+<li><code>docs</code> 文档改动</li>
+<li><code>style</code> 格式化</li>
+<li><code>refactor</code> 重构代码</li>
+<li><code>test</code> 添加缺失的测试, 重构测试, 不包括生产代码变动</li>
+<li><code>chore</code> 更新grunt任务等; 不包括生产代码变动</li>
+</ul>
+</li>
+<li><code>body</code> 通常包含此次改动的影响范围、改动的详细信息</li>
+<li><code>footer</code> 通常包含一些需要关闭的 <code>issues</code> 信息等</li>
+</ul>
+<h2 id="模板文件"><a href="#模板文件" class="headerlink" title="模板文件"></a>模板文件</h2><p>建议将如下内容保存到本机的某个目录，例如 <code>MAC</code> 的 <code>~/.git-commit-template.txt</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> &lt;类型&gt;: (类型的值见下面描述) &lt;主题&gt; (最多50个字)</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解释为什么要做这些改动</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> |&lt;----  请限制每行最多72个字   ----&gt;|</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提供相关文章和其它资源的链接和关键字</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如: Github issue <span class="comment">#23</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --- 提交 结束 ---</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 类型值包含</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    feat (新特性)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    fix (bug修复)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    docs (文档改动)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    style (格式化, 缺失分号等; 不包括生产代码变动)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    refactor (重构代码)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    <span class="built_in">test</span> (添加缺失的测试, 重构测试, 不包括生产代码变动)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    chore (更新grunt任务等; 不包括生产代码变动)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    主题和内容以一个空行分隔</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    主题限制为最大50个字</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    主题行大写</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    主题行结束不用标点</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    主题行使用祈使名</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    内容每行72个字</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    内容用于解释为什么和是什么,而不是怎么做</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    内容多行时以<span class="string">&#x27;-&#x27;</span>分隔</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --------------------</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="使用模板"><a href="#使用模板" class="headerlink" title="使用模板"></a>使用模板</h2><p>使用如下命令将模板文件指定为 <code>Git</code> 的 <code>commit.template</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global commit.template &lt;.git-commit-template.txt file path&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global commit.template ~/.git-commit-template.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用插件"><a href="#使用插件" class="headerlink" title="使用插件"></a>使用插件</h2><p>对于 <code>Android Studio</code> 或者 <code>IDEA</code> 来说，可以使用 <a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/9861-git-commit-template/">Git Commit Template</a> 插件，在图形化 <code>Commit</code> 界面使用该插件生成标准 <code>Commit Message</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/android-thread-pool-executor.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/android-thread-pool-executor.html" class="post-title-link" itemprop="url">Android 线程和线程池简介</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-22 10:52:06" itemprop="dateCreated datePublished" datetime="2019-04-22T10:52:06+08:00">2019-04-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>Android</code> 中使用线程有多种不同的方式，其中最根本的是通过 <code>Thread</code> 或 <code>Runnable</code> 派生线程对象。</p>
+<p>但是，使用 <code>Thread</code> 或 <code>Runnable</code> 实现多线程的方式，无法有效的在任务结束之后将结果返回。为了解决这一问题，<code>Java</code> 额外提供了 <code>Callable</code> 和 <code>FutureTask</code> 两种创建线程的方式，允许我们在线程执行完成之后得到返回的结果。</p>
+<p>另外，基于 <code>Thread</code>、<code>Runnable</code>、<code>Callable</code> 和 <code>FutureTask</code> 的封装，<code>Android</code> 系统中还提供了如下多线程的实现方式：</p>
+<ul>
+<li><code>AsyncTask</code>：基于线程池和 <code>Handler</code> 的封装，通常用于执行需要更新 <code>UI</code> 的任务</li>
+<li><code>HandlerThread</code>：基于 <code>Thread</code> 和 <code>Handler</code> 的封装，接收来自 <code>Handler</code> 的消息，其内部只有一个线程在执行任务</li>
+<li><code>IntentService</code>：基于 <code>Service</code> 和 <code>HandlerThread</code> 的封装，线程的优先级更高</li>
+</ul>
+<p>本文将围绕线程和线程池的使用展开讨论。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/android-thread-pool-executor.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-basic-message-channel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/flutter-basic-message-channel.html" class="post-title-link" itemprop="url">Flutter 开发（14）：BasicMessageChannel 的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-16 15:04:32" itemprop="dateCreated datePublished" datetime="2019-04-16T15:04:32+08:00">2019-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>与 <code>MethodChannel</code> 和 <code>EventChannel</code> 接收一个 <code>MethodCodec</code> 对象所不同的是，<code>BasicMessageChannel</code> 接收一个 <code>MessageCodec&lt;T&gt;</code> 作为其编解码器的实现。<code>BasicMessageChannel</code> 允许我们使用自定义的消息编解码器进行异步消息传递。</p>
+<p>本文中所使用的代码示例出自 <code>Flutter</code> 官方示例，感兴趣的小伙伴请移步 <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/tree/master/examples/flutter_view">flutter/examples/flutter_view</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/flutter-basic-message-channel.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-event-channel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/flutter-event-channel.html" class="post-title-link" itemprop="url">Flutter 开发（13）：EventChannel 的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-16 11:22:38" itemprop="dateCreated datePublished" datetime="2019-04-16T11:22:38+08:00">2019-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>EventChannel</code> 适用于 <code>Flutter</code> 端和设备平台端数据事件的通信。比较常见的使用 <code>EventChannel</code> 的场景是通过广播监听（<code>Android</code> 平台上的 <code>BroadcastReceiver</code>）动态的监听设备事件。</p>
+<p>本文中的示例代码是 <code>Flutter</code> 官方示例，感兴趣的小伙伴可以移步 <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter/tree/master/examples/platform_channel">flutter/examples/platform_channel/</a>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/flutter-event-channel.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-method-channel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/flutter-method-channel.html" class="post-title-link" itemprop="url">Flutter 开发（12）：MethodChannel 的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-15 14:15:12" itemprop="dateCreated datePublished" datetime="2019-04-15T14:15:12+08:00">2019-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 <code>Flutter</code> 中，<code>MethodChannel</code> 允许我们发送与方法调用相关的消息。<code>MethodChannel</code> 适用于 <code>Flutter</code> 端和设备平台端进行直接的方法调用，这种方法调用是双向的，即既可以通过 <code>MethodChannel</code> 从 <code>Flutter</code> 调用设备平台上的方法，也可以从设备平台上调用 <code>Flutter</code> 层的代码。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/flutter-method-channel.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-exception-handler.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/flutter-exception-handler.html" class="post-title-link" itemprop="url">Flutter 开发（11）：Flutter 层异常捕获</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-25 14:23:29" itemprop="dateCreated datePublished" datetime="2019-03-25T14:23:29+08:00">2019-03-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-04-16 11:23:29" itemprop="dateModified" datetime="2019-04-16T11:23:29+08:00">2019-04-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>Flutter</code> 中的异常可以分为同步异常和异步异常。通常情况下我们可以使用 <code>try-catch</code> 捕获同步异常，而异步异常则需要使用 <code>Flutter</code> 提供的其他 <code>API</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/flutter-exception-handler.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-running-mode.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/index.html/2019/flutter-running-mode.html" class="post-title-link" itemprop="url">Flutter 开发（10）：Flutter 的运行模式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-14 11:26:40" itemprop="dateCreated datePublished" datetime="2019-03-14T11:26:40+08:00">2019-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文主要是对 <code>Flutter</code> 的基本框架进行介绍。本文主要参考了 <a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 一文。<a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/08/09/waimai-flutter-practice.html">美团技术团队-Flutter 原理与实践</a> 是一篇非常优秀的介绍 <code>Flutter</code> 原理的文章。</p>
+<p><code>Flutter</code> 的设计目标是高性能的跨平台的（<code>Android</code> 和 <code>iOS</code>）<code>UI</code> 框架。与传统的基于 <code>WebView</code> 的（例如 <code>Cordova</code> 或者 <code>AppCan</code> 等框架）或者基于原生控件系统的（例如 <code>React Native</code>）跨平台开发框架所不同的是，<code>Flutter</code> 是基于跨平台的渲染引擎 <code>Skia</code> 来实现的全新的跨平台的开发框架。这也就是说，<code>Flutter</code> 对于设备平台的依赖只有图形渲染相关的部分，这在一定程度上保证了不同平台、不同设备上的一致的用户体验。从执行效率的角度来说，<code>Flutter</code> 使用的 <code>Dart</code> 语言相较于其他大多数跨平台开发框架使用的 <code>JavaScript</code> 语言在执行效率上高效很多。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/index.html/2019/flutter-running-mode.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/index.html/page/2/">2</a><a class="page-number" href="/index.html/page/3/">3</a><a class="extend next" rel="next" href="/index.html/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">肥肥鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/index.html/js/comments.js"></script><script src="/index.html/js/utils.js"></script><script src="/index.html/js/motion.js"></script><script src="/index.html/js/schemes/muse.js"></script><script src="/index.html/js/next-boot.js"></script>
+
+  
+<script src="/index.html/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

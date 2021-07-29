@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/index.html/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/index.html/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/index.html/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/index.html/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+<link rel="stylesheet" href="/index.html/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fiissh.tech","root":"/index.html/","images":"/index.html/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/index.html/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/index.html/js/config.js"></script>
+<meta name="description" content="Flutter 中的异常可以分为同步异常和异步异常。通常情况下我们可以使用 try-catch 捕获同步异常，而异步异常则需要使用 Flutter 提供的其他 API。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 开发（11）：Flutter 层异常捕获">
+<meta property="og:url" content="https://fiissh.tech/index.html/2019/flutter-exception-handler.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="Flutter 中的异常可以分为同步异常和异步异常。通常情况下我们可以使用 try-catch 捕获同步异常，而异步异常则需要使用 Flutter 提供的其他 API。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/1/16/1685691a02afb4b6?imageView2/0/w/1280/h/960/ignore-error/1">
+<meta property="article:published_time" content="2019-03-25T06:23:29.000Z">
+<meta property="article:modified_time" content="2019-04-16T03:23:29.000Z">
+<meta property="article:author" content="肥肥鱼">
+<meta property="article:tag" content="Flutter 异常捕获">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/1/16/1685691a02afb4b6?imageView2/0/w/1280/h/960/ignore-error/1">
+
+
+<link rel="canonical" href="https://fiissh.tech/index.html/2019/flutter-exception-handler.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/index.html/2019/flutter-exception-handler.html","path":"/2019/flutter-exception-handler.html","title":"Flutter 开发（11）：Flutter 层异常捕获"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter 开发（11）：Flutter 层异常捕获 | 肥言肥语</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-65174745-4","only_pageview":false}</script>
+  <script src="/index.html/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/index.html/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/index.html/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/index.html/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">肥言肥语</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">肥肥鱼胡说八道的地方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/index.html/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/index.html/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-try-catch-%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8"><span class="nav-number">1.</span> <span class="nav-text">使用 try-catch 捕获异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flutter-%E6%A1%86%E6%9E%B6%E5%B1%82%E7%9A%84%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7"><span class="nav-number">1.1.</span> <span class="nav-text">Flutter 框架层的异常捕获</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Future-API-%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8"><span class="nav-number">2.</span> <span class="nav-text">使用 Future API 捕获异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Zone-%E6%8D%95%E8%8E%B7%E6%9C%AA%E5%A4%84%E7%90%86%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="nav-number">3.</span> <span class="nav-text">使用 Zone 捕获未处理的异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E7%AB%AF%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.</span> <span class="nav-text">Flutter 端异常捕获最佳实践</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="肥肥鱼"
+      src="/index.html/images/homercat.png">
+  <p class="site-author-name" itemprop="name">肥肥鱼</p>
+  <div class="site-description" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/index.html/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/index.html/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/index.html/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fiissh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fiissh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail → mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-exception-handler.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter 开发（11）：Flutter 层异常捕获
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-25 14:23:29" itemprop="dateCreated datePublished" datetime="2019-03-25T14:23:29+08:00">2019-03-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-04-16 11:23:29" itemprop="dateModified" datetime="2019-04-16T11:23:29+08:00">2019-04-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><code>Flutter</code> 中的异常可以分为同步异常和异步异常。通常情况下我们可以使用 <code>try-catch</code> 捕获同步异常，而异步异常则需要使用 <code>Flutter</code> 提供的其他 <code>API</code>。</p>
+<span id="more"></span>
+<h2 id="使用-try-catch-捕获异常"><a href="#使用-try-catch-捕获异常" class="headerlink" title="使用 try-catch 捕获异常"></a>使用 try-catch 捕获异常</h2><p>与 <code>Java</code> 语言类似的，<code>Dart</code> 中提供了 <code>try-catch</code> 代码块用于对同步异常的捕获：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;Result&gt; _getDirectory(<span class="built_in">String</span> methodName, [<span class="built_in">String</span> extra]) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="built_in">String</span> path;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    path = <span class="keyword">await</span> _channel.invokeMethod(methodName, extra);</span><br><span class="line">    <span class="keyword">return</span> Result(Result.ERROR_CODE_SUCCESS, <span class="string">&#x27;success&#x27;</span>, Directory(<span class="string">&#x27;<span class="subst">$path</span>/&#x27;</span>));</span><br><span class="line">  &#125; <span class="keyword">on</span> PlatformException <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> Result(<span class="built_in">num</span>.parse(e.code), e.message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Flutter-框架层的异常捕获"><a href="#Flutter-框架层的异常捕获" class="headerlink" title="Flutter 框架层的异常捕获"></a>Flutter 框架层的异常捕获</h3><p><code>Flutter</code> 框架在很多关键位置自动进行了异常处理。例如，如果我们的 <code>Flutter</code> 页面出现错误，会自动弹出一个错误页面：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/1/16/1685691a02afb4b6?imageView2/0/w/1280/h/960/ignore-error/1"></p>
+<p>这是由于系统在调用 <code>build()</code> 方法构建页面时进行了 <code>try-catch</code> 的处理，并提供一个 <code>ErrorWidget</code> 用于出现异常信息时调用的页面：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="keyword">void</span> performRebuild() &#123;</span><br><span class="line"> ...</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//执行build方法  </span></span><br><span class="line">    built = build();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e, stack) &#123;</span><br><span class="line">    <span class="comment">// 有异常时则弹出错误提示  </span></span><br><span class="line">    built = ErrorWidget.builder(_debugReportException(<span class="string">&#x27;building <span class="subst">$this</span>&#x27;</span>, e, stack));</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>_debugReportException</code> 方法中最终通过 <code>FlutterError.reportError</code> 将错误信息进行上报：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">FlutterErrorDetails _debugReportException(</span><br><span class="line">  <span class="built_in">String</span> context,</span><br><span class="line">  <span class="built_in">dynamic</span> exception,</span><br><span class="line">  StackTrace stack, &#123;</span><br><span class="line">  InformationCollector informationCollector</span><br><span class="line">&#125;) &#123;</span><br><span class="line">  <span class="comment">//构建错误详情对象  </span></span><br><span class="line">  <span class="keyword">final</span> FlutterErrorDetails details = FlutterErrorDetails(</span><br><span class="line">    exception: exception,</span><br><span class="line">    stack: stack,</span><br><span class="line">    <span class="keyword">library</span>: <span class="string">&#x27;widgets library&#x27;</span>,</span><br><span class="line">    context: context,</span><br><span class="line">    informationCollector: informationCollector,</span><br><span class="line">  );</span><br><span class="line">  <span class="comment">//报告错误</span></span><br><span class="line">  FlutterError.reportError(details);</span><br><span class="line">  <span class="keyword">return</span> details;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>reportError</code> 方法中最终通过 <code>onError</code> 属性处理错误信息（实际上 <code>onError</code> 有默认实现 <code>dumpErrorToConsole</code>）。我们可以通过重写 <code>onError</code> 属性拦截上报信息（<code>reportError</code> 方法）：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  FlutterError.onError = (FlutterErrorDetails details) &#123;</span><br><span class="line">    reportError(details);</span><br><span class="line">  &#125;;</span><br><span class="line">  runApp(FilePathProviderApplication());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们需要自定义错误页面，则需要重写 <code>ErrorWidget.builder</code>：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails) &#123;</span><br><span class="line">    <span class="built_in">print</span>(flutterErrorDetails.toString());</span><br><span class="line">    <span class="keyword">return</span> Center(</span><br><span class="line">      child: Text(<span class="string">&quot;Flutter 崩溃了&quot;</span>),</span><br><span class="line">    );</span><br><span class="line">  &#125;;</span><br><span class="line">  runApp(FilePathProviderApplication());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-Future-API-捕获异常"><a href="#使用-Future-API-捕获异常" class="headerlink" title="使用 Future API 捕获异常"></a>使用 Future API 捕获异常</h2><p><code>Future API</code> 提供了 <code>catchError</code> 方法用于捕获使用 <code>Future</code> 时抛出的异步异常：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">filePathProvide.getExternalStorageApplicationDirectory().then((value) &#123;</span><br><span class="line">  doSomething(value);</span><br><span class="line">  <span class="keyword">throw</span> (<span class="string">&quot;exception message&quot;</span>);</span><br><span class="line">&#125;).catchError(_handlerError);</span><br><span class="line"></span><br><span class="line">_handlerError() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用-Zone-捕获未处理的异常"><a href="#使用-Zone-捕获未处理的异常" class="headerlink" title="使用 Zone 捕获未处理的异常"></a>使用 Zone 捕获未处理的异常</h2><p><code>Flutter</code> 提供了 <code>Zone.runZoned</code> 方法(<code>dart:async</code> 包)用于捕获所有未处理的异常信息：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">R runZoned&lt;R&gt;(R body(),&#123;<span class="built_in">Map</span> zoneValues, ZoneSpecification zoneSpecification, <span class="built_in">Function</span> onError&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>zoneValues</code> 是 <code>Zone</code> 的私有属性，<code>zoneSpecification</code> 是 <code>Zone</code> 的一些配置信息，可以自定义一些代码行为，<code>onError</code> 是 <code>Zone</code> 中未捕获异常的回调方法。</p>
+<p>如果开发者提供了 <code>onError</code> 回调方法或者通过 <code>ZoneSpecification.handleUncaughtError</code> 指定了错误处理的回调方法，那么这个 <code>Zone</code> 将会变为一个 <code>error zone</code>，无论是同步环境还是异步环境，该 <code>error zone</code> 都会在出现未捕获的异常信息时调用：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  runZoned(() =&gt; runApp(FilePathProviderApplication()), onError: (<span class="built_in">Object</span> obj, StackTrace stack) &#123;</span><br><span class="line">    uploadException(<span class="string">&quot;<span class="subst">$obj</span>\n<span class="subst">$stack</span>&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>runZoned</code> 可以捕获 <code>Flutter</code> 层全局的未处理异常信息。我们可以结合 <code>FlutterError</code>，在非生产环境下将 <code>Flutter UI</code> 层的异常信息使用 <code>FlutterError</code> 进行处理，而生产环境下使用 <code>runZoned</code>进行处理：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">bool</span> inProduction = <span class="keyword">const</span> <span class="built_in">bool</span>.fromEnvironment(<span class="string">&quot;dart.vm.product&quot;</span>);</span><br><span class="line"></span><br><span class="line">FlutterError.onError = (FlutterErrorDetails details) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (inProduction) &#123;</span><br><span class="line">    Zone.current.handleUncaughtError(details.exception, details.stack);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    FlutterError.dumpErrorToConsole(details);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">runApp(FilePathProviderApplication());</span><br></pre></td></tr></table></figure>
+
+<h2 id="Flutter-端异常捕获最佳实践"><a href="#Flutter-端异常捕获最佳实践" class="headerlink" title="Flutter 端异常捕获最佳实践"></a>Flutter 端异常捕获最佳实践</h2><p>对于 <code>Flutter</code> 端的异常信息，除了能够使用 <code>try-catch</code> 捕获的同步异常之外，大多是情况下异常信息集中在 <code>Flutter</code> 端的页面渲染方面，所以我们需要重写 <code>FlutterError.onError</code> 用于处理框架层自动添加的异常捕获：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">bool</span> inProduction = <span class="keyword">const</span> <span class="built_in">bool</span>.fromEnvironment(<span class="string">&quot;dart.vm.product&quot;</span>);</span><br><span class="line"></span><br><span class="line">FlutterError.onError = (FlutterErrorDetails details) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (inProduction) &#123;</span><br><span class="line">    Zone.current.handleUncaughtError(details.exception, details.stack);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    FlutterError.dumpErrorToConsole(details);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在非生产环境下，异常信息通过 <code>FlutterError.dumpErrorToConsole(details)</code> 交由控制台进行输出，生产环境则通过 <code>Zone.current.handleUncaughtError(details.exception, details.stack)</code> 将异常信息交付给 <code>Flutter</code> 层的全局异常捕获进行处理。</p>
+<p>然后，我们再为整个应用程序的 <code>Flutter</code> 层添加全局异常捕获：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">runZoned&lt;Future&lt;<span class="built_in">Null</span>&gt;&gt;(() <span class="keyword">async</span> &#123;</span><br><span class="line">    runApp(<span class="keyword">new</span> HomeApp());</span><br><span class="line">  &#125;, onError: (error, stackTrace) <span class="keyword">async</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> _reportError(error, stackTrace);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/index.html/tags/Flutter-%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7/" rel="tag"># Flutter 异常捕获</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-running-mode.html" rel="prev" title="Flutter 开发（10）：Flutter 的运行模式">
+                  <i class="fa fa-chevron-left"></i> Flutter 开发（10）：Flutter 的运行模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-method-channel.html" rel="next" title="Flutter 开发（12）：MethodChannel 的使用">
+                  Flutter 开发（12）：MethodChannel 的使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">肥肥鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/index.html/js/comments.js"></script><script src="/index.html/js/utils.js"></script><script src="/index.html/js/motion.js"></script><script src="/index.html/js/schemes/muse.js"></script><script src="/index.html/js/next-boot.js"></script>
+
+  
+<script src="/index.html/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

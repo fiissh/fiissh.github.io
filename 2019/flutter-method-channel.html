@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/index.html/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/index.html/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/index.html/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/index.html/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="9KsIJJsvbiRMsjTEbN5fANhynVSesariRWUHacVYOD4">
+  <meta name="baidu-site-verification" content="95yTtcGSv8">
+
+<link rel="stylesheet" href="/index.html/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fiissh.tech","root":"/index.html/","images":"/index.html/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/index.html/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/index.html/js/config.js"></script>
+<meta name="description" content="在 Flutter 中，MethodChannel 允许我们发送与方法调用相关的消息。MethodChannel 适用于 Flutter 端和设备平台端进行直接的方法调用，这种方法调用是双向的，即既可以通过 MethodChannel 从 Flutter 调用设备平台上的方法，也可以从设备平台上调用 Flutter 层的代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter 开发（12）：MethodChannel 的使用">
+<meta property="og:url" content="https://fiissh.tech/index.html/2019/flutter-method-channel.html">
+<meta property="og:site_name" content="肥言肥语">
+<meta property="og:description" content="在 Flutter 中，MethodChannel 允许我们发送与方法调用相关的消息。MethodChannel 适用于 Flutter 端和设备平台端进行直接的方法调用，这种方法调用是双向的，即既可以通过 MethodChannel 从 Flutter 调用设备平台上的方法，也可以从设备平台上调用 Flutter 层的代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/4313776-f4f8d3493b076946.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
+<meta property="article:published_time" content="2019-04-15T06:15:12.000Z">
+<meta property="article:modified_time" content="2019-04-15T06:15:12.000Z">
+<meta property="article:author" content="肥肥鱼">
+<meta property="article:tag" content="MethodChannel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/4313776-f4f8d3493b076946.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580">
+
+
+<link rel="canonical" href="https://fiissh.tech/index.html/2019/flutter-method-channel.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/index.html/2019/flutter-method-channel.html","path":"/2019/flutter-method-channel.html","title":"Flutter 开发（12）：MethodChannel 的使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Flutter 开发（12）：MethodChannel 的使用 | 肥言肥语</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-65174745-4","only_pageview":false}</script>
+  <script src="/index.html/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/index.html/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?2ed36102ffe08627252774ba00c82600"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/index.html/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/index.html/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">肥言肥语</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">肥肥鱼胡说八道的地方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/index.html/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/index.html/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MethodChannel-%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">MethodChannel 实现方法调用的步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flutter-%E5%B1%82%E7%9A%84-MethodChannel"><span class="nav-number">2.</span> <span class="nav-text">Flutter 层的 MethodChannel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">方法调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%9D%A5%E8%87%AA%E8%AE%BE%E5%A4%87%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8-setMethodCallHandler"><span class="nav-number">2.3.</span> <span class="nav-text">响应来自设备平台的方法调用 setMethodCallHandler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-%E5%B1%82%E7%9A%84-MethodChannel"><span class="nav-number">3.</span> <span class="nav-text">Android 层的 MethodChannel</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95-1"><span class="nav-number">3.1.</span> <span class="nav-text">构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8-1"><span class="nav-number">3.2.</span> <span class="nav-text">方法调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94-Flutter-%E5%B1%82%E7%9A%84%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">响应 Flutter 层的方法调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OptionalMethodChannel"><span class="nav-number">4.</span> <span class="nav-text">OptionalMethodChannel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="肥肥鱼"
+      src="/index.html/images/homercat.png">
+  <p class="site-author-name" itemprop="name">肥肥鱼</p>
+  <div class="site-description" itemprop="description">fiissh.zhao，肥肥鱼，Android SDK 开发</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/index.html/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/index.html/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/index.html/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fiissh" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fiissh" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:fiissh.zhao@gmail.com" title="E-Mail → mailto:fiissh.zhao@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/index.html/2019/flutter-method-channel.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/index.html/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flutter 开发（12）：MethodChannel 的使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-15 14:15:12" itemprop="dateCreated datePublished" datetime="2019-04-15T14:15:12+08:00">2019-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/index.html/categories/Flutter/" itemprop="url" rel="index"><span itemprop="name">Flutter</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在 <code>Flutter</code> 中，<code>MethodChannel</code> 允许我们发送与方法调用相关的消息。<code>MethodChannel</code> 适用于 <code>Flutter</code> 端和设备平台端进行直接的方法调用，这种方法调用是双向的，即既可以通过 <code>MethodChannel</code> 从 <code>Flutter</code> 调用设备平台上的方法，也可以从设备平台上调用 <code>Flutter</code> 层的代码。</p>
+<span id="more"></span>
+
+<h2 id="MethodChannel-实现方法调用的步骤"><a href="#MethodChannel-实现方法调用的步骤" class="headerlink" title="MethodChannel 实现方法调用的步骤"></a>MethodChannel 实现方法调用的步骤</h2><p>在 <code>Flutter</code> 层，我们需要通过 <code>MethodChannel</code> 的构造方法创建其对象，然后通过 <code>invokeMethod</code>、<code>invokeListMethod</code> 或者 <code>invokeMapMethod</code> 方法将需要在设备平台响应的方法名称和参数，通过 <code>BinaryMessages</code> 传递给设备平台对应的响应对象（<code>Android</code> 平台为 <code>MethodChannel</code>，<code>iOS</code> 平台为 <code>FlutterMethodChannel</code>），设备平台响应完成之后将结果传递回 <code>Flutter</code>。相应的，从设备平台调用 <code>Flutter</code> 层的方法也是一样的：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/4313776-f4f8d3493b076946.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/580"></p>
+<ul>
+<li>首先，<code>MethodChannel</code> 收到方法调用的请求之后，先通过 <code>MethodCodec</code> 的 <code>encodeMethodCall</code> 方法将需要调用的方法名称和参数信息进行编码</li>
+<li>然后，通过 <code>BinaryMessages.send</code> 方法将编码之后的数据传递给对应的设备平台，并接收其返回值</li>
+<li>最后，根据返回结果的值进行处理：<ul>
+<li>如果返回值为 <code>null</code>，抛出 <code>MissingPluginException</code></li>
+<li>如果返回值不为 <code>null</code>，通过 <code>MethodCodec</code> 的 <code>decodeEnvelope</code> 将返回值解码为具体的类型</li>
+</ul>
+</li>
+</ul>
+<h2 id="Flutter-层的-MethodChannel"><a href="#Flutter-层的-MethodChannel" class="headerlink" title="Flutter 层的 MethodChannel"></a>Flutter 层的 MethodChannel</h2><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p><code>MethodChannel</code> 的构造方法接收一个 <code>name</code> 和一个可选的 <code>codec</code> 变量：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MethodChannel(<span class="keyword">this</span>.name, [<span class="keyword">this</span>.codec = <span class="keyword">const</span> StandardMethodCodec()]);</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>name</code> 是 <code>String</code> 类型，作用是为每一个 <code>MethodChannel</code> 设置一个唯一的 <code>ID</code>，<code>codec</code> 是 <code>MethodCodec</code> 类型，默认值是 <code>StandardMethodCodec</code>，作用是对方法调用和返回值进行编解码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _METHOD_CHANNEL_NAME = <span class="string">&#x27;fiissh.flutter.plugin/flutter_file_path_provide&#x27;</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> MethodChannel _channel = <span class="keyword">const</span> MethodChannel(_METHOD_CHANNEL_NAME);</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，我们使用默认的 <code>MethodCodec</code> 对象即可。自定义 <code>MethodCodec</code> 的方式我们会在后文中介绍。</p>
+<h3 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h3><p><code>MethodChannel</code> 提供了下列三种方法用于方法调用：</p>
+<ul>
+<li><code>Future&lt;T&gt; invokeMethod&lt;T&gt;(String method, [dynamic arguments])</code>：普通方法调用</li>
+<li><code>Future&lt;List&lt;T&gt;&gt; invokeListMethod&lt;T&gt;(String method, [dynamic arguments])</code>：返回值是数组的方法调用</li>
+<li><code>Future&lt;Map&lt;K, V&gt;&gt; invokeMapMethod&lt;K, V&gt;(String method, [dynamic arguments])</code>：返回值是 <code>Map</code> 的方法调用</li>
+</ul>
+<p>我们以 <code>invokeMethod</code> 方法为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;T&gt; invokeMethod&lt;T&gt;(<span class="built_in">String</span> method, [<span class="built_in">dynamic</span> arguments]) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">assert</span>(method != <span class="keyword">null</span>);</span><br><span class="line">  <span class="keyword">final</span> ByteData result = <span class="keyword">await</span> BinaryMessages.send(</span><br><span class="line">    name,</span><br><span class="line">    codec.encodeMethodCall(MethodCall(method, arguments)),</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> MissingPluginException(<span class="string">&#x27;No implementation found for method <span class="subst">$method</span> on channel <span class="subst">$name</span>&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">final</span> T typedResult = codec.decodeEnvelope(result);</span><br><span class="line">  <span class="keyword">return</span> typedResult;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在接收到方法调用的参数之后，首先会通过 <code>codec.encodeMethodCall(MethodCall(method, arguments))</code> 将方法名称和参数进行编码，然后再通过 <code>BinaryMessages.send</code> 将 <code>MethodChannel</code> 的 <code>name</code> 和编码之后的数据发送到对应的设备平台，并接收 <code>ByteData</code> 类型的返回值。</p>
+<p>在接收到 <code>ByteData</code> 类型的返回值之后，如果返回值为 <code>null</code>，则抛出 <code>MissingPluginException</code>，视为设备平台上没有对应的方法。否则通过 <code>codec.decodeEnvelope(result)</code> 将返回值解码为具体的数据类型。我们以 <a target="_blank" rel="noopener" href="https://github.com/flutter/plugins/tree/master/packages/path_provider">path_provider/path_provider.dart</a> 项目代码为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;Result&gt; _getDirectory(<span class="built_in">String</span> methodName, [<span class="built_in">String</span> extra]) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="built_in">String</span> path;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    path = <span class="keyword">await</span> _channel.invokeMethod(methodName, extra);</span><br><span class="line">    <span class="keyword">return</span> Result(Result.ERROR_CODE_SUCCESS, <span class="string">&#x27;success&#x27;</span>, Directory(<span class="string">&#x27;<span class="subst">$path</span>/&#x27;</span>));</span><br><span class="line">  &#125; <span class="keyword">on</span> PlatformException <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> Result(<span class="built_in">num</span>.parse(e.code), e.message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终，我们通过如下代码完成一次 <code>Flutter</code> 层到设备平台的方法调用：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageDirectory&quot;</span>;</span><br><span class="line">Future&lt;Result&gt; getExternalStorageDirectory() <span class="keyword">async</span></span><br><span class="line">  <span class="keyword">return</span> _getDirectory(_EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="响应来自设备平台的方法调用-setMethodCallHandler"><a href="#响应来自设备平台的方法调用-setMethodCallHandler" class="headerlink" title="响应来自设备平台的方法调用 setMethodCallHandler"></a>响应来自设备平台的方法调用 setMethodCallHandler</h3><p><code>setMethodCallHandler</code> 方法通过一个方法回调用来接收设备平台通过 <code>MethodChannel</code> 调用 <code>Flutter</code> 代码时的响应信息：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> setMethodCallHandler(Future&lt;<span class="built_in">dynamic</span>&gt; handler(MethodCall call)) &#123;</span><br><span class="line">  BinaryMessages.setMessageHandler(</span><br><span class="line">    name,</span><br><span class="line">    handler == <span class="keyword">null</span> ? <span class="keyword">null</span> : (ByteData message) =&gt; _handleAsMethodCall(message, handler),</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该方法最终是通过 <code>BinaryMessages.setMessageHandler</code> 将 <code>MethodChannel</code> 的 <code>name</code> 属性和 <code>Future&lt;ByteData&gt; handler(ByteData message)</code> 回调方法赋值给了 <code>BinaryMessages</code> 对象中的 <code>_handlers</code>。</p>
+<p><code>_handleAsMethodCall</code> 方法则是对返回的结果进行处理：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;ByteData&gt; _handleAsMethodCall(ByteData message, Future&lt;<span class="built_in">dynamic</span>&gt; handler(MethodCall call)) <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">final</span> MethodCall call = codec.decodeMethodCall(message);</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> codec.encodeSuccessEnvelope(<span class="keyword">await</span> handler(call));</span><br><span class="line">  &#125; <span class="keyword">on</span> PlatformException <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> codec.encodeErrorEnvelope(</span><br><span class="line">      code: e.code,</span><br><span class="line">      message: e.message,</span><br><span class="line">      details: e.details,</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">on</span> MissingPluginException &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> codec.encodeErrorEnvelope(code: <span class="string">&#x27;error&#x27;</span>, message: e.toString(), details: <span class="keyword">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果方法调用成功，则通过 <code>MethodCodec</code> 的 <code>encodeSuccessEnvelope</code> 方法将结果编码为 <code>ByteData</code>，如果调用失败，则通过 <code>MethodCodec</code> 的 <code>encodeErrorEnvelope</code> 将错误码、错误信息和详情进行编码。我们以响应来自设备平台的一个方法调用（名称为 <code>a_method</code>）为例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">_channel.setMethodCallHandler(_handler);</span><br><span class="line"></span><br><span class="line">Future&lt;<span class="built_in">dynamic</span>&gt; _handler(MethodCall methodCall) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">&quot;a_method&quot;</span> == methodCall.method) &#123;</span><br><span class="line">    <span class="built_in">print</span>(methodCall.method);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Future.value(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>setMethodCallHandler</code> 设置方法调用的监听之后，我们可以根据 <code>methodCall.method</code> 判断具体的方法调用。</p>
+<h2 id="Android-层的-MethodChannel"><a href="#Android-层的-MethodChannel" class="headerlink" title="Android 层的 MethodChannel"></a>Android 层的 MethodChannel</h2><p><code>Android</code> 平台上响应 <code>Flutter</code> 层的方法调用是通过 <code>MethodCallHandler</code> 实现的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MethodCallHandler</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall methodCall, MethodChannel.Result result)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设备平台端（<code>Android</code> 为例）响应 <code>Flutter</code> 层发送的方法调用的请求，需要实现 <code>MethodCallHandler</code> 接口用于接收方法调用的详细信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlutterFilePathProvidePlugin</span> <span class="keyword">implements</span> <span class="title">MethodCallHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall call, Result result)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>onMethodCall</code> 方法回调时会传入 <code>methodCall</code> 和 <code>result</code> 两个对象。其中，<code>methodCall</code> 包含了方法调用的基本信息（方法名称和参数）以及用于处理参数的几个接口。<code>result</code> 参数则用于在方法响应完毕之后，将返回值或者错误信息传递到 <code>Flutter</code> 层。上文中我们通过 <code>MethodChannel</code> 向设备平台发送了一个名称为 <code>getExternalStorageDirectory</code> 的方法调用，那么在 <code>Android</code> 平台上的具体响应代码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME = <span class="string">&quot;getExternalStorageDirectory&quot;</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall call, Result result)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (TextUtils.equals(call.method, _EXTERNAL_STORAGE_DIRECTORY_METHOD_NAME)) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String path = getExternalStorageDirectory();</span><br><span class="line">            <span class="keyword">if</span> (TextUtils.isEmpty(path)) &#123;</span><br><span class="line">                result.error(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;path is null&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                result.success(path);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            result.error(<span class="string">&quot;2&quot;</span>, e.getMessage(), <span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getExternalStorageDirectory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Environment.getExternalStorageDirectory().getAbsolutePath();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，根据 <code>Flutter</code> 端传递过来的 <code>name</code> 属性，完成对应方法的调用，并通过 <code>result</code> 对象将结果回写回 <code>Flutter</code> 层：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Result</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">success</span><span class="params">(<span class="meta">@Nullable</span> Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">error</span><span class="params">(String var1, <span class="meta">@Nullable</span> String var2, <span class="meta">@Nullable</span> Object var3)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notImplemented</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与 <code>Flutter</code> 层相对应的，<code>Android</code> 端也需要初始化一个 <code>MethodChannel</code> 对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerWith</span><span class="params">(Registrar registrar)</span> </span>&#123;</span><br><span class="line">    FlutterFilePathProvidePlugin.registrar = registrar;</span><br><span class="line">    <span class="keyword">final</span> MethodChannel channel = <span class="keyword">new</span> MethodChannel(registrar.messenger(), _METHOD_CHANNEL_NAME);</span><br><span class="line">    channel.setMethodCallHandler(<span class="keyword">new</span> FlutterFilePathProvidePlugin());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造方法-1"><a href="#构造方法-1" class="headerlink" title="构造方法"></a>构造方法</h3><p><code>Android</code> 端的 <code>MethodChannel</code> 提供了两个构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MethodChannel</span><span class="params">(BinaryMessenger messenger, String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(messenger, name, StandardMethodCodec.INSTANCE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MethodChannel</span><span class="params">(BinaryMessenger messenger, String name, MethodCodec codec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">assert</span> messenger != <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> name != <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">assert</span> codec != <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.messenger = messenger;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.codec = codec;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>与 <code>Flutter</code> 端相对应的，<code>Android</code> 端的 <code>MethodChannel</code> 也需要 <code>BinaryMessenger</code>、<code>name</code> 和 <code>MethodCodec</code> 三个对象。其中，<code>name</code> 属性需要与 <code>Flutter</code> 端初始化 <code>MethodChannel</code> 时传入的 <code>name</code> 保持一致。</p>
+<h3 id="方法调用-1"><a href="#方法调用-1" class="headerlink" title="方法调用"></a>方法调用</h3><p><code>Android</code> 端的 <code>MethodChannel</code> 提供了下列两个方法用于调用 <code>Flutter</code> 层的方法：</p>
+<ul>
+<li><code>invokeMethod(@NonNull String method, @Nullable Object arguments)</code></li>
+<li><code>invokeMethod(String method, @Nullable Object arguments, MethodChannel.Result callback)</code></li>
+</ul>
+<p>与 <code>Flutter</code> 层调用设备平台代码一样，<code>Android</code> 端调用 <code>Flutter</code> 层代码也需要先通过 <code>MethodCodec</code> 的 <code>encodeMethodCall</code> 方法将方法调用进行编码，然后通过 <code>BinaryMessenger.send</code> 将对应的信息发送到 <code>Flutter</code> 层。</p>
+<h3 id="响应-Flutter-层的方法调用"><a href="#响应-Flutter-层的方法调用" class="headerlink" title="响应 Flutter 层的方法调用"></a>响应 Flutter 层的方法调用</h3><p><code>setMethodCallHandler(@Nullable MethodChannel.MethodCallHandler handler)</code> 方法通过接收一个 <code>handler</code> 对象来响应来自于 <code>Flutter</code> 层的方法调用。</p>
+<p>与 <code>Flutter</code> 层调用设备平台的方法一样的，设备平台调用 <code>Flutter</code> 层的方法也是通过 <code>MethodChannel</code> 实现的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel.invokeMethod(<span class="string">&quot;a_method&quot;</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="OptionalMethodChannel"><a href="#OptionalMethodChannel" class="headerlink" title="OptionalMethodChannel"></a>OptionalMethodChannel</h2><p><code>OptionalMethodChannel</code> 是 <code>MethodChannel</code> 的子类。与 <code>MethodChannel</code> 所不同的是，如果调用 <code>invokeMethod</code> 找不到与之对应的设备平台的方法，<code>MethodChannel</code> 以抛出异常的形式返回，而 <code>OptionalMethodChannel</code> 则是返回 <code>null</code>。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>MethodChannel</code> 的主要作用是提供一种 <code>Flutter</code> 端方法和设备平台端的方法相互调用的机制。默认情况下，<code>MethodChannel</code> 使用 <code>StandardMethodCodec</code> 作为数据的编解码器，并最终通过 <code>BinaryMessages</code> 完成与设备平台端数据的接收和传递。</p>
+<p>在 <code>MethodChannel</code> 中除了默认的 <code>StandardMethodCodec</code> 作为 <code>codec</code> 的默认实现，还可以选择 <code>JSONMethodCodec</code> 作为 <code>codec</code> 编解码器的实现，用于传递 <code>JSON</code> 类型的数据。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/index.html/tags/MethodChannel/" rel="tag"># MethodChannel</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-exception-handler.html" rel="prev" title="Flutter 开发（11）：Flutter 层异常捕获">
+                  <i class="fa fa-chevron-left"></i> Flutter 开发（11）：Flutter 层异常捕获
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/index.html/2019/flutter-event-channel.html" rel="next" title="Flutter 开发（13）：EventChannel 的使用">
+                  Flutter 开发（13）：EventChannel 的使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">肥肥鱼</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/index.html/js/comments.js"></script><script src="/index.html/js/utils.js"></script><script src="/index.html/js/motion.js"></script><script src="/index.html/js/schemes/muse.js"></script><script src="/index.html/js/next-boot.js"></script>
+
+  
+<script src="/index.html/js/third-party/search/local-search.js"></script>
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
