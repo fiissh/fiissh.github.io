@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>OutOfMemoryError:pthread_create failed 异常分析</title>
-    <url>//OutOfMemoryError-caused-by-pthread-create-failed.html</url>
+    <url>//2021/OutOfMemoryError-caused-by-pthread-create-failed.html</url>
     <content><![CDATA[<p><img src="./images/android.jpeg"></p>
 <p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
 <p>从崩溃的堆栈信息中可以分析出引发该 <code>OOM</code> 的主要与 <code>OkHttp</code> 有关系，而业务场景中都是普通的数据请求（<code>JSON</code>），并没有使用 <code>Bitmap</code> 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。</p>

@@ -25,24 +25,24 @@
 <meta name="description" content="线上出现一些 OutOfMemoryError，经过分析崩溃数据，发现出现 OOM 时进程的可用空间还是非常大的。 从崩溃的堆栈信息中可以分析出引发该 OOM 的主要与 OkHttp 有关系，而业务场景中都是普通的数据请求（JSON），并没有使用 Bitmap 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。 虽然堆栈信息不尽相同，但是最终从大量堆栈 LOG 中分析出有价值的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OutOfMemoryError:pthread_create failed 异常分析">
-<meta property="og:url" content="https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html">
+<meta property="og:url" content="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
 <meta property="og:site_name" content="肥言肥语">
 <meta property="og:description" content="线上出现一些 OutOfMemoryError，经过分析崩溃数据，发现出现 OOM 时进程的可用空间还是非常大的。 从崩溃的堆栈信息中可以分析出引发该 OOM 的主要与 OkHttp 有关系，而业务场景中都是普通的数据请求（JSON），并没有使用 Bitmap 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。 虽然堆栈信息不尽相同，但是最终从大量堆栈 LOG 中分析出有价值的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fiissh.tech/images/android.jpeg">
+<meta property="og:image" content="https://fiissh.tech/2021/images/android.jpeg">
 <meta property="article:published_time" content="2021-07-29T12:39:32.000Z">
 <meta property="article:modified_time" content="2020-03-03T03:17:57.000Z">
 <meta property="article:author" content="肥肥鱼">
 <meta property="article:tag" content="OutOfMemoryError">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fiissh.tech/images/android.jpeg">
+<meta name="twitter:image" content="https://fiissh.tech/2021/images/android.jpeg">
 
 
-<link rel="canonical" href="https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html">
+<link rel="canonical" href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html","path":"/OutOfMemoryError-caused-by-pthread-create-failed.html","title":"OutOfMemoryError:pthread_create failed 异常分析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html","path":"/2021/OutOfMemoryError-caused-by-pthread-create-failed.html","title":"OutOfMemoryError:pthread_create failed 异常分析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>OutOfMemoryError:pthread_create failed 异常分析 | 肥言肥语</title>
@@ -232,7 +232,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/homercat.png">
@@ -323,7 +323,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html" title="OutOfMemoryError:pthread_create failed 异常分析">https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html</a>
+      <a href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html" title="OutOfMemoryError:pthread_create failed 异常分析">https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
