@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://fiissh.tech/index.html/OutOfMemoryError-caused-by-pthread-create-failed.html</loc>
+    <loc>https://fiissh.tech/OutOfMemoryError-caused-by-pthread-create-failed.html</loc>
     
     <lastmod>2020-03-03</lastmod>
     
   </url>
   
   <url>
-    <loc>https://fiissh.tech/index.html/categories/index.html</loc>
+    <loc>https://fiissh.tech/categories/index.html</loc>
     
     <lastmod>2020-03-02</lastmod>
     
   </url>
   
   <url>
-    <loc>https://fiissh.tech/index.html/tags/index.html</loc>
+    <loc>https://fiissh.tech/tags/index.html</loc>
     
     <lastmod>2020-03-02</lastmod>
     
@@ -24,7 +24,7 @@
   
 
   <url>
-    <loc>https://fiissh.tech/index.html</loc>
+    <loc>https://fiissh.tech/</loc>
     <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -32,7 +32,7 @@
 
   
   <url>
-    <loc>https://fiissh.tech/index.html/tags/OutOfMemoryError/</loc>
+    <loc>https://fiissh.tech/tags/OutOfMemoryError/</loc>
     <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -41,7 +41,7 @@
 
   
   <url>
-    <loc>https://fiissh.tech/index.html/categories/Exception/</loc>
+    <loc>https://fiissh.tech/categories/Exception/</loc>
     <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
