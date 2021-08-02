@@ -170,20 +170,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,81 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html" class="post-title-link" itemprop="url">Android Studio 或 IntelliJ IDEA VM options</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-08-02 14:46:34 / 修改时间：14:59:51" itemprop="dateCreated datePublished" datetime="2021-08-02T14:46:34+08:00">2021-08-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/IntelliJ-IDEA/" itemprop="url" rel="index"><span itemprop="name">IntelliJ IDEA</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>基于 64G 物理内存的 <code>Android Studio</code> 或者 <code>IntelliJ IDEA</code> 内存配置优化：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> custom Android Studio VM options, see https://developer.android.com/studio/intro/studio-config.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 控制内存garbage方式</span></span><br><span class="line">-server</span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化的内存大小</span></span><br><span class="line">-Xms4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最大内存数</span></span><br><span class="line">-Xmx16384m</span><br><span class="line"><span class="meta">#</span><span class="bash"> PermSize 永久区的大小</span></span><br><span class="line">-XX:PermSize=2048m</span><br><span class="line">-XX:MaxPermSize=4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 代码内存容量</span></span><br><span class="line">-XX:ReservedCodeCacheSize=2048m</span><br><span class="line">-XX:+UseCompressedOops</span><br><span class="line">-Dfile.encoding=UTF-8</span><br><span class="line"><span class="meta">#</span><span class="bash">-XX:+UseConcMarkSweepGC</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用并行收集算法</span></span><br><span class="line">-XX:+UseParNewGC</span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=512</span><br><span class="line">-XX:CICompilerCount=8</span><br><span class="line">-Dsun.io.useCanonCaches=false</span><br><span class="line">-Dsun.io.useCanonPrefixCache=false</span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djdk.http.auth.tunneling.disabledSchemes=&quot;&quot;</span><br><span class="line">-Djna.nosys=true</span><br><span class="line">-Djna.boot.library.path=</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line">-Djdk.attach.allowAttachSelf</span><br><span class="line">-Dkotlinx.coroutines.debug=off</span><br><span class="line">-Djdk.module.illegalAccess.silent=true</span><br><span class="line">-ea</span><br><span class="line">-da</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

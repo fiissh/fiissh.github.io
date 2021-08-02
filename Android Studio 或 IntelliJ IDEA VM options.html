@@ -22,30 +22,30 @@
   <link rel="stylesheet" href="https://unpkg.com/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fiissh.tech","root":"/","images":"/images","scheme":"Mist","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="线上出现一些 OutOfMemoryError，经过分析崩溃数据，发现出现 OOM 时进程的可用空间还是非常大的。 从崩溃的堆栈信息中可以分析出引发该 OOM 的主要与 OkHttp 有关系，而业务场景中都是普通的数据请求（JSON），并没有使用 Bitmap 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。 虽然堆栈信息不尽相同，但是最终从大量堆栈 LOG 中分析出有价值的">
+<meta name="description" content="基于 64G 物理内存的 Android Studio 或者 IntelliJ IDEA 内存配置优化： 1234567891011121314151617181920212223242526272829303132# custom Android Studio VM options, see https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;intro&#x2F;studio-co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OutOfMemoryError:pthread_create failed 异常分析">
-<meta property="og:url" content="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
+<meta property="og:title" content="Android Studio 或 IntelliJ IDEA VM options">
+<meta property="og:url" content="https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html">
 <meta property="og:site_name" content="肥言肥语">
-<meta property="og:description" content="线上出现一些 OutOfMemoryError，经过分析崩溃数据，发现出现 OOM 时进程的可用空间还是非常大的。 从崩溃的堆栈信息中可以分析出引发该 OOM 的主要与 OkHttp 有关系，而业务场景中都是普通的数据请求（JSON），并没有使用 Bitmap 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。 虽然堆栈信息不尽相同，但是最终从大量堆栈 LOG 中分析出有价值的">
+<meta property="og:description" content="基于 64G 物理内存的 Android Studio 或者 IntelliJ IDEA 内存配置优化： 1234567891011121314151617181920212223242526272829303132# custom Android Studio VM options, see https:&#x2F;&#x2F;developer.android.com&#x2F;studio&#x2F;intro&#x2F;studio-co">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fiissh.tech/2021/images/android.jpeg">
-<meta property="article:published_time" content="2021-07-29T12:39:32.000Z">
-<meta property="article:modified_time" content="2020-03-03T03:17:57.000Z">
+<meta property="article:published_time" content="2021-08-02T06:46:34.000Z">
+<meta property="article:modified_time" content="2021-08-02T06:59:51.285Z">
 <meta property="article:author" content="肥肥鱼">
-<meta property="article:tag" content="OutOfMemoryError">
+<meta property="article:tag" content="Android Studio">
+<meta property="article:tag" content="VM options">
+<meta property="article:tag" content="idea.vmoptions">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://fiissh.tech/2021/images/android.jpeg">
 
 
-<link rel="canonical" href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
+<link rel="canonical" href="https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html","path":"/2021/OutOfMemoryError-caused-by-pthread-create-failed.html","title":"OutOfMemoryError:pthread_create failed 异常分析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html","path":"Android Studio 或 IntelliJ IDEA VM options.html","title":"Android Studio 或 IntelliJ IDEA VM options"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>OutOfMemoryError:pthread_create failed 异常分析 | 肥言肥语</title>
+<title>Android Studio 或 IntelliJ IDEA VM options | 肥言肥语</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65174745-4"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-65174745-4","only_pageview":false}</script>
@@ -235,7 +235,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/homercat.png">
@@ -248,7 +248,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OutOfMemoryError:pthread_create failed 异常分析
+          Android Studio 或 IntelliJ IDEA VM options
         </h1>
 
         <div class="post-meta-container">
@@ -258,23 +258,17 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-07-29 20:39:32" itemprop="dateCreated datePublished" datetime="2021-07-29T20:39:32+08:00">2021-07-29</time>
+      <time title="创建时间：2021-08-02 14:46:34 / 修改时间：14:59:51" itemprop="dateCreated datePublished" datetime="2021-08-02T14:46:34+08:00">2021-08-02</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-03-03 11:17:57" itemprop="dateModified" datetime="2020-03-03T11:17:57+08:00">2020-03-03</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Exception/" itemprop="url" rel="index"><span itemprop="name">Exception</span></a>
+          <a href="/categories/IntelliJ-IDEA/" itemprop="url" rel="index"><span itemprop="name">IntelliJ IDEA</span></a>
         </span>
     </span>
 
@@ -295,20 +289,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><img src="./images/android.jpeg"></p>
-<p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
-<p>从崩溃的堆栈信息中可以分析出引发该 <code>OOM</code> 的主要与 <code>OkHttp</code> 有关系，而业务场景中都是普通的数据请求（<code>JSON</code>），并没有使用 <code>Bitmap</code> 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。</p>
-<p>虽然堆栈信息不尽相同，但是最终从大量堆栈 <code>LOG</code> 中分析出有价值的信息：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: pthread_create (1040KB stack) failed: Try again</span><br><span class="line">at java.lang.Thread.nativeCreate(Native Method)</span><br><span class="line">at java.lang.Thread.start(Thread.java:<span class="number">733</span>)</span><br><span class="line">at tech.fiissh.base.utils.c.u(SourceFile:<span class="number">7</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">40</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">156</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a(SourceFile:<span class="number">30</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a$<span class="number">1.</span>handleMessage(SourceFile:<span class="number">6</span>)</span><br><span class="line">at android.os.Handler.dispatchMessage(Handler.java:<span class="number">105</span>)</span><br><span class="line">at android.os.Looper.loop(Looper.java:<span class="number">164</span>)</span><br><span class="line">at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6942</span>)</span><br><span class="line">at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:<span class="number">327</span>)</span><br><span class="line">at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">1374</span>)</span><br><span class="line"></span><br><span class="line">java.lang.OutOfMemoryErrorat java.lang.String.&lt;init&gt;(String.java:<span class="number">255</span>)</span><br><span class="line">at libcore.io.IoUtils$FileReader.toString(IoUtils.java:<span class="number">272</span>)</span><br><span class="line">at libcore.io.IoUtils.readFileAsString(IoUtils.java:<span class="number">114</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.readPinFile(CertPinManager.java:<span class="number">111</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.rebuild(CertPinManager.java:<span class="number">85</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.&lt;init&gt;(CertPinManager.java:<span class="number">49</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">137</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">97</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerFactoryImpl.engineGetTrustManagers(TrustManagerFactoryImpl.java:<span class="number">80</span>)</span><br><span class="line">at javax.net.ssl.TrustManagerFactory.getTrustManagers(TrustManagerFactory.java:<span class="number">219</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.internal.Util.platformTrustManager(Util.java:<span class="number">670</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient.&lt;init&gt;(OkHttpClient.java:<span class="number">256</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient$Builder.build(OkHttpClient.java:<span class="number">1035</span>)</span><br><span class="line">at tech.fiissh.base.common.net.e.b.&lt;init&gt;(OkHttpStack.java:<span class="number">73</span>)</span><br><span class="line">at tech.fiissh.base.common.net.g.&lt;init&gt;(NetworkDispatcher.java:<span class="number">51</span>)</span><br><span class="line">at tech.fiissh.base.common.net.i$<span class="number">1.</span>run(RequestQueue.java:<span class="number">110</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1112</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">587</span>)</span><br><span class="line">at java.lang.Thread.run(Thread.java:<span class="number">841</span>)</span><br></pre></td></tr></table></figure>
-
-<p>经过与源码文件进行比较，<code>OkHttpStack</code> 第73行的方法实际上是通过 <code>OkHttpClient.Builder</code> 来实例化一个 <code>OkHttpClient</code> 对象。</p>
-<p>通常情况下我们所理解的 <code>OOM</code> 是由于进程的可用堆内存不够（即 <code>Runtime.getRuntime().maxMemory()</code> 小于需要申请的内存大小）的情况下系统会抛出 <code>OutOfMemoryError</code>。其报错信息中详细的记录了我们的内存分配需求和可用堆内存的大小信息：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Failed to allocate a XXX <span class="keyword">byte</span> allocation with XXX free bytes and XXXKB until OOM</span><br></pre></td></tr></table></figure>
-
-<p>通过对 <code>pthread_create</code> 关键字的搜索，最终在 <a target="_blank" rel="noopener" href="https://cs.android.com/android/platform/superproject/+/master:art/runtime/thread.cc">thread.cc</a> 中找到了抛出该异常的位置，并且通过对 <code>Thread::CreateNativeThread</code> 函数的分析发现，在创建线程时，系统会先判断当前线程数是否超过了系统对线程数的限制，如果超过该限制则抛出 <code>java.lang.OutOfMemoryError:pthread_create (XXXXKB stack) failed</code> 异常。</p>
-<p>那么，问题的根源在哪里？通过对代码的分析，发现每次发起一个网络请求的时候都会创建一个 <code>OkHttpClient</code>，而每个 <code>OkHttpClient</code> 对象都会初始化一个线程池（线程的生命周期又较长），如果在短时间内发起多次请求，那么线程池会被创建多个，而线程数也会随之增加。解决的方案则是将 <code>OkHttpClient</code> 通过单例的方式对外提供。</p>
-<p>针对上述线程创建的问题，可以参考 <a target="_blank" rel="noopener" href="https://juejin.im/entry/59f7ea06f265da43143ffee4">不可思议的OOM</a>，作者针对出现类似问题的场景做了深入分析。</p>
-<p>关于 <code>HTTPClient</code> 的问题，可以参考 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3b232d9f38c2">OkHttp竟然玩出OOM？</a>，作者针对为什么创建多个线程池的场景进行了深入的分析。</p>
+        <p>基于 64G 物理内存的 <code>Android Studio</code> 或者 <code>IntelliJ IDEA</code> 内存配置优化：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> custom Android Studio VM options, see https://developer.android.com/studio/intro/studio-config.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 控制内存garbage方式</span></span><br><span class="line">-server</span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化的内存大小</span></span><br><span class="line">-Xms4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最大内存数</span></span><br><span class="line">-Xmx16384m</span><br><span class="line"><span class="meta">#</span><span class="bash"> PermSize 永久区的大小</span></span><br><span class="line">-XX:PermSize=2048m</span><br><span class="line">-XX:MaxPermSize=4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 代码内存容量</span></span><br><span class="line">-XX:ReservedCodeCacheSize=2048m</span><br><span class="line">-XX:+UseCompressedOops</span><br><span class="line">-Dfile.encoding=UTF-8</span><br><span class="line"><span class="meta">#</span><span class="bash">-XX:+UseConcMarkSweepGC</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用并行收集算法</span></span><br><span class="line">-XX:+UseParNewGC</span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=512</span><br><span class="line">-XX:CICompilerCount=8</span><br><span class="line">-Dsun.io.useCanonCaches=false</span><br><span class="line">-Dsun.io.useCanonPrefixCache=false</span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djdk.http.auth.tunneling.disabledSchemes=&quot;&quot;</span><br><span class="line">-Djna.nosys=true</span><br><span class="line">-Djna.boot.library.path=</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line">-Djdk.attach.allowAttachSelf</span><br><span class="line">-Dkotlinx.coroutines.debug=off</span><br><span class="line">-Djdk.module.illegalAccess.silent=true</span><br><span class="line">-ea</span><br><span class="line">-da</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -326,7 +308,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html" title="OutOfMemoryError:pthread_create failed 异常分析">https://fiissh.tech/2021/OutOfMemoryError-caused-by-pthread-create-failed.html</a>
+      <a href="https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html" title="Android Studio 或 IntelliJ IDEA VM options">https://fiissh.tech/Android Studio 或 IntelliJ IDEA VM options.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -335,18 +317,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/OutOfMemoryError/" rel="tag"># OutOfMemoryError</a>
+              <a href="/tags/Android-Studio/" rel="tag"># Android Studio</a>
+              <a href="/tags/VM-options/" rel="tag"># VM options</a>
+              <a href="/tags/idea-vmoptions/" rel="tag"># idea.vmoptions</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/OutOfMemoryError-caused-by-pthread-create-failed.html" rel="prev" title="OutOfMemoryError:pthread_create failed 异常分析">
+                  <i class="fa fa-chevron-left"></i> OutOfMemoryError:pthread_create failed 异常分析
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html" rel="next" title="Android Studio 或 IntelliJ IDEA VM options">
-                  Android Studio 或 IntelliJ IDEA VM options <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

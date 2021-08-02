@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://fiissh.tech/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html</loc>
+    
+    <lastmod>2021-08-02</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://fiissh.tech/404.html</loc>
     
     <lastmod>2021-07-29</lastmod>
@@ -46,15 +53,36 @@
 
   <url>
     <loc>https://fiissh.tech/</loc>
-    <lastmod>2021-07-29</lastmod>
+    <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>https://fiissh.tech/tags/Android-Studio/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fiissh.tech/tags/VM-options/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://fiissh.tech/tags/idea-vmoptions/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://fiissh.tech/tags/OutOfMemoryError/</loc>
-    <lastmod>2021-07-29</lastmod>
+    <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -62,8 +90,15 @@
 
   
   <url>
+    <loc>https://fiissh.tech/categories/IntelliJ-IDEA/</loc>
+    <lastmod>2021-08-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://fiissh.tech/categories/Exception/</loc>
-    <lastmod>2021-07-29</lastmod>
+    <lastmod>2021-08-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

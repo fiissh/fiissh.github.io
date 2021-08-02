@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Android Studio 或 IntelliJ IDEA VM options</title>
+    <url>/Android%20Studio%20%E6%88%96%20IntelliJ%20IDEA%20VM%20options.html</url>
+    <content><![CDATA[<p>基于 64G 物理内存的 <code>Android Studio</code> 或者 <code>IntelliJ IDEA</code> 内存配置优化：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> custom Android Studio VM options, see https://developer.android.com/studio/intro/studio-config.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 控制内存garbage方式</span></span><br><span class="line">-server</span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化的内存大小</span></span><br><span class="line">-Xms4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最大内存数</span></span><br><span class="line">-Xmx16384m</span><br><span class="line"><span class="meta">#</span><span class="bash"> PermSize 永久区的大小</span></span><br><span class="line">-XX:PermSize=2048m</span><br><span class="line">-XX:MaxPermSize=4096m</span><br><span class="line"><span class="meta">#</span><span class="bash"> 代码内存容量</span></span><br><span class="line">-XX:ReservedCodeCacheSize=2048m</span><br><span class="line">-XX:+UseCompressedOops</span><br><span class="line">-Dfile.encoding=UTF-8</span><br><span class="line"><span class="meta">#</span><span class="bash">-XX:+UseConcMarkSweepGC</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用并行收集算法</span></span><br><span class="line">-XX:+UseParNewGC</span><br><span class="line">-XX:SoftRefLRUPolicyMSPerMB=512</span><br><span class="line">-XX:CICompilerCount=8</span><br><span class="line">-Dsun.io.useCanonCaches=false</span><br><span class="line">-Dsun.io.useCanonPrefixCache=false</span><br><span class="line">-Djava.net.preferIPv4Stack=true</span><br><span class="line">-Djdk.http.auth.tunneling.disabledSchemes=&quot;&quot;</span><br><span class="line">-Djna.nosys=true</span><br><span class="line">-Djna.boot.library.path=</span><br><span class="line">-XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">-XX:-OmitStackTraceInFastThrow</span><br><span class="line">-Djdk.attach.allowAttachSelf</span><br><span class="line">-Dkotlinx.coroutines.debug=off</span><br><span class="line">-Djdk.module.illegalAccess.silent=true</span><br><span class="line">-ea</span><br><span class="line">-da</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>IntelliJ IDEA</category>
+      </categories>
+      <tags>
+        <tag>Android Studio</tag>
+        <tag>VM options</tag>
+        <tag>idea.vmoptions</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>OutOfMemoryError:pthread_create failed 异常分析</title>
     <url>//2021/OutOfMemoryError-caused-by-pthread-create-failed.html</url>
     <content><![CDATA[<p><img src="./images/android.jpeg"></p>
