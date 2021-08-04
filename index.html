@@ -170,20 +170,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -221,6 +221,88 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://fiissh.tech/2020/android-source-design-pattern-index.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/homercat.png">
+      <meta itemprop="name" content="肥肥鱼">
+      <meta itemprop="description" content="fiissh.zhao，肥肥鱼，Android SDK 开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="肥言肥语">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/android-source-design-pattern-index.html" class="post-title-link" itemprop="url">设计模式概述</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-08-04 11:12:08 / 修改时间：11:13:55" itemprop="dateCreated datePublished" datetime="2021-08-04T11:12:08+08:00">2021-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如何提高软件系统的可维护性和可复用性是面向对象程序设计思想需要解决的核心问题。在面向对象程序设计中，可维护性的复用是以设计原则为基础的。每一个设计原则都蕴含着面向对象程序设计的思想，可以从不同的角度提升一个软件系统的架构水平。</p>
+<p>面向对象程序设计原则是为支撑可维护性的复用而诞生的，它们是从很多的设计方案中总结出来的指导性原则，通常体现在设计模式中。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/android-source-design-pattern-index.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -358,8 +440,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="./images/android.jpeg"></p>
-<p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
+          <p>线上出现一些 <code>OutOfMemoryError</code>，经过分析崩溃数据，发现出现 <code>OOM</code> 时进程的可用空间还是非常大的。</p>
 <p>从崩溃的堆栈信息中可以分析出引发该 <code>OOM</code> 的主要与 <code>OkHttp</code> 有关系，而业务场景中都是普通的数据请求（<code>JSON</code>），并没有使用 <code>Bitmap</code> 这一类的较大内存占用的资源。更何况，进程的可用内存空间还是很充足的。</p>
 <p>虽然堆栈信息不尽相同，但是最终从大量堆栈 <code>LOG</code> 中分析出有价值的信息：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: pthread_create (1040KB stack) failed: Try again</span><br><span class="line">at java.lang.Thread.nativeCreate(Native Method)</span><br><span class="line">at java.lang.Thread.start(Thread.java:<span class="number">733</span>)</span><br><span class="line">at tech.fiissh.base.utils.c.u(SourceFile:<span class="number">7</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">40</span>)</span><br><span class="line">at tech.fiissh.base.common.e.c.a(SourceFile:<span class="number">156</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a(SourceFile:<span class="number">30</span>)</span><br><span class="line">at tech.fiissh.base.common.e.b.a$<span class="number">1.</span>handleMessage(SourceFile:<span class="number">6</span>)</span><br><span class="line">at android.os.Handler.dispatchMessage(Handler.java:<span class="number">105</span>)</span><br><span class="line">at android.os.Looper.loop(Looper.java:<span class="number">164</span>)</span><br><span class="line">at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6942</span>)</span><br><span class="line">at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:<span class="number">327</span>)</span><br><span class="line">at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">1374</span>)</span><br><span class="line"></span><br><span class="line">java.lang.OutOfMemoryErrorat java.lang.String.&lt;init&gt;(String.java:<span class="number">255</span>)</span><br><span class="line">at libcore.io.IoUtils$FileReader.toString(IoUtils.java:<span class="number">272</span>)</span><br><span class="line">at libcore.io.IoUtils.readFileAsString(IoUtils.java:<span class="number">114</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.readPinFile(CertPinManager.java:<span class="number">111</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.rebuild(CertPinManager.java:<span class="number">85</span>)</span><br><span class="line">at com.android.org.conscrypt.CertPinManager.&lt;init&gt;(CertPinManager.java:<span class="number">49</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">137</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerImpl.&lt;init&gt;(TrustManagerImpl.java:<span class="number">97</span>)</span><br><span class="line">at com.android.org.conscrypt.TrustManagerFactoryImpl.engineGetTrustManagers(TrustManagerFactoryImpl.java:<span class="number">80</span>)</span><br><span class="line">at javax.net.ssl.TrustManagerFactory.getTrustManagers(TrustManagerFactory.java:<span class="number">219</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.internal.Util.platformTrustManager(Util.java:<span class="number">670</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient.&lt;init&gt;(OkHttpClient.java:<span class="number">256</span>)</span><br><span class="line">at tech.fiissh.thrid.okhttp.OkHttpClient$Builder.build(OkHttpClient.java:<span class="number">1035</span>)</span><br><span class="line">at tech.fiissh.base.common.net.e.b.&lt;init&gt;(OkHttpStack.java:<span class="number">73</span>)</span><br><span class="line">at tech.fiissh.base.common.net.g.&lt;init&gt;(NetworkDispatcher.java:<span class="number">51</span>)</span><br><span class="line">at tech.fiissh.base.common.net.i$<span class="number">1.</span>run(RequestQueue.java:<span class="number">110</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:<span class="number">1112</span>)</span><br><span class="line">at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:<span class="number">587</span>)</span><br><span class="line">at java.lang.Thread.run(Thread.java:<span class="number">841</span>)</span><br></pre></td></tr></table></figure>
