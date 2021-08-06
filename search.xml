@@ -1165,4 +1165,41 @@
         <tag>Android</tag>
       </tags>
   </entry>
+  <entry>
+    <title>android-fix-zip-path-traversal-vulnerability</title>
+    <url>//2021/android-fix-zip-path-traversal-vulnerability.html</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>zip</code> 类型的压缩包文件中允许存在 <code>../</code> 类型的字符串，用于表示上一层级的目录。攻击者可以利用这一特性，通过精心构造 <code>zip</code> 文件，利用多个 <code>../</code> 从而改变 <code>zip</code> 包中某个文件的存放位置，达到替换掉原有文件的目的。</p>
+<p>那么，如果被替换掉的文件是是 <code>.so</code>、<code>.dex</code> 或 <code>.odex</code> 类型文件，那么攻击者就可以轻易更改原有的代码逻辑，轻则产生本地拒绝服务漏洞，影响应用的可用性，重则可能造成任意代码执行漏洞，危害应用用户的设备安全和信息安全。比如<em>寄生兽</em>漏洞、海豚浏览器远程命令执行漏洞和三星默认输入法远程代码执行等著名的安全事件。</p>
+<span id="more"></span>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>在 <code>Linux/Unix</code> 系统中 <code>../</code> 代表的是上一层级的目录，有些程序在当前工作目录中处理到诸如 <code>../../../../../../../../../../../etc/hosts</code> 表示的文件，会跳转出当前工作目录，跳转到到其他目录中对应的 <code>hosts</code> 目录。</p>
+<p><code>Java</code> 代码在解压 <code>zip</code> 文件时，会使用到 <code>ZipEntry</code> 类的 <code>getName()</code> 方法，如果 <code>zip</code> 文件中包含 <code>../</code> 的字符串，该方法返回值会原样返回。如果没有过滤掉 <code>getName()</code> 返回值中的 <code>../</code> 字符串，继续解压缩操作，就会在其他目录中创建解压的文件。</p>
+<h2 id="风险示例"><a href="#风险示例" class="headerlink" title="风险示例"></a>风险示例</h2><p>海豚浏览器海豚浏览器的主题设置中允许用户通过网络下载新的主题进行更换，主题文件其实是一个 <code>zip</code> 压缩文件，里面有如下文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip -l Red_roof.dwp.orig  </span><br><span class="line">Archive:  Red_roof.dwp.orig  </span><br><span class="line">  Length     Date   Time    Name</span><br><span class="line"> --------    ----   ----    ----</span><br><span class="line">    18165  12-18-14 09:57   icon.jpg</span><br><span class="line">      237  12-19-14 14:35   theme.config</span><br><span class="line">   131384  12-18-14 09:54   wallpaper.jpg</span><br><span class="line"> --------                   -------</span><br><span class="line">   149786                   3 files</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>dwp</code> 文件是海豚浏览器自己定义的主题文件包，本质上是一个 <code>zip</code> 包。</p>
+</blockquote>
+<p>通过中间人攻击的方法，替换掉这个 <code>zip</code> 文件。用来替换原有的 <code>zip</code> 文件的恶意 <code>zip</code> 文件中，有重新编译的 <code>libdolphin.so</code>。由于海豚浏览器的 <code>libdolphin.so</code> 文件在系统中的存放路径为 <code>../../../../../../data/data/mobi.mgeek.TunnyBrowser/files/libdolphin.so</code>，那么，我们只需要将我们重新编译的 <code>libdolphin.so</code> 文件以 <code>../../../../../../data/data/mobi.mgeek.TunnyBrowser/files/libdolphin.so</code> 的方式命名，并放置在我们的恶意 <code>zip</code> 包中：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip -l Red_roof.dwp  </span><br><span class="line">Archive:  Red_roof.dwp  </span><br><span class="line">  Length     Date   Time    Name</span><br><span class="line"> --------    ----   ----    ----</span><br><span class="line">    18165  12-18-14 09:57   icon.jpg</span><br><span class="line">      237  12-19-14 14:35   theme.config</span><br><span class="line">   131384  12-18-14 09:54   wallpaper.jpg</span><br><span class="line">        7  08-21-15 20:26   ../../../../../../data/data/mobi.mgeek.TunnyBrowser/files/libdolphin.so</span><br><span class="line"> --------                   -------</span><br><span class="line">   159142                   4 files</span><br></pre></td></tr></table></figure>
+
+<p>那么，当海豚浏览器下载到攻击者精心设计的 <code>zip</code> 包并完成解压之后，那么 <code>libdolphin.so</code> 就会被替换。</p>
+<p>如此一来，攻击者就可以轻易地把有风险的代码植入到应用中去，从而实现某些目的。</p>
+<p>可以使用如下 <code>Python</code> 代码生成一个可以触发该漏洞的 <code>zip</code> 包：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile  </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:  </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            binary = f.read()</span><br><span class="line">            zipFile = zipfile.ZipFile(<span class="string">&quot;test.zip&quot;</span>, <span class="string">&quot;a&quot;</span>, zipfile.ZIP_DEFLATED)</span><br><span class="line">            info = zipfile.ZipInfo(<span class="string">&quot;test.zip&quot;</span>)</span><br><span class="line">            zipFile.writestr(<span class="string">&quot;../../../../../data/data/com.corp.demo/files/test.txt&quot;</span>, binary)</span><br><span class="line">            zipFile.close()</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">raise</span> e</span><br></pre></td></tr></table></figure>
+
+<h2 id="修复方案"><a href="#修复方案" class="headerlink" title="修复方案"></a>修复方案</h2><ul>
+<li>对重要的 <code>zip</code> 压缩包文件进行数字签名校验，校验通过才进行解压</li>
+<li>检查 <code>zip</code> 压缩包中使用 <code>ZipEntry.getName()</code> 获取的文件名中是否包含 <code>../</code> 或者 <code>..</code> 字符</li>
+<li>更换 <code>zip</code> 解压方式，不使用 <code>ZipEntry.getName()</code> 的方式，使用 <code>ZipInputStream</code> 替代</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://support.google.com/faqs/answer/9294009">Fixing a Zip Path Traversal Vulnerability</a></p>
+]]></content>
+      <categories>
+        <category>漏洞修复</category>
+      </categories>
+      <tags>
+        <tag>漏洞修复</tag>
+        <tag>ZipEntry</tag>
+      </tags>
+  </entry>
 </search>
